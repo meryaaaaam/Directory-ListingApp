@@ -1,0 +1,103 @@
+<!-- Start Main Banner Area -->
+<div class="main-banner-area">
+    <div class="container">
+        <div class="main-banner-content" *ngFor="let Content of mainBannerContent;">
+            <h1>{{Content.title}}
+                <!-- <ngx-typed-js [strings]="['Hotels', 'Restaurants', 'Beauty', 'Fitness', 'Shopping']" [typeSpeed]="100" [loop]="true" [backSpeed]="100" [showCursor]="false">
+                    <span class="typing"></span>
+                </ngx-typed-js> -->
+            </h1>
+            <p>{{Content.paragraph}}</p>
+
+
+
+
+<div class="row row-input">
+
+<div class="col-5">
+<form><div class="form-group">
+  <label><i class="flaticon-search"></i></label>
+  <input type="text" class="form-control" placeholder="Qui? Quoi? ">
+</div></form>
+</div>
+
+<div class="col-4">
+  <form><div class="form-group">
+    <label><i class="flaticon-search"></i></label>
+    <input type="text" class="form-control" placeholder="Où">
+  </div></form>
+
+</div>
+
+<div class=" searchbtn col-3  ">
+        <div class="form-group">
+          <div class=" submit-btn  ">
+              <button type="submit">Search Now</button>
+           </div>
+        </div>
+ </div>
+
+
+
+</div>
+
+
+<div class="row" style="margin-top: 2em;">
+  <div class="col-4">
+    <div class="listings-widget-area widget-right-sidebar">
+
+
+        <div class="widget widget_categories">
+
+            <ul>
+                <li>
+                    <input id="categories1" type="checkbox">
+                    <label style="color:white" for="PInitiative">Pour programme Initiative</label>
+                </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+
+
+   </div>
+
+            <ul class="popular-search-list">
+                <li>Popular:</li>
+                <li *ngFor="let List of Content.popularSearchList;"><a routerLink="/{{List.link}}">{{List.title}}</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+
+<div class="row">
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- End Main Banner Area -->
+
+
+
+
