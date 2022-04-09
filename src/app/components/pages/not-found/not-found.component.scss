@@ -1,3 +1,22 @@
+.page-footer-title-area {
+  padding: {
+      //bottom: 130px;
+      top: 140px;
+  };
+  background: {
+      color: #f9f9f9;
+      position: center center;
+      size: cover;
+      repeat: no-repeat;
+  };
+  &.page-title-style-two {
+      padding: {
+          top: 140px;
+          bottom: 120px;
+      };
+  }
+}
+
 .error-content {
     text-align: center;
 
@@ -69,6 +88,6 @@
 /* Min width 1550px */
 @media only screen and (min-width: 1550px) {
 
-    
+
 
 }

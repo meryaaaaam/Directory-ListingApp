@@ -75,6 +75,7 @@ import { DashboardMyProfileComponent } from './components/pages/dashboard/dashbo
 import { DashboardAddListingsComponent } from './components/pages/dashboard/dashboard-add-listings/dashboard-add-listings.component';
 import { DashboardBookmarksComponent } from './components/pages/dashboard/dashboard-bookmarks/dashboard-bookmarks.component';
 import { DashboardMyListingsComponent } from './components/pages/dashboard/dashboard-my-listings/dashboard-my-listings.component';
+import { ListingComponent } from './components/pages/listing/listing.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import { DashboardMyListingsComponent } from './components/pages/dashboard/dashb
     DashboardMyProfileComponent,
     DashboardAddListingsComponent,
     DashboardBookmarksComponent,
-    DashboardMyListingsComponent
+    DashboardMyListingsComponent,
+    ListingComponent
   ],
   imports: [
     BrowserModule,

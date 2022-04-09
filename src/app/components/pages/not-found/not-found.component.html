@@ -1,13 +1,13 @@
 <app-navbar-style-one></app-navbar-style-one>
 
 <!-- Start Page Title Area -->
-<div class="page-title-area" *ngFor="let Content of pageTitleContent;" style="background-image: url({{Content.backgroundImage}});">
+<div class="page-footer-title-area bg-f9f9f9" *ngFor="let Content of pageTitleContent;"  >
     <div class="container">
         <div class="page-title-content">
-            <h2>{{Content.title}}</h2>
+            <h2 style="color: #00bd9a ;">{{Content.title}}</h2>
             <ul>
-                <li><a routerLink="/">Home</a></li>
-                <li>{{Content.title}}</li>
+                <li style="color: #00bd9a ;"><a routerLink="/" style="color: #2a2a33;">Home</a></li>
+                <li style="color: #00bd9a ;">{{Content.title}}</li>
             </ul>
         </div>
     </div>

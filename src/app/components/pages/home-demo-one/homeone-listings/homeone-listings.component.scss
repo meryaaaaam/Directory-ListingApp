@@ -82,7 +82,7 @@
             text-align: center;
             background-color: rgba(0, 0, 0, .55);
             width: 35px;
-            height: 35px;
+            height: 45px;
             border-radius: 50%;
             line-height: 35px;
             font-size: 15px;
@@ -95,7 +95,7 @@
         .single-image {
             position: relative;
             z-index: 1;
-            
+
             &::before {
                 content: '';
                 position: absolute;
@@ -338,7 +338,7 @@
     }
     .listings-content {
         padding: 45px 30px;
-        
+
         .status {
             display: inline-block;
             color: var(--whiteColor);
@@ -681,7 +681,7 @@
 	display: block;
 	width: 300px !important;
     position: relative;
-    
+
     .map-popup {
         display: block;
         width: 100%;
@@ -763,7 +763,7 @@
                 color: var(--optionalColor);
                 margin-bottom: 10px;
                 font-size: 13px;
-            
+
                 i {
                     font-weight: normal;
                     color: var(--mainColor);
@@ -788,7 +788,7 @@
                 color: var(--optionalColor);
                 display: block;
                 font-size: 13px;
-            
+
                 i {
                     font-weight: normal;
                     color: var(--mainColor);
@@ -876,7 +876,7 @@
 .cluster {
 	width: 40px !important;
     height: 40px !important;
-    
+
     img {
         display: none;
     }
@@ -965,7 +965,7 @@
         }
         .listings-content {
             padding: 25px 15px;
-            
+
             .status {
                 margin-bottom: 13px;
                 padding: 3px 10px;
@@ -974,7 +974,7 @@
             .listings-meta {
                 margin-top: 10px;
                 padding-top: 5px;
-                
+
                 li {
                     font-size: 13px;
                     margin: {
@@ -1149,6 +1149,6 @@
 /* Min width 1550px */
 @media only screen and (min-width: 1550px) {
 
-    
+
 
 }

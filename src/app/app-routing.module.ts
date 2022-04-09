@@ -30,7 +30,7 @@ import { GridListingsRightSidebarComponent } from './components/pages/grid-listi
 import { HomeDemoOneComponent } from './components/pages/home-demo-one/home-demo-one.component';
 import { HomeDemoTwoComponent } from './components/pages/home-demo-two/home-demo-two.component';
 import { HowItWorksPageComponent } from './components/pages/how-it-works-page/how-it-works-page.component';
-import { ListingsDetailsComponent } from './components/pages/listings-details/listings-details.component';
+ import { ListingsDetailsComponent } from './components/pages/listings-details/listings-details.component';
 import { NotFoundComponent } from './components/pages/not-found/not-found.component';
 import { PricingComponent } from './components/pages/pricing/pricing.component';
 import { ProductsDetailsComponent } from './components/pages/products-details/products-details.component';
@@ -39,6 +39,7 @@ import { TopPlaceComponent } from './components/pages/top-place/top-place.compon
 import { VerticalListingsFullWidthComponent } from './components/pages/vertical-listings-full-width/vertical-listings-full-width.component';
 import { VerticalListingsLeftSidebarComponent } from './components/pages/vertical-listings-left-sidebar/vertical-listings-left-sidebar.component';
 import { VerticalListingsRightSidebarComponent } from './components/pages/vertical-listings-right-sidebar/vertical-listings-right-sidebar.component';
+import { ListingComponent } from './components/pages/listing/listing.component';
 
 const routes: Routes = [
     {path: '', component: HomeDemoOneComponent},
@@ -79,6 +80,8 @@ const routes: Routes = [
     {path: 'dashboard-add-listings', component: DashboardAddListingsComponent},
     {path: 'dashboard-bookmarks', component: DashboardBookmarksComponent},
     {path: 'dashboard-my-listings', component: DashboardMyListingsComponent},
+    {path: 'listing', component: ListingComponent},
+
     // Here add new pages component
 
     {path: '**', component: NotFoundComponent} // This line will remain down from the whole pages component list

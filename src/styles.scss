@@ -1,11 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
     --fontFamily: 'Work Sans', sans-serif;
-    --mainColor: #0ec6c6;
-    --mainColor2: #30eded;
+   // --mainColor: #0ec6c6;
+    --mainColor: #00bd9a ;
+   // --mainColor2: #30eded;
+    --mainColor2: #00bd9a;
     --optionalColor: #666666;
     --whiteColor: #ffffff;
-    --blackColor: #221638;
+   // --blackColor: #221638;
+     --blackColor: #2a2a33;
     --fontSize: 15px;
     --transition: .5s;
 }
@@ -160,7 +163,7 @@ p {
     border: none;
     text-align: center;
     border: 1px solid #00bd9a ;
-    box-shadow: 4px 4px #00bd9a ;
+    //box-shadow: 4px 4px #00bd9a ;
     background-color: var(--whiteColor);
     color:#2a2a33;
     font: {
@@ -847,7 +850,7 @@ textarea.form-control {
     }
     form {
         background-color: var(--whiteColor);
-        box-shadow: 5px 5px #30eded;
+        box-shadow: 5px 5px #00bd9aa8 ;
         border-radius: 5px;
         max-width: 900px;
         padding: {
