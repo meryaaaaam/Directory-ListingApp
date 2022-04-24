@@ -41,8 +41,10 @@ import { VerticalListingsLeftSidebarComponent } from './components/pages/vertica
 import { VerticalListingsRightSidebarComponent } from './components/pages/vertical-listings-right-sidebar/vertical-listings-right-sidebar.component';
 import { ListingComponent } from './components/pages/listing/listing.component';
 
-const routes: Routes = [
+
+ const routes: Routes = [
     {path: '', component: HomeDemoOneComponent},
+
     {path: 'index-2', component: HomeDemoTwoComponent},
     {path: 'about', component: AboutUsComponent},
     {path: 'how-it-works', component: HowItWorksPageComponent},

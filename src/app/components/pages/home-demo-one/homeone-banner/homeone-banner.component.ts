@@ -19,24 +19,24 @@ export class HomeoneBannerComponent implements OnInit {
             paragraph: 'Trouvez une entreprise ou un(e) professionel(le)',
             popularSearchList: [
                 {
-                    title: 'Restaurants',
-                    link: 'grid-listings-left-sidebar'
+                    title: 'Marketing',
+                    link: 'single-listings'
                 },
                 {
-                    title: 'Automobile',
-                    link: 'grid-listings-left-sidebar'
+                    title: 'Finance',
+                    link: 'single-listings'
                 },
                 {
-                    title: 'Divertissements',
-                    link: 'grid-listings-left-sidebar'
+                    title: 'Banque et Assurance',
+                    link: 'single-listings'
                 },
                 {
-                    title: 'Soins',
-                    link: 'grid-listings-left-sidebar'
+                    title: 'Comptabilité',
+                    link: 'single-listings'
                 },
                 {
-                    title: 'Personnels',
-                    link: 'grid-listings-left-sidebar'
+                    title: 'Commerce',
+                    link: 'single-listings'
                 }
             ]
         }

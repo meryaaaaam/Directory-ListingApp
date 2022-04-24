@@ -4,7 +4,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { NgxTypedJsModule } from 'ngx-typed-js';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -76,8 +76,12 @@ import { DashboardAddListingsComponent } from './components/pages/dashboard/dash
 import { DashboardBookmarksComponent } from './components/pages/dashboard/dashboard-bookmarks/dashboard-bookmarks.component';
 import { DashboardMyListingsComponent } from './components/pages/dashboard/dashboard-my-listings/dashboard-my-listings.component';
 import { ListingComponent } from './components/pages/listing/listing.component';
+ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-@NgModule({
+
+
+
+ @NgModule({
   declarations: [
     AppComponent,
     HomeDemoOneComponent,
@@ -146,7 +150,8 @@ import { ListingComponent } from './components/pages/listing/listing.component';
     DashboardAddListingsComponent,
     DashboardBookmarksComponent,
     DashboardMyListingsComponent,
-    ListingComponent
+    ListingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -156,9 +161,14 @@ import { ListingComponent } from './components/pages/listing/listing.component';
     SelectDropDownModule,
     NgxTypedJsModule,
     FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule ,
+
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

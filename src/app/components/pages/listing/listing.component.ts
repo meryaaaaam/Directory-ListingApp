@@ -15,7 +15,7 @@ export class ListingComponent implements OnInit {
 
   pageTitleContent = [
       {
-          title: 'Find Popular Places'
+          title: 'Trouver une Entreprise ou un(e) professionnel(le)'
       }
   ]
 
@@ -32,22 +32,22 @@ export class ListingComponent implements OnInit {
   options = [
       // Type here your category name
       {
-          name: "Restaurants",
+          name: "Marketing",
       },
       {
-          name: "Événements",
+          name: "Finance",
       },
       {
-          name: "Shopping",
+          name: "Banque et Assurance",
       },
       {
-          name: "Banque",
+          name: "Technologies",
       },
       {
-          name: "Santé",
+          name: "Comptabilité",
       },
       {
-          name: "Librairie",
+          name: "Commerce",
       }
   ];
   searchChange($event) {
@@ -82,17 +82,17 @@ export class ListingComponent implements OnInit {
   // All Listings
   singleListingsItem = [
       {
-          mainImg: 'assets/img/listings/listings9.jpg',
+          mainImg: 'assets/img/bottin.jpg',
           categoryLink: 'single-listings',
           bookmarkLink: 'single-listings',
-          category: 'Restaurant',
-          location: 'New York, USA',
-          title: 'The Mad Made Grill',
-          price: 'Start From: $121',
+          category: 'Entreprise',
+          location: 'Montréal, Québec',
+          title: 'Groupe 3737',
+         // price: 'Start From: $121',
           detailsLink: 'single-listings',
           authorImg: 'assets/img/user3.jpg',
           authorName: 'James',
-           openORclose: 'Open Now',
+           //openORclose: 'Open Now',
           extraClass: 'status-open',
           rating: [
               {
@@ -113,7 +113,75 @@ export class ListingComponent implements OnInit {
           ],
           ratingCount: '18'
       },
+
       {
+        mainImg: 'assets/img/bottin.jpg',
+        categoryLink: 'single-listings',
+        bookmarkLink: 'single-listings',
+        category: 'Entreprise',
+        location: 'Montréal, Québec',
+        title: 'Groupe 3737',
+       // price: 'Start From: $121',
+        detailsLink: 'single-listings',
+        authorImg: 'assets/img/user3.jpg',
+        authorName: 'James',
+         //openORclose: 'Open Now',
+        extraClass: 'status-open',
+        rating: [
+            {
+                icon: 'bx bxs-star'
+            },
+            {
+                icon: 'bx bxs-star'
+            },
+            {
+                icon: 'bx bxs-star'
+            },
+            {
+                icon: 'bx bxs-star'
+            },
+            {
+                icon: 'bx bxs-star'
+            }
+        ],
+        ratingCount: '18'
+    },
+
+    {
+      mainImg: 'assets/img/bottin.jpg',
+      categoryLink: 'single-listings',
+      bookmarkLink: 'single-listings',
+      category: 'Entreprise',
+      location: 'Montréal, Québec',
+      title: 'Groupe 3737',
+     // price: 'Start From: $121',
+      detailsLink: 'single-listings',
+      authorImg: 'assets/img/user3.jpg',
+      authorName: 'James',
+       //openORclose: 'Open Now',
+      extraClass: 'status-open',
+      rating: [
+          {
+              icon: 'bx bxs-star'
+          },
+          {
+              icon: 'bx bxs-star'
+          },
+          {
+              icon: 'bx bxs-star'
+          },
+          {
+              icon: 'bx bxs-star'
+          },
+          {
+              icon: 'bx bxs-star'
+          }
+      ],
+      ratingCount: '18'
+  },
+
+
+   /*   {
           mainImg: 'assets/img/listings/listings10.jpg',
           categoryLink: 'single-listings',
           bookmarkLink: 'single-listings',
@@ -272,7 +340,7 @@ export class ListingComponent implements OnInit {
               }
           ],
           ratingCount: '55'
-      }
+      }*/
   ]
 
   verticalListings: number =  1;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationCancel, NavigationEnd } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { filter } from 'rxjs/operators';
+
 declare let $: any;
 
 @Component({
@@ -19,11 +20,25 @@ export class AppComponent {
     location: any;
     routerSubscription: any;
 
-    constructor(private router: Router) {
+    isSignedIn!: boolean;
+
+    constructor(
+      private router: Router,
+
+
+
+      ) {
     }
 
     ngOnInit(){
         this.recallJsFuntions();
+
+
+    }
+
+    signOut() {
+
+      this.router.navigate(['login']);
     }
 
     recallJsFuntions() {
