@@ -116,16 +116,17 @@
                             </ul>
                         </div>-->
                         <span class="sub-title"><span> Connexion</span></span>
-                        <form>
+                        <form [formGroup]="loginForm" (ngSubmit)="login()">
                             <div class="form-group">
-                                <input type="text" placeholder="Username or Email" class="form-control">
+                                <input type="text" placeholder=" Email" class="form-control" formControlName="email">
                             </div>
                             <div class="form-group">
-                                <input type="password" placeholder="Password" class="form-control">
+                                <input type="password" placeholder="Password" class="form-control" formControlName="password">
                             </div>
                             <button type="submit">Connexion</button>
                         </form>
                         <span class="dont-account">Vous n'avez pas de compte ? <a href="#">S'inscrire </a></span>
+
                     </div>
                 </div>
                 <div class="tab-pane fade" id="register" role="tabpanel">
@@ -138,22 +139,26 @@
                             </ul>
                         </div>-->
                         <span class="sub-title"><span>Creer compte</span></span>
-                        <form>
+                        <form [formGroup]="registerForm" (ngSubmit)="signup()">
                             <div class="form-group">
-                                <input type="text" placeholder="Username" class="form-control">
+                                <input type="text" placeholder="Username" class="form-control" formControlName="name">
                             </div>
                             <div class="form-group">
-                                <input type="email" placeholder="Email" class="form-control">
+                                <input type="email" placeholder="Email" class="form-control" formControlName="email">
                             </div>
                             <div class="form-group">
-                                <input type="password" placeholder="Password" class="form-control">
+                                <input type="password" placeholder="Password" class="form-control" formControlName="password">
                             </div>
                             <div class="form-group">
-                                <input type="password" placeholder="Confirm Password" class="form-control">
+                                <input type="password" placeholder="Confirm Password" class="form-control" formControlName="password_confirmation">
                             </div>
                             <button type="submit">S'inscrire</button>
                         </form>
-                        <span class="already-account">Vous avez déjà un compte? <a href="#">Login Now</a></span>
+                        <span class="already-account">Vous avez déjà un compte?
+                           <a href="#" >Login Now</a></span>
+
+
+
                     </div>
                 </div>
             </div>

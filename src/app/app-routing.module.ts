@@ -40,6 +40,7 @@ import { VerticalListingsFullWidthComponent } from './components/pages/vertical-
 import { VerticalListingsLeftSidebarComponent } from './components/pages/vertical-listings-left-sidebar/vertical-listings-left-sidebar.component';
 import { VerticalListingsRightSidebarComponent } from './components/pages/vertical-listings-right-sidebar/vertical-listings-right-sidebar.component';
 import { ListingComponent } from './components/pages/listing/listing.component';
+import { ProfileComponent } from './components/pages/user-panel/profile/profile.component';
 
 
  const routes: Routes = [
@@ -83,6 +84,9 @@ import { ListingComponent } from './components/pages/listing/listing.component';
     {path: 'dashboard-bookmarks', component: DashboardBookmarksComponent},
     {path: 'dashboard-my-listings', component: DashboardMyListingsComponent},
     {path: 'listing', component: ListingComponent},
+
+
+    {path: 'profile', component: ProfileComponent},
 
     // Here add new pages component
 

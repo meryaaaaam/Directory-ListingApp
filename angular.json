@@ -39,6 +39,8 @@
                 "src/assets/css/dropzone.min.css",
                 "node_modules/magnific-popup/dist/magnific-popup.css",
                 "src/styles.scss"
+
+
             ],
             "scripts": [
                 "node_modules/jquery/dist/jquery.min.js",

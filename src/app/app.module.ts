@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
@@ -77,6 +77,12 @@ import { DashboardBookmarksComponent } from './components/pages/dashboard/dashbo
 import { DashboardMyListingsComponent } from './components/pages/dashboard/dashboard-my-listings/dashboard-my-listings.component';
 import { ListingComponent } from './components/pages/listing/listing.component';
  import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth/auth.interceptor';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { UserSidemenuComponent } from './components/common/user-panel/user-sidemenu/user-sidemenu.component';
+import { UserPanelComponent } from './components/pages/user-panel/user-panel.component';
+import { UserNavbarComponent } from './components/common/user-panel/user-navbar/user-navbar.component';
+import { ProfileComponent } from './components/pages/user-panel/profile/profile.component';
 
 
 
@@ -151,6 +157,13 @@ import { ListingComponent } from './components/pages/listing/listing.component';
     DashboardBookmarksComponent,
     DashboardMyListingsComponent,
     ListingComponent,
+    UserSidemenuComponent,
+    UserPanelComponent,
+    UserNavbarComponent,
+    ProfileComponent,
+
+
+
 
   ],
   imports: [
@@ -164,11 +177,17 @@ import { ListingComponent } from './components/pages/listing/listing.component';
     HttpClientModule,
     ReactiveFormsModule ,
 
-    NgxPaginationModule
+    NgxPaginationModule,
+    SweetAlert2Module
   ],
   providers: [
-
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
