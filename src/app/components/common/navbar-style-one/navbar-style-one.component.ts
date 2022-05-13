@@ -54,21 +54,46 @@ export class NavbarStyleOneComponent implements OnInit {
    // footer: '<a href="">Why do I have this issue?</a>'
   })}
 
+  loginAfterRegister(form:any) {
+    this.authService.signin(form).subscribe(
+      (result) => {
+        this.responseHandler(result);
+        console.log('authenticated') ;
+
+        this.authState.setAuthState(true);
+        this.loginForm.reset();
+       this.alertWithSuccess() ;
+       // this.router.navigate(['user/profile']);
+        this.router.navigateByUrl('profile');
+      },
+      (error) => {
+        this.alertWithError();
+        this.errors = error.error;
+      }
+    );
+  }
+
   signup() {
     this.authService.register(this.registerForm.value).subscribe(
       (result) => {
+        const data = result;
 
-        console.log(result);
+        const data1 : any = {email: data.email , password:data.password}
+
+        this.registerForm.reset();
+        this.alertWithSuccess() ;
+
+        /*this.loginAfterRegister(data1);
+        console.log(result);*/
+
       },
       (error) => {
         this.errors = error.error;
         this.alertWithError();
       },
-      () => {
-        this.registerForm.reset();
-       this.alertWithSuccess() ;
-        this.router.navigate(['login']);
-      }
+
+
+
     );
   }
 
@@ -76,22 +101,24 @@ export class NavbarStyleOneComponent implements OnInit {
     this.authService.signin(this.loginForm.value).subscribe(
       (result) => {
         this.responseHandler(result);
-        console.log('authenticated') ;
-      },
-      (error) => {
-        this.alertWithError();
-        this.errors = error.error;
-      },
-      () => {
+
+
         this.authState.setAuthState(true);
         this.loginForm.reset();
        this.alertWithSuccess() ;
        // this.router.navigate(['user/profile']);
-        this.router.navigateByUrl('profile');
-
+        this.router.navigateByUrl('profile'); console.log('authenticated') ;
+      },
+      (error) => {
+        this.alertWithError();
+        this.errors = error.error;
       }
     );
   }
+
+
+
+
   // Handle response
   responseHandler(data:any) {
     this.token.handleData(data.access_token);

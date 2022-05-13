@@ -41,6 +41,7 @@ import { VerticalListingsLeftSidebarComponent } from './components/pages/vertica
 import { VerticalListingsRightSidebarComponent } from './components/pages/vertical-listings-right-sidebar/vertical-listings-right-sidebar.component';
 import { ListingComponent } from './components/pages/listing/listing.component';
 import { ProfileComponent } from './components/pages/user-panel/profile/profile.component';
+import { AuthGuard } from './services/guard/AuthGuard.guard';
 
 
  const routes: Routes = [
@@ -86,7 +87,8 @@ import { ProfileComponent } from './components/pages/user-panel/profile/profile.
     {path: 'listing', component: ListingComponent},
 
 
-    {path: 'profile', component: ProfileComponent},
+    {path: 'profile', component: ProfileComponent ,
+     canActivate: [   AuthGuard ] },
 
     // Here add new pages component
 
