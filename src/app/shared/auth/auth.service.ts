@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Password } from 'src/app/models/user/password';
 // User interface
 export class User {
   name!: String;
@@ -25,4 +26,11 @@ export class AuthService {
   profileUser(): Observable<any> {
     return this.http.get('http://127.0.0.1:8000/api/auth/user-profile');
   }
+
+
+
+  changepassword(password: Password): Observable<any> {
+    return this.http.post('http://127.0.0.1:8000/api/auth/new_pass' , password);
+  }
+
 }

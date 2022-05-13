@@ -87,7 +87,7 @@ export class NavbarStyleOneComponent implements OnInit {
         this.loginForm.reset();
        this.alertWithSuccess() ;
        // this.router.navigate(['user/profile']);
-        this.router.navigateByUrl('user/profile');
+        this.router.navigateByUrl('profile');
 
       }
     );
