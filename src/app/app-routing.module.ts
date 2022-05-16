@@ -41,6 +41,11 @@ import { VerticalListingsLeftSidebarComponent } from './components/pages/vertica
 import { VerticalListingsRightSidebarComponent } from './components/pages/vertical-listings-right-sidebar/vertical-listings-right-sidebar.component';
 import { ListingComponent } from './components/pages/listing/listing.component';
 import { ProfileComponent } from './components/pages/user-panel/profile/profile.component';
+
+
+import { ProfileComponent as pro} from './components/pages/user-panel/pro/profile/profile.component' ;
+import { ProfileComponent as company} from './components/pages/user-panel/company/profile/profile.component' ;
+
 import { AuthGuard } from './services/guard/AuthGuard.guard';
 
 
@@ -87,8 +92,10 @@ import { AuthGuard } from './services/guard/AuthGuard.guard';
     {path: 'listing', component: ListingComponent},
 
 
-    {path: 'profile', component: ProfileComponent ,
-     canActivate: [   AuthGuard ] },
+    {path: 'profile', component: ProfileComponent , canActivate: [   AuthGuard ] },
+
+    {path: 'professionnel/profile', component: pro , canActivate: [   AuthGuard ] },
+    {path: 'entreprise/profile', component: company , canActivate: [   AuthGuard ] },
 
     // Here add new pages component
 

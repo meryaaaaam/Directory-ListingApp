@@ -83,7 +83,9 @@ import { UserSidemenuComponent } from './components/common/user-panel/user-sidem
 import { UserPanelComponent } from './components/pages/user-panel/user-panel.component';
 import { UserNavbarComponent } from './components/common/user-panel/user-navbar/user-navbar.component';
 import { ProfileComponent } from './components/pages/user-panel/profile/profile.component';
-
+import { ProfileComponent as pro } from './components/pages/user-panel/pro/profile/profile.component';
+import { ProfileComponent as company } from './components/pages/user-panel/company/profile/profile.component';
+ import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS} from '@angular/material/checkbox';
 
 
 
@@ -161,6 +163,7 @@ import { ProfileComponent } from './components/pages/user-panel/profile/profile.
     UserPanelComponent,
     UserNavbarComponent,
     ProfileComponent,
+    pro, company
 
 
 
@@ -176,7 +179,7 @@ import { ProfileComponent } from './components/pages/user-panel/profile/profile.
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule ,
-
+    MatCheckboxModule,
     NgxPaginationModule,
     SweetAlert2Module
   ],
@@ -185,7 +188,7 @@ import { ProfileComponent } from './components/pages/user-panel/profile/profile.
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
+    } ,   {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions}
   ],
 
   bootstrap: [AppComponent]

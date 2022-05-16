@@ -15,9 +15,9 @@ import Swal from 'sweetalert2'
 export class NavbarStyleOneComponent implements OnInit {
   loginForm: FormGroup;
   errors:any = null;
+  role : any ;
 
   registerForm: FormGroup;
-
 
 
   constructor(
@@ -33,15 +33,32 @@ export class NavbarStyleOneComponent implements OnInit {
     });
 
     this.registerForm = this.fb.group({
-      name: [''],
+      username: [''],
       email: [''],
       password: [''],
       password_confirmation: [''],
+      role: [''],
+      isActive: 0,
     });
+
   }
-  ngOnInit(): void {
+  ngOnInit(){
+
+
+
   }
 
+  getroles()
+  {this.authService.roles().subscribe(
+    (result) => {
+      console.log(result) ;
+       this.role = result ;
+    },
+    (error) => {
+
+      console.log(error.errors);
+    }
+  );}
  alertWithSuccess(){
     Swal.fire('Yre authentificated succesfully!', '', 'success')
   }
@@ -55,20 +72,24 @@ export class NavbarStyleOneComponent implements OnInit {
   })}
 
   loginAfterRegister(form:any) {
+  //  this.getroles() ;
     this.authService.signin(form).subscribe(
       (result) => {
         this.responseHandler(result);
-        console.log('authenticated') ;
+      //  console.log(result.role)
+        console.log() ;
 
         this.authState.setAuthState(true);
+
         this.loginForm.reset();
        this.alertWithSuccess() ;
        // this.router.navigate(['user/profile']);
-        this.router.navigateByUrl('profile');
+
       },
       (error) => {
         this.alertWithError();
         this.errors = error.error;
+        console.log(this.errors);
       }
     );
   }
@@ -89,6 +110,7 @@ export class NavbarStyleOneComponent implements OnInit {
       },
       (error) => {
         this.errors = error.error;
+        console.log(this.errors) ;
         this.alertWithError();
       },
 
@@ -101,13 +123,22 @@ export class NavbarStyleOneComponent implements OnInit {
     this.authService.signin(this.loginForm.value).subscribe(
       (result) => {
         this.responseHandler(result);
-
+        console.log(result);
+        console.log('c est un '+result.user.role);
+     let data = result.user.role ;
 
         this.authState.setAuthState(true);
         this.loginForm.reset();
        this.alertWithSuccess() ;
        // this.router.navigate(['user/profile']);
-        this.router.navigateByUrl('profile'); console.log('authenticated') ;
+       if(data == "Pro")
+       this.router.navigateByUrl('professionnel/profile');
+       else if(data == "Company")
+       this.router.navigateByUrl('entreprise/profile');
+       else
+       { this.router.navigateByUrl('profile');}
+
+       console.log(this.role) ;
       },
       (error) => {
         this.alertWithError();
@@ -124,6 +155,11 @@ export class NavbarStyleOneComponent implements OnInit {
     this.token.handleData(data.access_token);
   }
 
-
+  ischecked = false ;
+  pro=false ; company = false;
+  checked = false;
+  indeterminate = false;
+  labelPosition: 'before' | 'after' = 'after';
+  disabled = false;
 
 }

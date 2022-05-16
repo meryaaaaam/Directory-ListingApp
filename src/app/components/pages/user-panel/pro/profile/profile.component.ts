@@ -10,12 +10,14 @@ import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+
   fileData: File = null;
   fileProgress(fileInput: any) {
     this.fileData = <File>fileInput.target.files[0];
@@ -27,8 +29,8 @@ export class ProfileComponent implements OnInit {
 
  public password!: Password ;
  public currentuser : any = null;
-    passwordForm: FormGroup;
-  //  userForm: FormGroup;
+ public passwordForm: FormGroup;
+ public userForm: FormGroup;
   constructor(public auth: AuthService ,
     public userapi : UserService ,
     public router: Router ,
@@ -46,19 +48,27 @@ export class ProfileComponent implements OnInit {
     });
 
 
+    this.userForm = this.fb.group({
+      firstname: [''],
+      email: [''],
+      lastname: [''],
+      username: [''],
+      phone: [''],
+      adresse: [''],
+      website: [''],
+      LinkedIn: [''],
+      langue: [''],
+      isEmailActive: [''],
+
+    });
+
+
 
 
 
   }
 
-  ngOnInit():void  {
-    if(this.user.role == 'Pro')
-    this.router.navigateByUrl('professionnel/profile');
-    else if(this.user.role == "Company")
-    this.router.navigateByUrl('entreprise/profile');
-    else
-    { this.router.navigateByUrl('profile');}
-  }
+  ngOnInit():void  {}
 
   successAlert()
   {
@@ -119,4 +129,6 @@ export class ProfileComponent implements OnInit {
 
 
 }
+
+
 }

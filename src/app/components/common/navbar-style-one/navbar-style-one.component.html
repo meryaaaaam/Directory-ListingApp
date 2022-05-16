@@ -141,7 +141,7 @@
                         <span class="sub-title"><span>Creer compte</span></span>
                         <form [formGroup]="registerForm" (ngSubmit)="signup()">
                             <div class="form-group">
-                                <input type="text" placeholder="Username" class="form-control" formControlName="name">
+                                <input type="text" placeholder="Username" class="form-control" formControlName="username">
                             </div>
                             <div class="form-group">
                                 <input type="email" placeholder="Email" class="form-control" formControlName="email">
@@ -152,22 +152,27 @@
                             <div class="form-group">
                                 <input type="password" placeholder="Confirm Password" class="form-control" formControlName="password_confirmation">
                             </div>
+
+
+
+
                             <div class="add-listings-box">
                             <div class="form-group">
 
                               <ul class="facilities-list">
                                   <li>
-                                      <label class="checkbox">
-                                          <input type="checkbox" name="facilities-list" value="Professionnel" checked>
+                                      <label class="checkbox p-3">
+                                          <input type="radio" name="role" value="Pro"formControlName="role"  >
                                           <span>Professionnel</span>
-                                      </label>
-                                  </li>
-                                  <li>
-                                      <label class="checkbox">
-                                          <input type="checkbox" name="facilities-list" value="Entreprise">
+
+                                        </label>
+
+                                        <label class="checkbox">
+                                          <input type="radio" name="role" value="Company" formControlName="role">
                                           <span>Entreprise</span>
-                                      </label>
+                                        </label>
                                   </li>
+
 
                                </ul>
 

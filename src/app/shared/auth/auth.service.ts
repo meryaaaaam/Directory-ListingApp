@@ -27,7 +27,8 @@ export class AuthService {
     return this.http.get('http://127.0.0.1:8000/api/auth/user-profile');
   }
 
-
+  roles(): Observable<any> {
+    return this.http.get('http://127.0.0.1:8000/api/auth/roles');}
 
   changepassword(password: Password): Observable<any> {
     return this.http.post('http://127.0.0.1:8000/api/auth/new_pass' , password);
