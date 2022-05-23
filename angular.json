@@ -38,7 +38,10 @@
                 "src/assets/css/simplebar.min.css",
                 "src/assets/css/dropzone.min.css",
                 "node_modules/magnific-popup/dist/magnific-popup.css",
-                "src/styles.scss"
+                "src/styles.scss",
+                "node_modules/primeng/resources/themes/lara-light-teal/theme.css",
+                "node_modules/primeicons/primeicons.css",
+                "node_modules/primeng/resources/primeng.min.css"
 
 
             ],

@@ -36,6 +36,13 @@
 
                         </li>
 
+                        <li *ngIf="user.id" class="nav-item">
+                          <a routerLink={{link}} class="nav-link" routerLinkActive="active"[routerLinkActiveOptions]="{exact: true}">Profile </a>
+
+                        </li>
+
+
+
 
 
 
@@ -43,14 +50,15 @@
 
                     </ul>
 
-                    <div class="others-option d-flex align-items-center">
-                        <div class="option-item">
-                            <span data-bs-toggle="modal" data-bs-target="#loginRegisterModal"><i class="flaticon-user"></i> Login / Register</span>
-                        </div>
+                      <div *ngIf="!user.id"class="others-option d-flex align-items-center">
+                        <div   class="option-item">
+                          <span data-bs-toggle="modal" data-bs-target="#loginRegisterModal"><i class="flaticon-user"></i> Login / Register</span>
+                          </div>
 
-                        <div class="option-item">
+
+                       <!-- <div class="option-item">
                             <a routerLink="/#" class="default-btn"><i class="flaticon-more"></i> Ajouter annonces </a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </nav>

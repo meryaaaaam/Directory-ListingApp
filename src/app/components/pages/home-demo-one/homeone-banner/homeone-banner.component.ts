@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from 'src/app/shared/api/category.service';
+import { SearchService } from 'src/app/shared/api/search.service';
 
 @Component({
     selector: 'app-homeone-banner',
@@ -6,11 +8,21 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./homeone-banner.component.scss']
 })
 export class HomeoneBannerComponent implements OnInit {
+    categories: any;
+    cat : any ;
+    label : any ;
 
-    constructor() { }
+    constructor(public category : CategoryService , public s : SearchService  ) { }
 
     ngOnInit(): void {
+
+
         this.resetOption = [this.options[0]];
+
+        this.category.getAllCategories().subscribe(
+          data => this.categories = data
+        )
+
     }
 
     mainBannerContent = [

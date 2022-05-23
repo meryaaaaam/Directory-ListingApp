@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user/user';
 import { AuthStateService } from 'src/app/shared/auth/auth-state.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { TokenService } from 'src/app/shared/auth/token.service';
@@ -18,15 +19,42 @@ export class NavbarStyleOneComponent implements OnInit {
   role : any ;
 
   registerForm: FormGroup;
+  user:User = new User ;
+  link: string;
 
-
-  constructor(
+  constructor(public auth: AuthService ,
     public router: Router,
     public fb: FormBuilder,
     public authService: AuthService,
     private token: TokenService,
     private authState: AuthStateService
   ) {
+    this.auth.profileUser().subscribe((data: any)=>
+
+    {this.user = data ;   console.log(this.user.role) ;
+
+
+      if (this.user.role=='Admin')
+      {
+        this.link ='profile' ;
+      }
+      else if (this.user.role =='Company')
+      {
+        this.link ='entreprise/profile' ;
+      }
+      else {
+        this.link ='professionnel/profile' ;
+      }
+      console.log(this.link) ;
+
+    }
+
+    );
+
+
+
+
+
     this.loginForm = this.fb.group({
       email: [],
       password: [],
@@ -43,6 +71,8 @@ export class NavbarStyleOneComponent implements OnInit {
 
   }
   ngOnInit(){
+
+
 
 
 
@@ -99,7 +129,7 @@ export class NavbarStyleOneComponent implements OnInit {
       (result) => {
         const data = result;
 
-        const data1 : any = {email: data.email , password:data.password}
+        const data1 : any = {email: data.email , password:data.password, isActive:0}
 
         this.registerForm.reset();
         this.alertWithSuccess() ;

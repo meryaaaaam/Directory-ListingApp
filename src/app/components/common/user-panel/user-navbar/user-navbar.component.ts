@@ -12,13 +12,22 @@ import { TokenService } from 'src/app/shared/auth/token.service';
 })
 export class UserNavbarComponent implements OnInit {
   isSignedIn!: boolean;
-  user!:User ;
+  public user: User  = new User ;
+  logo: any;
   constructor(public auth: AuthService  ,private auths: AuthStateService,
     public router: Router,
     public token: TokenService )
   { this.auth.profileUser().subscribe((data: any)=>
 
-    {this.user = data ;   });
+    {this.user = data ;
+
+      if(this.user.logo)
+      {this.logo = this.user.logo ;}
+      else
+      {this.logo="assets/img/logo/default.png" ;}
+
+
+    });
 
   }
 

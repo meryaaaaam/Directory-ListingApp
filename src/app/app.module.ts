@@ -87,8 +87,14 @@ import { ProfileComponent as pro } from './components/pages/user-panel/pro/profi
 import { ProfileComponent as company } from './components/pages/user-panel/company/profile/profile.component';
  import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS} from '@angular/material/checkbox';
 
+ import { NotifierModule } from 'angular-notifier';
 
+ import { ButtonModule } from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
+import {InputMaskModule} from 'primeng/inputmask';
+import { ProfileTestComponent } from './components/test/profile-test/profile-test.component';
  @NgModule({
   declarations: [
     AppComponent,
@@ -163,7 +169,7 @@ import { ProfileComponent as company } from './components/pages/user-panel/compa
     UserPanelComponent,
     UserNavbarComponent,
     ProfileComponent,
-    pro, company
+    pro, company, ProfileTestComponent
 
 
 
@@ -181,7 +187,11 @@ import { ProfileComponent as company } from './components/pages/user-panel/compa
     ReactiveFormsModule ,
     MatCheckboxModule,
     NgxPaginationModule,
-    SweetAlert2Module
+    SweetAlert2Module, NotifierModule,AutoCompleteModule,InputMaskModule,
+
+
+
+    ButtonModule,DropdownModule
   ],
   providers: [
     {

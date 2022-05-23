@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
     this.fileData = <File>fileInput.target.files[0];
 }
 
- public user!: User   ;
+ public user: User  = new User ;
 
  public image = 'assets/img/user1.jpg';
 
@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
     public fb: FormBuilder,
     public upload : UploadService,private http: HttpClient
      )
-  { this.auth.profileUser().subscribe((data: any)=>
+  { this.auth.Profile().subscribe((data: any)=>
 
     {this.user = data ;   console.log(this.user.role)});
 
@@ -52,6 +52,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit():void  {
+    this.router.navigateByUrl('profile');
     if(this.user.role == 'Pro')
     this.router.navigateByUrl('professionnel/profile');
     else if(this.user.role == "Company")
@@ -75,7 +76,7 @@ export class ProfileComponent implements OnInit {
 
   updateprofile()
   {
-    const data : any = {name: this.user.name , email:this.user.email}
+    //const data : any = {name: this.user.name , email:this.user.email}
   let currentuser = this.user ;
 
     this.userapi.update(this.user.id , currentuser) .subscribe(

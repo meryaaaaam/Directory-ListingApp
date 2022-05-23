@@ -47,6 +47,8 @@ import { ProfileComponent as pro} from './components/pages/user-panel/pro/profil
 import { ProfileComponent as company} from './components/pages/user-panel/company/profile/profile.component' ;
 
 import { AuthGuard } from './services/guard/AuthGuard.guard';
+import { ProfileTestComponent } from './components/test/profile-test/profile-test.component';
+
 
 
  const routes: Routes = [
@@ -89,13 +91,16 @@ import { AuthGuard } from './services/guard/AuthGuard.guard';
     {path: 'dashboard-add-listings', component: DashboardAddListingsComponent},
     {path: 'dashboard-bookmarks', component: DashboardBookmarksComponent},
     {path: 'dashboard-my-listings', component: DashboardMyListingsComponent},
-    {path: 'listing', component: ListingComponent},
+    {path: 'listing/:id', component: ListingComponent},
 
 
     {path: 'profile', component: ProfileComponent , canActivate: [   AuthGuard ] },
 
     {path: 'professionnel/profile', component: pro , canActivate: [   AuthGuard ] },
     {path: 'entreprise/profile', component: company , canActivate: [   AuthGuard ] },
+
+
+    {path: 'test/profile', component: ProfileTestComponent },
 
     // Here add new pages component
 

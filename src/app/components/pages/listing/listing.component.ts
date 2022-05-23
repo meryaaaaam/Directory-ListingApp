@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { Category } from 'src/app/models/category/category';
+import { CategoryService } from 'src/app/shared/api/category.service';
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
@@ -7,10 +10,31 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 })
 export class ListingComponent implements OnInit {
 
-  constructor() { }
+  x : any; options : any ;
+  category : Category = new Category ;
+
+  label : any
+
+  constructor( private route: ActivatedRoute, public categories: CategoryService) { }
 
   ngOnInit(): void {
-      this.resetOption = [this.options[0]];
+
+       this.getuser(this.route.snapshot.paramMap.get('id')) ;
+
+      this.categories.getAllCategories().subscribe(
+        data=>{this.options = data ,  console.log(this.options)},
+        error=> error.errors
+      )
+
+  }
+
+
+  getuser(id)
+  {
+    this.categories.getUserbyCat(id).subscribe(
+      data=> {this.x = data ; console.log(this.x) ;},
+      error=>error.errors,
+    )
   }
 
   pageTitleContent = [
@@ -29,27 +53,8 @@ export class ListingComponent implements OnInit {
       displayKey: "name",
       search: true
   };
-  options = [
-      // Type here your category name
-      {
-          name: "Marketing",
-      },
-      {
-          name: "Finance",
-      },
-      {
-          name: "Banque et Assurance",
-      },
-      {
-          name: "Technologies",
-      },
-      {
-          name: "Comptabilité",
-      },
-      {
-          name: "Commerce",
-      }
-  ];
+
+
   searchChange($event) {
       console.log($event);
   }

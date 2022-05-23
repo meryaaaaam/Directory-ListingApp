@@ -22,25 +22,30 @@
 
                 <form>
                     <div class="row">
-                        <div class="col-lg-12 col-md-12">
-                            <div class="form-group profile-box">
-                                <img src="{{ image }}" alt="image">
-                                <div class="file-upload">
-                                    <input type="file" name="image" id="file" class="inputfile" disabled />
-                                    <label for="file"><i class='bx bx-upload'></i> Upload Photo</label>
-                                   <!-- <button  class="button is-primary" type="submit" (click)="onUpload()"    >
-                                       Upload  </button>-->
-                                </div>
-                            </div>
-                        </div>
+
 
                         <div class="col-lg-12 col-md-12">
                             <div class="form-group">
 
-                                <label>Your Name</label>
-                                <input type="text" class="form-control"  [(ngModel)]="user.name" name="user.name">
+                                <label>Username</label>
+                                <input type="text" class="form-control"  [(ngModel)]="user.username" name="user.name">
                             </div>
                         </div>
+
+                        <div class="col-xl-6 col-lg-12 col-md-12">
+                          <div class="form-group">
+                              <label>Firstname</label>
+                              <input type="email" class="form-control"  [(ngModel)]="user.firstname" name="firstname"
+                             >
+                          </div>
+                      </div>
+                      <div class="col-xl-6 col-lg-12 col-md-12">
+                        <div class="form-group">
+                            <label>Lastname</label>
+                            <input type="email" class="form-control"  [(ngModel)]="user.lastname" name="lastname"
+                           >
+                        </div>
+                    </div>
 
                         <div class="col-xl-6 col-lg-12 col-md-12">
                             <div class="form-group">
@@ -57,26 +62,6 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-6 col-lg-12 col-md-12">
-                            <div class="form-group">
-                                <label>Address</label>
-                                <input type="text" class="form-control"[(ngModel)]="user.adress" name="adress">
-                            </div>
-                        </div>
-
-                        <div class="col-xl-6 col-lg-12 col-md-12">
-                            <div class="form-group">
-                                <label>Website</label>
-                                <input type="text" class="form-control"   [(ngModel)]="user.website" name="website">
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 col-md-12">
-                            <div class="form-group">
-                                <label>Bio</label>
-                                <textarea cols="30" rows="6" placeholder="Short description about you..." class="form-control" [(ngModel)]="user.bio" name="bio"></textarea>
-                            </div>
-                        </div>
 
 
 
