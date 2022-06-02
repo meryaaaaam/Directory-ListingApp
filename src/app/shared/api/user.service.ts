@@ -47,6 +47,19 @@ export class UserService {
     return this.http.get(baseUrl);
   }
 
+  getAllListUser()
+  {return this.http.get("http://127.0.0.1:8000/api/list/users") ; }
+
+
+
+  getAllActifUsers()
+  {return this.http.get(" http://127.0.0.1:8000/api/list/users/actifs") ; }
+
+
+
+  getAllPredingUsers()
+  {return this.http.get(" http://127.0.0.1:8000/api/list/users/preding") ; }
+
   isActive(id,data)
   {
     return this.http.put(`${Active}/${id}`, data)

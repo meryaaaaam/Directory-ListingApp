@@ -5,6 +5,7 @@ import { element } from 'protractor';
 import { Search } from 'src/app/models/service/search';
 import { Service } from 'src/app/models/service/service';
 import { CategoryService } from 'src/app/shared/api/category.service';
+import { SearchService } from 'src/app/shared/api/search.service';
 
 
 interface City {
@@ -31,7 +32,7 @@ export class ProfileTestComponent implements OnInit {
   filteredCountries: any[];
   filteredServices: any[];
 
-   serach = new Search ;
+   //serach = new Search ;
 
   //selectedCountry: Country;
   selectedCountry: string;
@@ -39,42 +40,59 @@ export class ProfileTestComponent implements OnInit {
 
   countries: any[];
   services : any;
+  search : any ;
   servicesArray : any[] ;
 
   selectedCity: City;
 
   formsearch : FormGroup ;
   Disabled: boolean;
-
-  constructor(public cat : CategoryService , private filterService: FilterService ,  public fb: FormBuilder,) {
+  x: any;
+  constructor(public cat : CategoryService , private filterService: FilterService ,  public fb: FormBuilder, public searchserv : SearchService) {
 
 
     this.cat.getAllServices().subscribe(
       response => {
         this.services = response ;
-        console.log(this.services);
-        console.log(this.countries);
+       // console.log(this.services);
+       // console.log(this.countries);
 
 
-      },
-
-
-
-
-      error => {
+      },error => {
         console.log(error);
       });
 
+
+     /* this.searchserv.results(this.route.snapshot.paramMap.get('label')).subscribe(
+        response => {
+          this.search = response ;
+          console.log(this.search);
+        //  console.log(this.countries);
+
+
+        },error => {
+          console.log(error);
+        });*/
 
   }
 
   ngOnInit() {
 
+    this.searchserv.result('ass').subscribe(
+      response => {
+        this.x = response ;
+        console.log(this.x);
+       // console.log(this.countries);
+
+
+      },
+      err => console.log(err.errorMessage)
+    )
     this.cat.getAllServices().subscribe(
       response => {
         this.services = response ;
-        console.log(this.services);
-        console.log(this.countries);
+        //console.log(this.services);
+       // console.log(this.countries);
 
 
       },) ;

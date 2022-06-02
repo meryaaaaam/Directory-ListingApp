@@ -26,12 +26,12 @@ export class ProfileComponent implements OnInit {
 
   fileData: File = null;
   Disabled: boolean;
-  categories: Object;
+  categories: any;
   sub: any;
   filteredSub: any[];
   search: any;
   type: any;
-  states: Object;
+  states: any;
 
 
   fileProgress(fileInput: any) {
@@ -166,7 +166,7 @@ adress : Adress = new Adress ; state : any;
   breadcrumb = [ {  title: 'My Profile',subTitle: 'User Panel'}]
 
   ngOnInit()   {
-    this.router.navigateByUrl('entreprise/profile');
+
 
     this.category.getAllCategories().subscribe(
       response => {

@@ -95,6 +95,11 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 
 import {InputMaskModule} from 'primeng/inputmask';
 import { ProfileTestComponent } from './components/test/profile-test/profile-test.component';
+
+import { AdminComponent } from './components/pages/panel/admin/admin.component';
+import { AllUsersComponent } from './components/pages/panel/admin/all-users/all-users.component';
+import { ActifUsersComponent } from './components/pages/panel/admin/actif-users/actif-users.component';
+import { PredingUsersComponent } from './components/pages/panel/admin/preding-users/preding-users.component';
  @NgModule({
   declarations: [
     AppComponent,
@@ -169,7 +174,7 @@ import { ProfileTestComponent } from './components/test/profile-test/profile-tes
     UserPanelComponent,
     UserNavbarComponent,
     ProfileComponent,
-    pro, company, ProfileTestComponent
+    pro, company, ProfileTestComponent,  AdminComponent, AllUsersComponent, ActifUsersComponent, PredingUsersComponent
 
 
 

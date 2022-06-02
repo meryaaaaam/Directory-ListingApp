@@ -144,10 +144,18 @@
                 </aside>
             </div>
 
-            <div class="col-lg-8 col-md-12">
+            <div *ngIf="! search" class="col-lg-8 col-md-12">
+              <div class="listings-grid-sorting row align-items-center">
+                  <div class="col-lg-5 col-md-6 result-count">
+                      <p>Nous avons trouvé <span class="count">  0  </span> annonces disponibles  </p>
+                  </div>
+              </div>
+            </div>
+
+            <div *ngIf="search" class="col-lg-8 col-md-12">
                 <div class="listings-grid-sorting row align-items-center">
                     <div class="col-lg-5 col-md-6 result-count">
-                        <p>Nous avons trouvé <span class="count">{{x.length}}</span> annonces disponibles  </p>
+                        <p>Nous avons trouvé <span class="count">  {{search.length}}  </span> annonces disponibles  </p>
                     </div>
 
                     <div class="col-lg-7 col-md-6 ordering">
@@ -159,14 +167,15 @@
                         </div>
                     </div>
                 </div>
+                  <div class="row">
+                    <div class="col-lg-12 col-md-12" *ngFor="let Content of search | paginate: { itemsPerPage: 10, currentPage: verticalListings }">
 
-                <div class="row">
-                    <div class="col-lg-12 col-md-12" *ngFor="let Content of x | paginate: { itemsPerPage: 10, currentPage: verticalListings }">
-                        <div *ngIf="Content.role === 'Pro'"class="single-listings-item">
+                      <div *ngIf="Content.role === 'Pro'"class="single-listings-item">
+
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-4 p-0">
                                     <div class="listings-image" style="background-image: url({{Content.logo}});">
-                                        <img [src]="Content.mainImg" alt="image">
+                                         <img [src]="Content.mainImg" alt="image">
                                        <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
                                         <!--  <a routerLink="/{{Content.categoryLink}}" class="category"><i class="flaticon-cooking"></i></a>-->
                                         <a routerLink="/{{Content.id}}" class="link-btn">  </a>
@@ -192,11 +201,15 @@
                                             </div>
                                         </div>
                                         <ul class="listings-meta">
-                                            <li><a routerLink="/{{Content.categoryLink}}">
+                                            <li><a routerLink="/{{Content.category}}">
 
                                               <i class="flaticon-furniture-and-household"></i> Professionnel</a></li>
                                             <li>
-                                              <li><i class="flaticon-pin"></i> {{Content.adresse}}</li>
+                                              <li><i class="flaticon-pin"></i> {{Content.adresse}}</li><br>
+                                              <a href="#"><li  > <i class="flaticon-pin"></i> {{Content.services[0] }}    </li></a>
+
+                                            <br> <a href="#">   <li><i class="flaticon-pin"></i> {{Content.category}}</li> </a>
+
 
                                         </ul>
                                     </div>
@@ -208,7 +221,7 @@
                           <div class="row m-0">
                               <div class="col-lg-4 col-md-4 p-0">
                                   <div class="listings-image" style="background-image: url({{Content.logo}});">
-                                      <img [src]="Content.mainImg" alt="image">
+                                      <img [src]="Content.logos" alt="image">
                                      <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
                                       <!--  <a routerLink="/{{Content.categoryLink}}" class="category"><i class="flaticon-cooking"></i></a>-->
                                       <a routerLink="/{{Content.id}}" class="link-btn">  </a>
@@ -234,11 +247,15 @@
                                           </div>
                                       </div>
                                       <ul class="listings-meta">
-                                          <li><a routerLink="/{{Content.categoryLink}}">
+                                          <li><a routerLink="/{{Content.category}}">
 
-                                            <i class="flaticon-furniture-and-household"></i> Professionnel</a></li>
+                                            <i class="flaticon-furniture-and-household"></i> Entreprise </a></li>
                                           <li>
-                                            <li><i class="flaticon-pin"></i> {{Content.adresse}}</li>
+                                            <br> <li><i class="flaticon-pin"></i> {{Content.adresse}}</li>
+                                            <br>
+                                            <a href="#"><li  > <i class="flaticon-pin"></i> {{Content.services[0] }}    </li></a>
+
+                                            <br> <a href="#">   <li><i class="flaticon-pin"></i> {{Content.category}}</li> </a>
 
                                       </ul>
                                   </div>

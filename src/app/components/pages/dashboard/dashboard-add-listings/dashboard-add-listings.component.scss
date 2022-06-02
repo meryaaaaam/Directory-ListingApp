@@ -2,8 +2,10 @@
 
 .add-listings-box {
     margin-bottom: 30px;
-    background-color: var(--whiteColor);
-    box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+    //background-color: var(--whiteColor);
+  //  box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+     background-color: none;
+    box-shadow: none ;
     border-radius: 5px;
     padding: 0 25px 0 25px;
 
@@ -320,7 +322,7 @@
 
 /* Max width 767px */
 @media only screen and (max-width: 767px) {
-    
+
     .add-listings-box {
         padding: 0 20px 0 20px;
 
@@ -402,7 +404,7 @@
 /* Min width 992px to Max width 1199px */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 
-    
+
 
 }
 /* Min width 1200px to Max width 1355px */
@@ -414,6 +416,6 @@
 /* Min width 1550px */
 @media only screen and (min-width: 1550px) {
 
-    
+
 
 }

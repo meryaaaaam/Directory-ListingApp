@@ -22,12 +22,25 @@
               </a>
           </li>
 
-          <li class="nav-item" routerLinkActive="active mm-active">
-              <a routerLink="/dashboard-bookings" class="nav-link">
+          <li *ngIf="role === 'Admin'" class="nav-item" routerLinkActive="active mm-active">
+              <a routerLink="/users-list" class="nav-link">
                   <span class="icon"><i class='bx bx-copy'></i></span>
                   <span class="menu-title">liste des utilisateurs</span>
               </a>
           </li>
+
+          <li *ngIf="role === 'Admin'" class="nav-item" routerLinkActive="active mm-active">
+            <a routerLink="/users-actifs" class="nav-link">
+                <span class="icon"><i class='bx bx-copy'></i></span>
+                <span class="menu-title"> Utilisateurs actifs</span>
+            </a>
+        </li>
+        <li *ngIf="role === 'Admin'" class="nav-item" routerLinkActive="active mm-active">
+          <a routerLink="/users-preding" class="nav-link">
+              <span class="icon"><i class='bx bx-copy'></i></span>
+              <span class="menu-title">  Liste d'attente </span>
+          </a>
+      </li>
 
 
           <li class="nav-item-title">

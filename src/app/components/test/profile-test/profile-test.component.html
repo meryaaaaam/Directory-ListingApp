@@ -15,43 +15,7 @@
 </div>
 <!-- End Breadcrumb Area -->
 
-<!-- Start -->
-<div class="row">
-  <div class="col-lg-6 col-md-12">
-      <div class="my-profile-box">
-          <h3>Informations de l'entreprise</h3>
-
-          <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name"></p-dropdown>
-
-
-           <p-dropdown [options]="services" [(ngModel)]="selcttedService" optionLabel="label" [filter]="true" filterBy="label" [showClear]="true" placeholder="Select a Country"  >
-              <ng-template pTemplate="selectedItem">
-                  <div class="country-item country-item-value"  *ngIf="selcttedService">
-                       <div>{{selcttedService.label}}</div>
-                  </div>
-              </ng-template>
-              <ng-template let-country pTemplate="label">
-                  <div class="country-item">
-                       <div>{{country.label}}</div>
-                  </div>
-              </ng-template>
-          </p-dropdown>
-
-
-
-
-          <h5>Multiple</h5>
-          <span class="p-fluid">
-             <p-autoComplete [(ngModel)]="selectedServices" [suggestions]="filteredServices" (completeMethod)="filterServices($event)" field="label" [multiple]="true" [dropdown]="true" >
-             </p-autoComplete>
-         </span>
-
-      </div>
-  </div>
-
-
-</div>
-<!-- End -->
+ {{x | json}}
 
 
 </div>

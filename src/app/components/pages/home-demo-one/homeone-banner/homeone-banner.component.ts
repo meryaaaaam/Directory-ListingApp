@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/shared/api/category.service';
 import { SearchService } from 'src/app/shared/api/search.service';
 
@@ -11,13 +12,18 @@ export class HomeoneBannerComponent implements OnInit {
     categories: any;
     cat : any ;
     label : any ;
+    searchResult : any ;
+    constructor(public category : CategoryService , public s : SearchService , public r : Router ) { }
 
-    constructor(public category : CategoryService , public s : SearchService  ) { }
+    ngOnInit() {
 
-    ngOnInit(): void {
+      this.s.SearchByLabel().subscribe(
+        data =>{this.searchResult = data ; console.log(this.searchResult); }
+      );
+
+        this.resetOption =  [];
 
 
-        this.resetOption = [this.options[0]];
 
         this.category.getAllCategories().subscribe(
           data => this.categories = data
@@ -29,28 +35,7 @@ export class HomeoneBannerComponent implements OnInit {
         {
             title: 'Bienvenu dans le bottin 3737',
             paragraph: 'Trouvez une entreprise ou un(e) professionel(le)',
-            popularSearchList: [
-                {
-                    title: 'Marketing',
-                    link: 'single-listings'
-                },
-                {
-                    title: 'Finance',
-                    link: 'single-listings'
-                },
-                {
-                    title: 'Banque et Assurance',
-                    link: 'single-listings'
-                },
-                {
-                    title: 'Comptabilité',
-                    link: 'single-listings'
-                },
-                {
-                    title: 'Commerce',
-                    link: 'single-listings'
-                }
-            ]
+            popularSearchList: [ ]
         }
     ]
 
@@ -61,32 +46,29 @@ export class HomeoneBannerComponent implements OnInit {
     objectsArray: any = [];
     resetOption: any;
     config = {
-        displayKey: "name",
+        displayKey: "label",
         search: true
     };
-    options = [
-        // Type here your category name
-        {
-            name: "Restaurants",
-        },
-        {
-            name: "Automobile",
-        },
-        {
-            name: "Divertissements",
-        },
-        {
-            name: "Soins",
-        },
-        {
-            name: "Personnels",
-        }
-    ];
+
     searchChange($event) {
         console.log($event);
+
     }
     reset() {
         this.resetOption = [];
     }
 
+
+    search($event )
+    {
+     // console.log($event);
+      console.log(this.singleSelect.label) ;
+
+      let word = this.singleSelect.label ;
+      this.r.navigate(['/listing/', word]);
+
+
+
+
+    }
 }

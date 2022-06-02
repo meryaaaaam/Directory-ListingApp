@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Category } from 'src/app/models/category/category';
+import { Search } from 'src/app/models/Search';
 import { CategoryService } from 'src/app/shared/api/category.service';
+import { SearchService } from 'src/app/shared/api/search.service';
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
@@ -13,26 +15,50 @@ export class ListingComponent implements OnInit {
   x : any; options : any ;
   category : Category = new Category ;
 
-  label : any
+  label : any ;
+  search : any ;
 
-  constructor( private route: ActivatedRoute, public categories: CategoryService) { }
+  constructor( private route: ActivatedRoute, public categories: CategoryService , private s : SearchService)
+  {
+    }
 
   ngOnInit(): void {
-
+        this.getResult(this.route.snapshot.paramMap.get('label')) ;
        this.getuser(this.route.snapshot.paramMap.get('id')) ;
 
       this.categories.getAllCategories().subscribe(
-        data=>{this.options = data ,  console.log(this.options)},
+        data=>{this.options = data
+          //console.log(this.options)
+        },
         error=> error.errors
       )
 
   }
 
 
+  getResult(label)
+  {
+    this.s.result(label).subscribe(
+      response => {
+        this.x = response ;
+        this.search = this.x.Result
+        console.log(this.x);
+        console.log(this.search);
+       // console.log(this.countries);
+
+
+      },
+      err => console.log(err.errorMessage)
+    )
+  }
+
+
   getuser(id)
   {
     this.categories.getUserbyCat(id).subscribe(
-      data=> {this.x = data ; console.log(this.x) ;},
+      data=> {this.x = data ;
+        // console.log(this.x);
+        },
       error=>error.errors,
     )
   }

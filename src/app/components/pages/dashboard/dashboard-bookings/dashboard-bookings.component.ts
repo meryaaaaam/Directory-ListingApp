@@ -17,7 +17,7 @@ export class DashboardBookingsComponent implements OnInit {
   name: string;
   logo: any;
   user: User =new User;
-    data:any   ;
+  data:any   ;
 
   constructor(public auth: AuthService ,
     public userapi : UserService ,
@@ -25,7 +25,7 @@ export class DashboardBookingsComponent implements OnInit {
     public fb: FormBuilder,
     public upload : UploadService,private http: HttpClient
      )
-  { this.userapi.getAll().subscribe((data: any)=>
+  { this.userapi.getAllListUser().subscribe((data: any)=>
 
     {this.users = data ;
 

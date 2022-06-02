@@ -14,12 +14,13 @@ export class UserSidemenuComponent implements OnInit {
 
   isSignedIn!: boolean;
   user!:User ;
+  role : string ;
   constructor(public auth: AuthService  ,private auths: AuthStateService,
     public router: Router,
     public token: TokenService )
-  { this.auth.profileUser().subscribe((data: any)=>
+  { this.auth.roles().subscribe((data: any)=>
 
-    {this.user = data ;   });
+    {this.role = data ;  console.log(this.role) });
 
   }
 

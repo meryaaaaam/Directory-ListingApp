@@ -14,32 +14,48 @@
 
 <div class="row row-input">
 
-<div class="col-5">
-<form><div class="form-group">
-  <label><i class="flaticon-search"></i></label>
-  <input type="text" class="form-control" placeholder="Qui?  Quoi? ">
-</div></form>
-</div>
+                            <div class="col-5 search">
 
-<div class="col-4">
-  <form><div class="form-group">
-    <label><i class="flaticon-search"></i></label>
-    <input type="text" class="form-control" placeholder="Où">
-  </div></form>
+                                  <form>
+                                    <div class="form-group">
+                                    <label><i class="flaticon-search"></i></label>
+                                    <ngx-select-dropdown (searchChange)="search($event)" tabindex="0" [multiple]="false" [(ngModel)]="singleSelect" name="country-select" [config]="config" [options]="searchResult.Result"></ngx-select-dropdown>
 
-</div>
+                                   </div>
+                                  </form>
 
-<div class=" searchbtn col-3  ">
-        <div class="form-group">
-          <div class=" submit-btn  ">
-              <button type="submit">Search Now</button>
-           </div>
-        </div>
- </div>
+                                  <!--<div class="col-lg-12 col-md-12">
+                                    <div class="form-group">
+                                        <label>Country <span class="required">*</span></label>
+                                        <div class="select-box">
+                                            <ngx-select-dropdown (searchChange)="searchChange($event)" tabindex="0" [multiple]="false" [(ngModel)]="singleSelect" name="country-select" [config]="config" [options]="options"></ngx-select-dropdown>
+                                        </div>
+                                    </div>
+                                </div>-->
+
+                               </div>
+
+                            <div class="col-4">
+                              <form>
+                                  <div class="form-group">
+                                  <label><i class="flaticon-search"></i></label>
+                                  <input type="text" class="form-control" placeholder="Où">
+                                </div>
+                             </form>
+
+                            </div>
+
+                            <div class=" searchbtn col-3  ">
+                                    <div class="form-group">
+                                      <div class=" submit-btn  ">
+                                          <button type="submit" (click)="search()">Search Now</button>
+                                      </div>
+                                    </div>
+                            </div>
 
 
 
-</div>
+                            </div>
 
 
 <div class="row" style="margin-top: 2em;">
@@ -64,10 +80,10 @@
 
    </div>
 
-            <ul class="popular-search-list">
+          <!-- <ul class="popular-search-list">
                 <li>Popular:</li>
                 <li *ngFor="let List of categories;"><a routerLink="/listing/{{List.id}}" >{{List.label}}</a></li>
-            </ul>
+            </ul>-->
 
         </div>
     </div>

@@ -48,6 +48,10 @@ import { ProfileComponent as company} from './components/pages/user-panel/compan
 
 import { AuthGuard } from './services/guard/AuthGuard.guard';
 import { ProfileTestComponent } from './components/test/profile-test/profile-test.component';
+import { RoleService } from './services/role/role.service';
+import { AllUsersComponent } from './components/pages/panel/admin/all-users/all-users.component';
+import { ActifUsersComponent } from './components/pages/panel/admin/actif-users/actif-users.component';
+import { PredingUsersComponent } from './components/pages/panel/admin/preding-users/preding-users.component';
 
 
 
@@ -83,7 +87,7 @@ import { ProfileTestComponent } from './components/test/profile-test/profile-tes
     {path: 'single-events', component: EventsDetailsComponent},
     {path: 'dashboard', component: DashboardComponent},
     {path: 'dashboard-messages', component: DashboardMessagesComponent},
-    {path: 'dashboard-bookings', component: DashboardBookingsComponent},
+    {path: 'dashboard-bookings', component: DashboardBookingsComponent , canActivate: [AuthGuard ]      },
     {path: 'dashboard-wallet', component: DashboardWalletComponent},
     {path: 'dashboard-reviews', component: DashboardReviewsComponent},
     {path: 'dashboard-invoice', component: DashboardInvoiceComponent},
@@ -91,7 +95,11 @@ import { ProfileTestComponent } from './components/test/profile-test/profile-tes
     {path: 'dashboard-add-listings', component: DashboardAddListingsComponent},
     {path: 'dashboard-bookmarks', component: DashboardBookmarksComponent},
     {path: 'dashboard-my-listings', component: DashboardMyListingsComponent},
-    {path: 'listing/:id', component: ListingComponent},
+    {path: 'listing/:label', component: ListingComponent},
+
+    {path: 'users-list', component: AllUsersComponent , canActivate: [AuthGuard ]   },
+    {path: 'users-actifs', component: ActifUsersComponent , canActivate: [AuthGuard ]   },
+    {path: 'users-preding', component: PredingUsersComponent , canActivate: [AuthGuard ]   },
 
 
     {path: 'profile', component: ProfileComponent , canActivate: [   AuthGuard ] },
@@ -100,7 +108,7 @@ import { ProfileTestComponent } from './components/test/profile-test/profile-tes
     {path: 'entreprise/profile', component: company , canActivate: [   AuthGuard ] },
 
 
-    {path: 'test/profile', component: ProfileTestComponent },
+    {path: 'test/profile/:label', component: ProfileTestComponent },
 
     // Here add new pages component
 
