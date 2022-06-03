@@ -100,6 +100,8 @@ import { AdminComponent } from './components/pages/panel/admin/admin.component';
 import { AllUsersComponent } from './components/pages/panel/admin/all-users/all-users.component';
 import { ActifUsersComponent } from './components/pages/panel/admin/actif-users/actif-users.component';
 import { PredingUsersComponent } from './components/pages/panel/admin/preding-users/preding-users.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
  @NgModule({
   declarations: [
     AppComponent,
@@ -193,10 +195,11 @@ import { PredingUsersComponent } from './components/pages/panel/admin/preding-us
     MatCheckboxModule,
     NgxPaginationModule,
     SweetAlert2Module, NotifierModule,AutoCompleteModule,InputMaskModule,
+    
+   
 
 
-
-    ButtonModule,DropdownModule
+    ButtonModule,DropdownModule, NgbModule
   ],
   providers: [
     {

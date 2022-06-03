@@ -229,10 +229,18 @@
                             font-size: 15px;
                         }
                         &.danger {
-                            margin-right: 0;
+                            margin-right: 2;
 
                             &:hover {
                                 background-color: red;
+                                color: var(--whiteColor);
+                            }
+                        }
+                        &.primary {
+                            margin-right: 0;
+
+                            &:hover {
+                                background-color: blue;
                                 color: var(--whiteColor);
                             }
                         }

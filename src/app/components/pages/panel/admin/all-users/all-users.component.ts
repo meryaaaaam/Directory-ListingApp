@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user/user';
 import { UploadService } from 'src/app/shared/api/upload.service';
 import { UserService } from 'src/app/shared/api/user.service';
@@ -18,12 +19,13 @@ export class AllUsersComponent implements OnInit {
   logo: any;
   user: User =new User;
   data:any   ;
-
+  closeResult = '';
+  
   constructor(public auth: AuthService ,
     public userapi : UserService ,
     public router: Router ,
     public fb: FormBuilder,
-    public upload : UploadService,private http: HttpClient
+    public upload : UploadService,private http: HttpClient,private modalService: NgbModal
      )
      {  this.userapi.getAllListUser().subscribe((data: any)=>
 
@@ -110,5 +112,26 @@ export class AllUsersComponent implements OnInit {
           });
 
       }
+      
+      open(content) {
+        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+      }
+    
+      private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+          return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+          return 'by clicking on a backdrop';
+        } else {
+          return `with: ${reason}`;
+        }
+      }
+  
+
+  
 }
 

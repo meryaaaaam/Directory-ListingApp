@@ -4,154 +4,154 @@
 
   <app-user-navbar></app-user-navbar>
 
-    <!-- Breadcrumb Area -->
-    <div class="breadcrumb-area" *ngFor="let Content of breadcrumb;">
-        <h1>{{Content.title}}</h1>
-        <ol class="breadcrumb">
-            <li class="item"><a routerLink="/">Home</a></li>
-            <li class="item"><a routerLink="dashboard">{{Content.subTitle}}</a></li>
-            <li class="item">{{Content.title}}</li>
-        </ol>
-    </div>
-    <!-- End Breadcrumb Area -->
+  <!-- Breadcrumb Area -->
+  <div class="breadcrumb-area" *ngFor="let Content of breadcrumb;">
+    <h1>{{ Content.title }}</h1>
+    <ol class="breadcrumb">
+      <li class="item"><a routerLink="/">Home</a></li>
+      <li class="item"><a routerLink="dashboard">{{ Content.subTitle }}</a></li>
+      <li class="item">{{ Content.title }}</li>
+    </ol>
+  </div>
+  <!-- End Breadcrumb Area -->
 
   <!-- Start -->
   <div class="bookings-listings-box">
     <h3>Booking Requests</h3>
 
     <div class="table-responsive">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Infomation Génerale</th>
-                    <th>Détails</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Infomation Génerale</th>
+            <th>Détails</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
 
-                <tr *ngFor="let Content of users;" >
+          <tr *ngFor="let Content of users;">
 
-                    <td class="name">
-                       <img *ngIf="Content.logo" [src]="Content.logo" alt="image">
-                        <img *ngIf="!Content.logo" [src]="logo" alt="image">
-                        <div class="info">
-                          <span *ngIf="Content.role === 'Pro'">{{Content.firstname}} {{Content.lastname}} </span>
-                          <span *ngIf="Content.role === 'Company'">{{Content.companyname}}  </span>
+            <td class="name">
+              <img *ngIf="Content.logo" [src]="Content.logo" alt="image">
+              <img *ngIf="!Content.logo" [src]="logo" alt="image">
+              <div class="info">
+                <span *ngIf="Content.role === 'Pro'">{{ Content.firstname }} {{ Content.lastname }} </span>
+                <span *ngIf="Content.role === 'Company'">{{ Content.companyname }} </span>
 
-                            <ul>
-                                <li><a href="tel:{{Content.phone}}">{{Content.phone}}</a></li>
-                                <li><a href="mailto:{{Content.email}}">{{Content.email}}</a></li>
-                            </ul>
-
-
-
-                        </div>
-                    </td>
-
-                    <td class="details">
-                      <ng-container  *ngIf="Content.role === 'Pro';else or">
-                        <h4 > {{Content.firstname}} {{Content.lastname}}
-                          <span *ngIf="Content.isActive ; else or" class="bookings-status  ">Approvée</span></h4>
-                          <ng-template #or >
-                            <span class="bookings-status ">Preding</span>
-                          </ng-template>
-                            <ul>
-                              <li>
-                                  <i class='bx bx-map'></i>
-                                  <span>Adresse:</span>
-                                 {{ Content.adresse}}
-                              </li>
-
-                              <li>
-                                <i class='bx bx-calendar'></i>
-                                <span>Date de Creation :</span>
-                               {{ Content.created_at | date:"MM/dd/yyyy" }}
-                            </li>
-
-                            <li>
-                              <i class='bx bxl-linkedin' ></i>
-                              <span>LinkdIn URL : </span>
-                              <a href="{{Content.phone}}">  {{Content.username}}</a>
-                          </li>
-
-                          <li>
-                            <i class='bx bx-globe' ></i>
-                            <span>website : </span>
-                            <a href="{{Content.website}}">  {{Content.website}}</a>
-                        </li>
-
-                        <li>
-                          <i class='bx bx-user-voice'></i>
-                          <span>Langue : </span>
-                            {{Content.language}}
-                      </li>
+                <ul>
+                  <li><a href="tel:{{ Content.phone }}">{{ Content.phone }}</a></li>
+                  <li><a href="mailto:{{ Content.email }}">{{ Content.email }}</a></li>
+                </ul>
 
 
 
+              </div>
+            </td>
 
-                    <li>
-                      <i class='bx bx-outline'></i>
-                      <span>Type ligne : </span>
-                        {{Content.Line_type}}
+            <td class="details">
+              <ng-container *ngIf="Content.role === 'Pro';else or">
+                <h4> {{ Content.firstname }} {{ Content.lastname }}
+                  <span *ngIf="Content.isActive ; else or" class="bookings-status  ">Approvée</span></h4>
+                <ng-template #or>
+                  <span class="bookings-status ">Preding</span>
+                </ng-template>
+                <ul>
+                  <li>
+                    <i class='bx bx-map'></i>
+                    <span>Adresse:</span>
+                    {{ Content.adresse }}
+                  </li>
+
+                  <li>
+                    <i class='bx bx-calendar'></i>
+                    <span>Date de Creation :</span>
+                    {{ Content.created_at | date:"MM/dd/yyyy" }}
+                  </li>
+
+                  <li>
+                    <i class='bx bxl-linkedin'></i>
+                    <span>LinkdIn URL : </span>
+                    <a href="{{ Content.phone }}"> {{ Content.username }}</a>
+                  </li>
+
+                  <li>
+                    <i class='bx bx-globe'></i>
+                    <span>website : </span>
+                    <a href="{{ Content.website }}"> {{ Content.website }}</a>
+                  </li>
+
+                  <li>
+                    <i class='bx bx-user-voice'></i>
+                    <span>Langue : </span>
+                    {{ Content.language }}
+                  </li>
+
+
+
+
+                  <li>
+                    <i class='bx bx-outline'></i>
+                    <span>Type ligne : </span>
+                    {{ Content.Line_type }}
                   </li>
 
                   <li>
                     <i class='bx bxs-file-pdf'></i>
                     <span>CV: </span>
-                     {{Content.CV}}
-                </li>
+                    {{ Content.CV }}
+                  </li>
 
 
-                          </ul>
+                </ul>
 
-                        </ng-container>
-
-
-                        <ng-template #or >
-                          <ng-container *ngIf="Content.role === 'Company';else oror">
-                          <h4 > {{Content.companyname}}
-                            <span *ngIf="Content.isActive ; else or" class="bookings-status  ">Approvée</span></h4>
-                          <ng-template #or >
-                            <span class="bookings-status ">Preding</span>
-                          </ng-template>
-                            <ul>
-                              <li>
-                                <i class='bx bx-map'></i>
-                                <span>Prénom de contact:</span>
-                               {{ Content.firstname}}
-                            </li>
-                            <li>
-                              <i class='bx bx-map'></i>
-                              <span>Nom de contact:</span>
-                               {{ Content.lastname}}
-                          </li>
-
-                              <li>
-                                  <i class='bx bx-map'></i>
-                                  <span>Adresse:</span>
-                                 {{ Content.adresse}}
-                              </li>
-
-                              <li>
-                                <i class='bx bx-calendar'></i>
-                                <span>Date de Creation :</span>
-                               {{ Content.created_at | date:"MM/dd/yyyy" }}
-                            </li>
+              </ng-container>
 
 
+              <ng-template #or>
+                <ng-container *ngIf="Content.role === 'Company';else oror">
+                  <h4> {{ Content.companyname }}
+                    <span *ngIf="Content.isActive ; else or" class="bookings-status  ">Approvée</span></h4>
+                  <ng-template #or>
+                    <span class="bookings-status ">Preding</span>
+                  </ng-template>
+                  <ul>
+                    <li>
+                      <i class='bx bx-map'></i>
+                      <span>Prénom de contact:</span>
+                      {{ Content.firstname }}
+                    </li>
+                    <li>
+                      <i class='bx bx-map'></i>
+                      <span>Nom de contact:</span>
+                      {{ Content.lastname }}
+                    </li>
 
-                          <li>
-                            <i class='bx bx-globe' ></i>
-                            <span>website : </span>
-                            <a href="{{Content.website}}">  {{Content.website}}</a>
-                        </li>
+                    <li>
+                      <i class='bx bx-map'></i>
+                      <span>Adresse:</span>
+                      {{ Content.adresse }}
+                    </li>
 
-                        <li>
-                          <i class='bx bx-user-voice'></i>
-                          <span>Langue : </span>
-                            {{Content.language}}
-                      </li>
+                    <li>
+                      <i class='bx bx-calendar'></i>
+                      <span>Date de Creation :</span>
+                      {{ Content.created_at | date:"MM/dd/yyyy" }}
+                    </li>
+
+
+
+                    <li>
+                      <i class='bx bx-globe'></i>
+                      <span>website : </span>
+                      <a href="{{ Content.website }}"> {{ Content.website }}</a>
+                    </li>
+
+                    <li>
+                      <i class='bx bx-user-voice'></i>
+                      <span>Langue : </span>
+                      {{ Content.language }}
+                    </li>
 
 
 
@@ -159,47 +159,66 @@
                     <li>
                       <i class='bx bx-outline'></i>
                       <span>Type ligne : </span>
-                        {{Content.Line_type}}
-                  </li>
+                      {{ Content.Line_type }}
+                    </li>
 
-                  <li>
-                    <i class='bx bx-globe' ></i>
-                    <span>NEQ : </span>
-                      {{Content.NEQ}}
-                </li>
-
-
-                          </ul>
+                    <li>
+                      <i class='bx bx-globe'></i>
+                      <span>NEQ : </span>
+                      {{ Content.NEQ }}
+                    </li>
 
 
-
-                          </ng-container>
-                        </ng-template>
+                  </ul>
 
 
 
+                </ng-container>
+              </ng-template>
+              
+
+
+              <ng-template #content let-modal>
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title">Take Note</h4>
+                  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      
+                      <div class="input-group">
+                        <input id="typeahead-basic" type="textarea" class="form-control"/>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+                </div>
+              </ng-template>
+              
+              
 
 
 
 
-                    </td>
+            </td>
 
-                    <td class="action">
+            <td class="action">
 
-                        <a  (click)=Approved(Content.id) class="default-btn" ><i class='bx bx-check-circle' ></i>
-                           Approve
-
-                          </a>
-                        <a  (click)=reject(Content.id) class="default-btn danger"><i class='bx bx-x-circle'></i> Reject</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+              <a (click)=Approved(Content.id) class="default-btn"><i class='bx bx-check-circle'></i>Approve </a>
+              <a (click)=reject(Content.id) class="default-btn danger"><i class='bx bx-x-circle'></i> Reject</a>
+              <a class="default-btn primary" (click)=open(content)><i class='bx bxs-note'></i>Note</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</div>
-<!-- End -->
+  </div>
+  <!-- End -->
 
-    <div class="flex-grow-1"></div>
+  <div class="flex-grow-1"></div>
 
 
 
