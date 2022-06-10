@@ -18,6 +18,7 @@
   <!-- Start -->
   <div class="bookings-listings-box">
     <h3>Booking Requests</h3>
+    <p-toast></p-toast>
 
     <div class="table-responsive">
       <table class="table">
@@ -188,7 +189,7 @@
                     <div class="mb-3">
 
                       <div class="input-group">
-                        <input id="typeahead-basic" type="textarea" class="form-control" ngModel="note" />
+                        <input id="typeahead-basic" type="textarea" class="form-control" [(ngModel)]="note" name="note" />
                       </div>
                     </div>
                   </form>

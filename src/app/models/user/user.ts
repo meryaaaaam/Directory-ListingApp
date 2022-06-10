@@ -20,12 +20,11 @@ export class User {
   logo!:any ;
   created_at!:Date ;
   updated_at!:any ;
-  isActive!:any ;
-<<<<<<< Updated upstream:src/app/models/user/user.ts
   isTermsAccepted!: any;
-=======
+  isActive!:any ;
+
   status!:any ;
   isEmailActive!:any ;
->>>>>>> Stashed changes:src/app/models/user/user2.ts
+
 
  }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 
 const baseUrl = "http://127.0.0.1:8000/api/users" ;
 const model = "http://127.0.0.1:8000/api/makes" ;
-const Active = "http://127.0.0.1:8000/api/users/isActive" ;
+const Active = "http://127.0.0.1:8000/api/userss/isActive" ;
 const adresse = "http://127.0.0.1:8000/api/userss/update" ;
 const state = "http://127.0.0.1:8000/api/provinces" ;
 const search = "http://127.0.0.1:8000/api/allusers/" ;

@@ -102,6 +102,14 @@ import { ActifUsersComponent } from './components/pages/panel/admin/actif-users/
 import { PredingUsersComponent } from './components/pages/panel/admin/preding-users/preding-users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { MessageService } from 'primeng/api';
+
+import {ToastModule} from 'primeng/toast';
+
+
+
+
+
  @NgModule({
   declarations: [
     AppComponent,
@@ -195,9 +203,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatCheckboxModule,
     NgxPaginationModule,
     SweetAlert2Module, NotifierModule,AutoCompleteModule,InputMaskModule,
-    
-   
 
+    ToastModule,
 
     ButtonModule,DropdownModule, NgbModule
   ],
