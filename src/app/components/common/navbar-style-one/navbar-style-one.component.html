@@ -161,25 +161,7 @@
                                 <input type="password" placeholder="Confirm Password" class="form-control" formControlName="password_confirmation">
                             </div>
 
-                            <div class="add-listings-box">
-                            <div class="form-group">
-
-                              <ul class="facilities-list">
-                                  <li>
-                                      <label class="checkbox p-3">
-                                          <input type="checkbox" name="d" value="true"formControlName="role"  >
-                                          <span>Afficher l'adresse dans le bottin</span>
-
-                                        </label>
-
-
-                                  </li>
-
-
-                               </ul>
-
-
-                          </div></div>
+                            
 
 
                             <div class="add-listings-box">
@@ -188,7 +170,7 @@
                               <ul class="facilities-list">
                                   <li>
                                       <label class="checkbox p-3">
-                                          <input type="radio" name="role" value="Pro"formControlName="role"  >
+                                          <input type="radio" name="role" value="Pro" formControlName="role"  >
                                           <span>Professionnel</span>
 
                                         </label>
@@ -204,6 +186,27 @@
 
 
                           </div></div>
+
+                          <div class="add-listings-box">
+                            <div class="form-group">
+
+                              <ul class="facilities-list">
+                                  <li>
+                                      <label class="checkbox p-3">
+                                          <input type="checkbox" name="isTermsAccepted" value="true" formControlName="isTermsAccepted"  >
+                                          <span>j’accepte et valide les <a href="../../../../assets/contenu/Politique de protection des renseignements personnels pour le Groupe 3737.pdf" target="_blank">conditions d’utilisation</a></span>
+
+                                        </label>
+
+
+                                  </li>
+
+
+                               </ul>
+
+
+                          </div></div>
+
                             <button type="submit">S'inscrire</button>
                         </form>
                         <span class="already-account">Vous avez déjà un compte?

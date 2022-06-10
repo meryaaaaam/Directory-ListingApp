@@ -67,6 +67,7 @@ export class NavbarStyleOneComponent implements OnInit {
       password_confirmation: [''],
       role: [''],
       isActive: 0,
+      isTermsAccepted: 0,
     });
 
   }

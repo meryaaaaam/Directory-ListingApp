@@ -44,8 +44,8 @@
                 "src/styles.scss",
                 "node_modules/primeng/resources/themes/lara-light-teal/theme.css",
                 "node_modules/primeicons/primeicons.css",
-                "node_modules/primeng/resources/primeng.min.css"
-
+                "node_modules/primeng/resources/primeng.min.css",
+                "node_modules/sweetalert2/src/sweetalert2.scss"
 
             ],
             "scripts": [
@@ -58,6 +58,7 @@
                 "src/assets/js/simplebar.min.js",
                 "src/assets/js/dropzone.min.js",
                 "node_modules/wowjs/dist/wow.js",
+                "node_modules/sweetalert2/dist/sweetalert2.js",
                 "src/assets/js/main.js"
             ],
             "vendorChunk": true,

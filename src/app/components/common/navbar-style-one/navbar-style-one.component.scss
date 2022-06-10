@@ -993,12 +993,14 @@
                     .register-with-account {
                         margin-bottom: 30px;
 
+                   
                         span {
                             display: block;
                             color: #666666;
                             font-weight: 500;
                         }
                         ul {
+                            
                             padding-left: 0;
                             list-style-type: none;
                             display: flex;
@@ -1010,6 +1012,9 @@
                                 right: -7px;
                             };
                             li {
+                                
+    
+
                                 flex: 0 0 50%;
                                 max-width: 50%;
                                 padding: {
@@ -1084,6 +1089,9 @@
                     form {
                         .form-group {
                             margin-bottom: 15px;
+                            
+    width: 404px;
+
 
                             .form-control {
                                 border: 1px solid #d5d5d5 !important;

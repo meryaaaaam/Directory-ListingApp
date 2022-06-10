@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
- import { HttpClient, HttpEventType } from '@angular/common/http';
+ import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Password } from 'src/app/models/user/password';
@@ -12,7 +12,7 @@ import { UploadService } from 'src/app/shared/api/upload.service';
 import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import Swal from 'sweetalert2';
-import { FilterService, SelectItem, SelectItemGroup } from 'primeng/api';
+import { FilterService, MessageService, SelectItem, SelectItemGroup } from 'primeng/api';
 import { Search } from 'src/app/models/service/search';
 import { Adress } from 'src/app/models/user/adress';
 import { UserAdress } from 'src/app/models/user/useradress';
@@ -23,6 +23,7 @@ import { UserAdress } from 'src/app/models/user/useradress';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  uploadedFiles: any[] = [];
 
   fileData: File = null;
   Disabled: boolean;
@@ -163,6 +164,7 @@ adress : Adress = new Adress ; state : any;
 
   }
 
+
   breadcrumb = [ {  title: 'My Profile',subTitle: 'User Panel'}]
 
   ngOnInit()   {
@@ -207,10 +209,7 @@ adress : Adress = new Adress ; state : any;
   updateprofile()
   {
    // const data : any = {name: this.user.username , email:this.user.email}
-  this.currentuser = this.user ;
-
-
-
+   this.currentuser = this.user ;
 
     this.userapi.updateAdress(this.user.id , this.currentuser) .subscribe(
       response => {
@@ -221,12 +220,8 @@ adress : Adress = new Adress ; state : any;
         console.log(error);
       });
 
-
-
-
-
-
   }
+
 
   updatepassword()
   {
@@ -241,24 +236,56 @@ adress : Adress = new Adress ; state : any;
   }
 
 
-  onUpload() {
-    const formData = new FormData();
-    formData.append('file', this.fileData);
+/* file upload */
+     /* Variabe to store file data */
+     filedata:any;
+    /* File onchange event */
+    fileEvent(e){
+        this.filedata = e.target.files[0];
+    }
+    /* Upload button functioanlity */
+    onSubmitform(f: NgForm) {
+       
+      var myFormData = new FormData();
+      const headers = new HttpHeaders();
+      headers.append('Content-Type', 'multipart/form-data');
+      headers.append('Accept', 'application/json');
+      myFormData.append('image', this.filedata);
+      /* Image Post Request */
+      this.http.post(`http://127.0.0.1:8000/api/auth/upload-image`, myFormData, {
+      headers: headers
+      }).subscribe(data => {
+       //Check success message
+       //sweetalert message popup
+        Swal.fire({
+             title: 'Hurray!!',
+             text:   data['message'],
+             icon: 'success'
+         });
+      });  
+  
+  }
+/* file upload */
 
-    const isUploading = true;
 
-    this.http.put("http://127.0.0.1:8000/api/auth/upload-image", formData , {  reportProgress: true,
-    observe: 'events'  } ).subscribe(events => {
-      if(events.type == HttpEventType.UploadProgress) {
-          console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
-      } else if(events.type === HttpEventType.Response) {
-          console.log(events);
-      }
-  });
+//   onUpload() {
+//     const formData = new FormData();
+//     formData.append('file', this.fileData);
+
+//     const isUploading = true;
+
+//     this.http.put("http://127.0.0.1:8000/api/auth/upload-image", formData , {  reportProgress: true,
+//     observe: 'events'  } ).subscribe(events => {
+//       if(events.type == HttpEventType.UploadProgress) {
+//           console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
+//       } else if(events.type === HttpEventType.Response) {
+//           console.log(events);
+//       }
+//   });
 
 
 
-}
+// }
 
 filteredGroups : any[] ;
 

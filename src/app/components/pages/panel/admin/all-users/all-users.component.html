@@ -206,7 +206,8 @@
             </td>
 
             <td class="action">
-
+              <!-- (click)=Approved(Content.id) -->
+              <!-- (click)=SendMail(Content.id) -->
               <a (click)=Approved(Content.id) class="default-btn"><i class='bx bx-check-circle'></i>Approve </a>
               <a (click)=reject(Content.id) class="default-btn danger"><i class='bx bx-x-circle'></i> Reject</a>
               <a class="default-btn primary" (click)=open(content)><i class='bx bxs-note'></i>Note</a>

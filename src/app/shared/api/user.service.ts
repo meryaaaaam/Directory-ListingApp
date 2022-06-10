@@ -81,5 +81,8 @@ export class UserService {
 
    // return this.http.put(`${baseUrl}/${id}`, data);
   }
+  // sendMails(id,data){
+  //   return  this.http.get(`${mail}/${id}`,data)
+  // }
 
  }
