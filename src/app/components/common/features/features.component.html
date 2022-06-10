@@ -1,5 +1,5 @@
 <!-- Start Features Area -->
-<section class="features-area ptb-100">
+<section class="features-area ptb-50">
     <div class="container">
 
 
@@ -22,13 +22,14 @@
           </div>
 
           <div class="row" style="margin-top: 2em;">
-  <div class="col-6">
-    <input type="text" class="form-control" placeholder="Qui?">
+  <div class="col-6 ">
+
+    <!--<input type="text" class="form-control" placeholder="Qui?">-->
+   Qui? <ngx-select-dropdown    (searchChange)="search($event)" tabindex="0" [multiple]="false" [(ngModel)]="singleSelect" name="pro" [config]="config" [options]="searchResult"></ngx-select-dropdown>
 
   </div>
-
-    <div class="col-6">
-      <input type="text" class="form-control" placeholder="Où? ">
+     <div class="col-6 ">
+     Où? <ngx-select-dropdown   (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="StateSelect" name="state" [config]="config" [options]="searchstate"></ngx-select-dropdown>
 
     </div>
           </div>
@@ -66,12 +67,14 @@
 
         <div class="row" style="margin-top: 2em;">
 <div class="col-6">
-  <input type="text" class="form-control" placeholder="Qui?">
+ Qui? <ngx-select-dropdown   placeholder="Qui?" (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="CompanysingleSelect" name="company" [config]="config" [options]="searchCompany"></ngx-select-dropdown>
 
 </div>
 
   <div class="col-6">
-    <input type="text" class="form-control" placeholder="Où? ">
+    <!--<input type="text" class="form-control" placeholder="Où? ">-->
+   Où? <ngx-select-dropdown  placeholder="Où?" (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="StateSelect" name="state2" [config]="config" [options]="searchstate"></ngx-select-dropdown>
+
 
   </div>
         </div>

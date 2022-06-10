@@ -52,10 +52,10 @@
             <td class="details">
               <ng-container *ngIf="Content.role === 'Pro';else or">
                 <h4> {{ Content.firstname }} {{ Content.lastname }}
-                  <span *ngIf="Content.isActive ; else or" class="bookings-status  ">Approvée</span></h4>
-                <ng-template #or>
+                  <span  class="bookings-status  ">{{Content.status}}</span></h4>
+               <!-- <ng-template #or>
                   <span class="bookings-status ">Preding</span>
-                </ng-template>
+                </ng-template>-->
                 <ul>
                   <li>
                     <i class='bx bx-map'></i>
@@ -111,10 +111,10 @@
               <ng-template #or>
                 <ng-container *ngIf="Content.role === 'Company';else oror">
                   <h4> {{ Content.companyname }}
-                    <span *ngIf="Content.isActive ; else or" class="bookings-status  ">Approvée</span></h4>
-                  <ng-template #or>
+                    <span  class="bookings-status  ">{{Content.status}}</span></h4>
+                  <!--<ng-template #or>
                     <span class="bookings-status ">Preding</span>
-                  </ng-template>
+                  </ng-template>-->
                   <ul>
                     <li>
                       <i class='bx bx-map'></i>
@@ -175,20 +175,20 @@
 
                 </ng-container>
               </ng-template>
-              
+
 
 
               <ng-template #content let-modal>
                 <div class="modal-header">
-                  <h4 class="modal-title" id="modal-basic-title">Take Note</h4>
+                  <h4 class="modal-title" id="modal-basic-title">Remarque</h4>
                   <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
                 </div>
                 <div class="modal-body">
                   <form>
                     <div class="mb-3">
-                      
+
                       <div class="input-group">
-                        <input id="typeahead-basic" type="textarea" class="form-control"/>
+                        <input id="typeahead-basic" type="textarea" class="form-control" ngModel="note" />
                       </div>
                     </div>
                   </form>
@@ -197,8 +197,8 @@
                   <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
                 </div>
               </ng-template>
-              
-              
+
+
 
 
 
@@ -210,7 +210,7 @@
               <!-- (click)=SendMail(Content.id) -->
               <a (click)=Approved(Content.id) class="default-btn"><i class='bx bx-check-circle'></i>Approve </a>
               <a (click)=reject(Content.id) class="default-btn danger"><i class='bx bx-x-circle'></i> Reject</a>
-              <a class="default-btn primary" (click)=open(content)><i class='bx bxs-note'></i>Note</a>
+              <a class="default-btn primary" (click)=open(content,Content.id)><i class='bx bxs-note'></i>Note</a>
             </td>
           </tr>
         </tbody>

@@ -36,6 +36,7 @@ export class ProfileComponent implements OnInit {
           public user: User  = new User ;
           public users: UserAdress  = new UserAdress ;
 
+
           public image = 'assets/img/Logo_e.jpg';
 
           public password!: Password ;
@@ -97,6 +98,7 @@ export class ProfileComponent implements OnInit {
     this.auth.Profile().subscribe((data: any)=> {this.user = data ;   console.log(this.user.role)});
 
     this.auth.profileUser().subscribe(data=>  {this.users = data ; console.log(this.users = data ) ;  }) ;
+
 
     this.passwordForm = this.fb.group({
       password_current: [''],
@@ -186,7 +188,7 @@ export class ProfileComponent implements OnInit {
    // const data : any = {name: this.user.username , email:this.user.email}
   let currentuser = this.users ;
 
-    this.userapi.updateAdress(this.users.user.id , currentuser) .subscribe(
+    this.userapi.updateAdress(this.user.id , currentuser) .subscribe(
       response => {
         this.notifier.notify('success', 'User updated successfully');
         console.log(response);

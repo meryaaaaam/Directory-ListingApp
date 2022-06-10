@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { UserService } from 'src/app/shared/api/user.service';
 
 @Component({
     selector: 'app-features',
@@ -6,12 +8,68 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./features.component.scss']
 })
 export class FeaturesComponent implements OnInit {
+  singleSelect : any ;
+  StateSelect : any ;
+  CompanysingleSelect : any ;
+  data : any ;
+  Cdata : any ;
+  searchResult : any ;
+  searchstate : any ;
+  searchCompany : any ;
+  state : any;
+  config = {
+    displayKey: "name",
+    search: true
+};
 
-    constructor() { }
+    constructor( public r : Router , public u : UserService ) { }
 
     ngOnInit(): void {
+
+      this.u.getAllStates().subscribe(
+        data => {this.state = data ; this.searchstate= this.state ;
+        console.log(this.state) ; }
+      )
+
+      this.u.searchCompany().subscribe(data => {this.Cdata = data ;
+        this.searchCompany = this.Cdata.Result ;
+        console.log(this.searchCompany) ;})
+
+      this.u.searchPro().subscribe(
+        data => { this.data = data ;
+
+          this.searchResult = this.data.Result ;
+        console.log(this.searchResult) ;
+        }
+      )
     }
 
+    search($event )
+    {
+     // console.log($event);
+      console.log(this.singleSelect.id) ;
+
+      let word = this.singleSelect.id ;
+      this.r.navigate(['/listing/', word]);
+
+
+
+
+    }
+
+
+    searchComp($event )
+    {
+     // console.log($event);
+      console.log(this.singleSelect.id) ;
+
+      let word = this.singleSelect.id ;
+      this.r.navigate(['/listing/', word]);
+
+
+
+
+    }
     sectionTitle = [
         {
             title: 'Your Small Business Start With Vesax',

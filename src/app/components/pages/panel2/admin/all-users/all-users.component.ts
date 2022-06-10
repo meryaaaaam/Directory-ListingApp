@@ -16,12 +16,28 @@ import Swal from 'sweetalert2';
   styleUrls: ['./all-users.component.scss']
 })
 export class AllUsersComponent implements OnInit {
+<<<<<<< Updated upstream:src/app/components/pages/panel/admin/all-users/all-users.component.ts
   users: any;
+=======
+  users : any ;
+  note : string ;
+>>>>>>> Stashed changes:src/app/components/pages/panel2/admin/all-users/all-users.component.ts
   name: string;
   logo: any;
   user: User = new User;
   data: any;
   closeResult = '';
+<<<<<<< Updated upstream:src/app/components/pages/panel/admin/all-users/all-users.component.ts
+=======
+
+  constructor(public auth: AuthService ,
+    public userapi : UserService ,
+    public router: Router ,
+    public fb: FormBuilder,
+    public upload : UploadService,private http: HttpClient,private modalService: NgbModal
+     )
+     {  this.userapi.getAllListUser().subscribe((data: any)=>
+>>>>>>> Stashed changes:src/app/components/pages/panel2/admin/all-users/all-users.component.ts
 
 
   constructor(public auth: AuthService,
@@ -71,9 +87,14 @@ export class AllUsersComponent implements OnInit {
   Approved(id) {
 
 
+<<<<<<< Updated upstream:src/app/components/pages/panel/admin/all-users/all-users.component.ts
     this.userapi.get(id).subscribe(
       response => {
         this.data = response;
+=======
+             this.user.isActive = true ;
+            this.user.status = 'approuved' ;
+>>>>>>> Stashed changes:src/app/components/pages/panel2/admin/all-users/all-users.component.ts
 
         this.user.isActive = true;
 
@@ -92,9 +113,13 @@ export class AllUsersComponent implements OnInit {
 
   reject(id) {
 
+<<<<<<< Updated upstream:src/app/components/pages/panel/admin/all-users/all-users.component.ts
     this.userapi.get(id).subscribe(
       response => {
         this.data = response;
+=======
+              this.user.status = 'rejected' ; this.user.isActive = false ;
+>>>>>>> Stashed changes:src/app/components/pages/panel2/admin/all-users/all-users.component.ts
 
         this.user.isActive = false;
 
@@ -108,6 +133,7 @@ export class AllUsersComponent implements OnInit {
       error => {
         console.log(error);
       }
+<<<<<<< Updated upstream:src/app/components/pages/panel/admin/all-users/all-users.component.ts
     );
 
   }
@@ -161,6 +187,34 @@ export class AllUsersComponent implements OnInit {
     }
   }
 
+=======
+
+      open(content , id) {
+        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+            console.log(id) ;
+          this.userapi.note(id , this.note).subscribe(
+            data => console.log(data)
+          );
+
+
+
+          this.closeResult = `Closed with: ${result}`;
+        }, (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
+      }
+
+      private getDismissReason(reason: any): string {
+        if (reason === ModalDismissReasons.ESC) {
+          return 'by pressing ESC';
+        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+          return 'by clicking on a backdrop';
+        } else {
+          return `with: ${reason}`;
+        }
+      }
+
+>>>>>>> Stashed changes:src/app/components/pages/panel2/admin/all-users/all-users.component.ts
 
 
 }

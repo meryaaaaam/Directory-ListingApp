@@ -27,6 +27,10 @@ export class AuthService {
     return this.http.get('http://127.0.0.1:8000/api/auth/user-profile');
   }
 
+
+  UserCnt(): Observable<any> {
+    return this.http.get('http://127.0.0.1:8000/api/auth/profile');
+  }
   GetUser(id): Observable<any> {
     return this.http.get('http://127.0.0.1:8000/api/users/update/',id );
   }

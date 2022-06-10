@@ -6,8 +6,11 @@ import { Injectable } from '@angular/core';
 const baseUrl = "http://127.0.0.1:8000/api/users" ;
 const model = "http://127.0.0.1:8000/api/makes" ;
 const Active = "http://127.0.0.1:8000/api/users/isActive" ;
-const adresse = "http://127.0.0.1:8000/api/users/update" ;
+const adresse = "http://127.0.0.1:8000/api/userss/update" ;
 const state = "http://127.0.0.1:8000/api/provinces" ;
+const search = "http://127.0.0.1:8000/api/allusers/" ;
+
+
 
 
 
@@ -21,6 +24,10 @@ export class UserService {
 
   get(id) {
     return this.http.get(`${baseUrl}/${id}`);
+  }
+
+  note(id , data) {
+    return this.http.put("http://127.0.0.1:8000/api/note/"+id , data);
   }
 
   create(data)  {
@@ -70,7 +77,7 @@ export class UserService {
 
   updateAdress(id,data)
   {
-    return this.http.post(`${adresse}/${id}`, data)
+    return this.http.put(`${adresse}/${id}`, data)
 
    // return this.http.put(`${baseUrl}/${id}`, data);
   }
@@ -85,4 +92,10 @@ export class UserService {
   //   return  this.http.get(`${mail}/${id}`,data)
   // }
 
- }
+
+  searchPro() { return this.http.get(search +"pro") ; }
+
+
+  searchCompany() { return this.http.get(search +"company") ; }
+
+  }
