@@ -16,11 +16,13 @@ import { FilterService, MessageService, SelectItem, SelectItemGroup } from 'prim
 import { Search } from 'src/app/models/service/search';
 import { Adress } from 'src/app/models/user/adress';
 import { UserAdress } from 'src/app/models/user/useradress';
+import { State } from 'src/app/models/user/state';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  providers: [MessageService]
 })
 export class ProfileComponent implements OnInit {
   uploadedFiles: any[] = [];
@@ -32,15 +34,16 @@ export class ProfileComponent implements OnInit {
   filteredSub: any[];
   search: any;
   type: any;
-  states: any;
+  datastates : any ;
+  states : State[];
 
 
   fileProgress(fileInput: any) {
     this.fileData = <File>fileInput.target.files[0];
 }
-public c : any;
- public users: UserAdress  = new UserAdress ;
-public user: any   ;
+  public c : any;
+  public users: UserAdress  = new UserAdress ;
+  public user: any   ;
 
  public image : any;
 
@@ -69,8 +72,8 @@ public user: any   ;
  countries: any[];
  services : any;
  servicesArray : any[] ;
-
-adress : Adress = new Adress ; state : any;
+  lang : any ;
+ adress : Adress = new Adress ; state : any;
 
  formsearch : FormGroup ;
 
@@ -79,8 +82,11 @@ adress : Adress = new Adress ; state : any;
  groupedServices: SelectItemGroup[];
  groupeddServices: any[];
 
- public line : any = [
-  {title:"Affaires"}, {title:"Résidence"}, {title:"Cellulaire"}, {title:"Autre"}
+ public line = [
+          {title:"Affaires"},
+          {title:"Résidence"},
+          {title:"Cellulaire"},
+          {title:"Autre"}
 
  ];
 
@@ -93,17 +99,19 @@ adress : Adress = new Adress ; state : any;
     public userapi : UserService ,
     public router: Router ,
     public fb: FormBuilder,
-    public upload : UploadService,private http: HttpClient ,
+    public upload : UploadService,
+    private http: HttpClient ,
     public category : CategoryService,
-    notifierService: NotifierService,  private filterService: FilterService
-     )
+    public notifierService: NotifierService,
+    private filterService: FilterService ,
+    private messageService: MessageService)
   {
 
     this.notifier = notifierService;
 
     this.auth.profileUser().subscribe(data=>
 
-    {this.user = data ; this.users = data ; this.type = this.user.Line_type ;
+    {this.user = data ; this.users = data ; this.type = this.user.Line_type ; console.log(this.user) ;
 
     if (this.user.logo)
     {this.image = this.user.logo ;}
@@ -153,6 +161,12 @@ adress : Adress = new Adress ; state : any;
         error => { console.log(error);  });
 
 
+        this.lang = [
+
+          {name: 'germany', code: 'DE'},
+          {name: 'japan', code: 'JP'},
+          {name: 'usa', code: 'US'}
+      ];
 
         this.countries = [
 
@@ -182,7 +196,9 @@ adress : Adress = new Adress ; state : any;
 
       this.userapi.getAllStates().subscribe(
         response => {
-          this.states = response ;
+          this.datastates = response ;
+          this.states = this.datastates  ;
+          console.log(this.states)  ;
 
         }) ;
 
@@ -191,6 +207,22 @@ adress : Adress = new Adress ; state : any;
 
 
 
+}
+
+showSuccess(detail) {
+  this.messageService.add({severity:'success', summary: 'Success', detail: detail});
+}
+
+showInfo(detail) {
+  this.messageService.add({severity:'info', summary: 'Info', detail: detail});
+}
+
+showWarn(detail) {
+  this.messageService.add({severity:'warn', summary: 'Warn', detail: detail});
+}
+
+showError(detail) {
+  this.messageService.add({severity:'error', summary: 'Error', detail: detail});
 }
 
   successAlert()
@@ -213,11 +245,18 @@ adress : Adress = new Adress ; state : any;
 
     this.userapi.updateAdress(this.user.id , this.currentuser) .subscribe(
       response => {
-         console.log(response);
+        let c :any ;
+        // console.log(response);
+         c= response ;
+          if(!c.data)
+         {this.showError(c.message) ;}
+         else {
+          this.showSuccess(c.message) ;          }
 
       },
       error => {
         console.log(error);
+
       });
 
   }
@@ -245,7 +284,7 @@ adress : Adress = new Adress ; state : any;
     }
     /* Upload button functioanlity */
     onSubmitform(f: NgForm) {
-       
+
       var myFormData = new FormData();
       const headers = new HttpHeaders();
       headers.append('Content-Type', 'multipart/form-data');
@@ -262,8 +301,8 @@ adress : Adress = new Adress ; state : any;
              text:   data['message'],
              icon: 'success'
          });
-      });  
-  
+      });
+
   }
 /* file upload */
 

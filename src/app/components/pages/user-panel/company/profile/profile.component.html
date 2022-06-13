@@ -42,7 +42,7 @@
 
 
         <form>
-
+          <p-toast></p-toast>
             <div class="row">
 
 
@@ -55,9 +55,8 @@
             </div>
           </div>
 
-           <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6">
             <div class="form-group">
-
 
               <label>Nom d'entreprise</label>
               <input type="text" class="form-control" [(ngModel)]="user.companyname" name="companyname">
@@ -85,67 +84,7 @@
               <label>Site internet</label>
               <input type="text" class="form-control" [(ngModel)]="user.website" name="website">
             </div>
-
-        <div class="col-lg-6 col-md-12">
-
-            <div class="my-profile-box">
-              <h3>Informations de contact</h3>
-
-              <form   >
-                  <div class="row">
-                      <div class="col-lg-6 col-md-6">
-                          <div class="form-group">
-                              <label>Prénom</label>
-                              <input type="text" class="form-control"   [(ngModel)]="user.firstname" name="firstname">
-                          </div>
-                      </div>
-
-                      <div class="col-lg-6 col-md-6">
-                          <div class="form-group">
-                              <label>Nom</label>
-                              <input type="text" class="form-control"   [(ngModel)]="user.lastname" name="lastname">
-                          </div>
-                      </div>
-
-                      <div class="col-lg-6 col-md-6">
-                          <div class="form-group">
-                              <label>Téléphone personnel</label>
-                              <input type="text" class="form-control"  [(ngModel)]="user.phone" name="phone">
-                          </div>
-                      </div>
-                      <div class="col-lg-6 col-md-6">
-                        <div class="form-group">
-                            <label>Courriel personnel</label>
-                            <input type="email" class="form-control"  [(ngModel)]="user.email" name="email">
-                        </div>
-                    </div>
-
-                      <div class="col-lg-6 col-md-6">
-                        <div class="form-group">
-                            <label>NEQ</label>
-                            <input type="text" class="form-control"  [(ngModel)]="user.NEQ" name="NEQ">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6">
-                      <div class="form-group">
-                          <label>Langue de correspondance</label>
-                          <input type="text" class="form-control"  [(ngModel)]="user.language" name="language">
-                      </div>
-                  </div>
-
-
-
-
-                      <div class="col-lg-12 col-md-12">
-                        <div class="form-group">
-                            <label>Bio</label>
-                            <textarea cols="30" rows="9" placeholder="Short description about you..." class="form-control" name="bio"></textarea>
-                        </div>
-                    </div>
-
-
-
+          </div>
 
 
           <div class="col-xl-6 col-lg-12 col-md-12">
@@ -155,8 +94,8 @@
 
 
               <select [(ngModel)]="user.Line_type" name="user.Line_type">
-                <option [ngValue]="null" disabled selected> </option>
-                <option *ngFor="let m of line" selected value={{ m.title }}>{{ m.title }}</option>
+                 <option [ngValue]="null" disabled  >  Type de ligne  </option>
+                  <option *ngFor="let m of line" selected [ngValue]= m.title >{{ m.title }}</option>
 
               </select>
             </div>
@@ -183,19 +122,39 @@
             </div>
           </div>
 
-          <div class="col-xl-8 col-lg-12 col-md-12">
+
+
+          <div class="col-lg-8 col-md-8 pl-3">
+            <div class="form-group  ">
+              <label><i class='bx bx-duplicate'></i> Province</label>
+              <p-dropdown  [options]="states" name="user.province_id"[(ngModel)]="user.province_id" optionLabel="name"  optionValue="id"   [showClear]="true" placeholder="Selectionner une province"  >
+                <ng-template pTemplate="selectedItem" >
+                    <div class="country-item country-item-value"  *ngIf="user.province_id">
+                         <div >{{user.province_id.id}}</div>
+                    </div>
+                </ng-template>
+                <ng-template let-c pTemplate="name">
+                    <div class="country-item">
+                         <div>{{c.name}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
+            </div>
+        </div>
+
+
+          <!--<div class="col-xl-8 col-lg-12 col-md-12">
             <div class="form-group">
               <label>Province</label>
-
-              <select [(ngModel)]="users.province_id" name="users.province_id">
+               <select [(ngModel)]="user.province_id" name="user.province_id">
                 <option [ngValue]="null" disabled selected> </option>
-                <option *ngFor="let m of states" selected value={{ m.id }}>{{ m.name }}</option>
+                <option *ngFor="let m of states" selected value={{ m.id }}></option>
               </select>
 
 
 
             </div>
-          </div>
+          </div>-->
 
           <div class="col-lg-12 col-md-12">
             <div class="form-group">
@@ -258,7 +217,13 @@
 
 
 
-
+          <div class="col-lg-12 col-md-12">
+            <div class="form-group">
+              <label>Bio</label>
+              <textarea cols="30" rows="9" placeholder="Short description about you..." class="form-control"
+                [(ngModel)]="user.bio" name="bio"></textarea>
+            </div>
+          </div>
 
 
           <div class="col-lg-12 col-md-12 pt-5">
