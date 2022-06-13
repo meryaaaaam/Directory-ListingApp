@@ -29,6 +29,7 @@ export class AllUsersComponent implements OnInit {
   closeResult = '';
 
 
+
   constructor(public auth: AuthService ,
     public userapi : UserService ,
     public router: Router ,
@@ -179,17 +180,18 @@ showError(detail) {
   open(content , id) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
         console.log(id , this.note) ;
-
+       this.user.bio = this.note ;
+        this.userapi.note(id , this.user.bio).subscribe(
+          data => console.log(data)
+        );
 
 
 
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-      this.userapi.note(id , this.note).subscribe(
-        data => console.log(data)
-      );
-      this.showSuccess('note a été enregister') ;
+
+
     });
   }
 
