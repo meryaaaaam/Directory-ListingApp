@@ -16,12 +16,7 @@ import { FilterService, MessageService, SelectItem, SelectItemGroup } from 'prim
 import { Search } from 'src/app/models/service/search';
 import { Adress } from 'src/app/models/user/adress';
 import { UserAdress } from 'src/app/models/user/useradress';
-<<<<<<< Updated upstream
 import { State } from 'src/app/models/user/state';
-=======
-import { runInThisContext } from 'vm';
-
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-profile',
@@ -39,7 +34,6 @@ logo:any;
   filteredSub: any[];
   search: any;
   type: any;
-<<<<<<< Updated upstream
   datastates : any ;
   states : State[];
 
@@ -50,21 +44,6 @@ logo:any;
   public c : any;
   public users: UserAdress  = new UserAdress ;
   public user: any   ;
-=======
-  states: any;
-  submitted =false;
-  form : FormGroup;
-
-
- 
-
-//   fileProgress(fileInput: any) {
-//     this.fileData = <File>fileInput.target.files[0];
-// }
-public c : any;
- public users: UserAdress  = new UserAdress ;
-public user: User   ;
->>>>>>> Stashed changes
 
  public image : any;
 
@@ -123,14 +102,9 @@ public user: User   ;
     public upload : UploadService,
     private http: HttpClient ,
     public category : CategoryService,
-<<<<<<< Updated upstream
     public notifierService: NotifierService,
     private filterService: FilterService ,
     private messageService: MessageService)
-=======
-    notifierService: NotifierService,  private filterService: FilterService
-  )
->>>>>>> Stashed changes
   {
 
     this.notifier = notifierService;
@@ -285,7 +259,6 @@ fileEvent(e){
   
     this.userapi.updateAdress(this.user.id , formData) .subscribe(
       response => {
-<<<<<<< Updated upstream
         let c :any ;
         // console.log(response);
          c= response ;
@@ -293,10 +266,6 @@ fileEvent(e){
          {this.showError(c.message) ;}
          else {
           this.showSuccess(c.message) ;          }
-=======
-        this.data = response;
-          console.log(response);
->>>>>>> Stashed changes
 
       },
       error => {
@@ -319,9 +288,7 @@ fileEvent(e){
       });
   }
 
-get f(){
-  return this.form.controls;
-}
+
 
 // public imagePath;
 
@@ -369,102 +336,27 @@ get f(){
 //         console.log(this.filedata);
 //     }
     /* Upload button functioanlity */
-<<<<<<< Updated upstream
-    onSubmitform(f: NgForm) {
+  //   onSubmitform(f: NgForm) {
 
-      var myFormData = new FormData();
-      const headers = new HttpHeaders();
-      headers.append('Content-Type', 'multipart/form-data');
-      headers.append('Accept', 'application/json');
-      myFormData.append('image', this.filedata);
-      /* Image Post Request */
-      this.http.post(`http://127.0.0.1:8000/api/auth/upload-image`, myFormData, {
-      headers: headers
-      }).subscribe(data => {
-       //Check success message
-       //sweetalert message popup
-        Swal.fire({
-             title: 'Hurray!!',
-             text:   data['message'],
-             icon: 'success'
-         });
-      });
-
-  }
-=======
-    // onSubmit(id) {
-       
-    //   this.submitted = true;
-    //   if(this.form.invalid){
-    //     return;
-    //   }
-    //   const formData =new FormData();
-      
-    //   // this.userapi.get(id).subscribe(
-    //   //   response => {
-    //       // this.data = response;
-    //       formData.append("logo",this.filedata,this.filedata.name);
-    //   this.userapi.uploadData(formData,id).subscribe(res =>{
-    //     this.data =res;
-    //     //console.log(this.data);
-    //     console.log(this.userapi);
-
-    //   })
-    // }
-  //   saveOrUpdate(user: User) {
-  //     // debugger;
-  //     const myFormData = new FormData();
+  //     var myFormData = new FormData();
   //     const headers = new HttpHeaders();
   //     headers.append('Content-Type', 'multipart/form-data');
   //     headers.append('Accept', 'application/json');
   //     myFormData.append('image', this.filedata);
-  //     //console.log(this.filedata);
-  //     // myFormData.append('code', product.code);
-  //     this.http.post(`http://127.0.0.1:8000/api/auth/upload-image/${user.id}`, myFormData, {
-  //         headers: headers
+  //     /* Image Post Request */
+  //     this.http.post(`http://127.0.0.1:8000/api/auth/upload-image`, myFormData, {
+  //     headers: headers
   //     }).subscribe(data => {
-  //          console.log(data);
+  //      //Check success message
+  //      //sweetalert message popup
+  //       Swal.fire({
+  //            title: 'Hurray!!',
+  //            text:   data['message'],
+  //            icon: 'success'
+  //        });
   //     });
-     
+
   // }
-//    else {
-//       const myFormData = new FormData();
-//       const headers = new HttpHeaders();
-//       headers.append('Content-Type', 'multipart/form-data');
-//       headers.append('Accept', 'application/json');
-//       myFormData.append('image', this.file);
-//       myFormData.append('code', product.code);
-//       this.http.delete(environment.utilityApiBasePath + 'deleteImage/' + product.code + '.jpg').subscribe(
-//           data1 => {
-//               console.log(data1);
-//               this.http.post(environment.utilityApiBasePath + 'upload', myFormData, {
-//                   headers: headers
-//               }).subscribe(data => {
-//                   console.log(data);
-//               });
-//           });
-// }
-    // )
-      // var myFormData = new FormData();
-      // const headers = new HttpHeaders();
-      // headers.append('Content-Type', 'multipart/form-data');
-      // headers.append('Accept', 'application/json');
-      // myFormData.append('image', this.filedata);
-      // /* Image Post Request */
-      // this.http.post(`http://127.0.0.1:8000/api/auth/upload-image`, myFormData, {
-      // headers: headers
-      // }).subscribe(data => {
-      //  //Check success message
-      //  //sweetalert message popup
-      //   Swal.fire({
-      //        title: 'Hurray!!',
-      //        text:   data['message'],
-      //        icon: 'success'
-      //    });
-      // });  
-  
-  
->>>>>>> Stashed changes
 /* file upload */
 
 
