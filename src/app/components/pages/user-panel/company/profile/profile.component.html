@@ -20,34 +20,57 @@
       <div class="my-profile-box">
         <h3>Informations de l'entreprise</h3>
 
-          <div class="row">
-            <div class="col-lg-12 col-md-12">
-              <div class="form-group profile-box">
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <div class="form-group profile-box">
+              <!-- {{ this.user.logo }} -->
 
-                <img src="{{ image }}" alt="image">
+              <img src="http://localhost:8000/storage/image/{{ image }}" alt="image">
 
             </div>
+          </div>
         </div>
-      </div>
-
-                <form  #f="ngForm" (ngSubmit)="onSubmitform(f)">
-                <div class="file-upload">
-                  <input type="file" name="logo" id="file" class="inputfile" (change)="fileEvent($event)" />
-                  <label for="file"><i class='bx bx-upload'></i> Upload Logo</label>
-                   <!-- <input type="file"  name="myFile" (change)="fileEvent($event)"/> -->
-                  <button>Upload Image</button>
-                </div>
-                </form>
-
-
-
+        <!-- #f="ngForm" -->
+        <!-- <form  #f="ngForm" (ngSubmit)="onSubmitform(f)">
+           <div class="file-upload">
+            <label for="logo"><i class='bx bx-upload'></i> Upload Logo</label>
+          </div> -->
+          <!-- <div class="form-group">
+            <input type="file" name="logo" id="logo" class="form-control" formControlName="logo"
+            (change)="fileEvent($event)" /> -->
+            <!-- [ngClass]="{'is-invalid':submitted && f.logo.errors}" -->
+            <!-- <div *ngif="submitted && f.logo.errors" class="invalid-feedback">
+              <div *ngif="f.logo.errors.required">image is required </div>
+             <input type="file"  name="myFile" (change)="fileEvent($event)"/> 
+            </div> 
+          </div>
+          <button type="submit">Upload Image</button>
+        </form>
+          -->
+          <!-- <div class="form-group">
+            <input type="file" name="logo" id="logo" class="form-control" formControlName="logo"
+            (change)="fileEvent($event)" /> -->
+            <!-- [ngClass]="{'is-invalid':submitted && f.logo.errors}" -->
+            <!-- <div *ngif="submitted && f.logo.errors" class="invalid-feedback">
+              <div *ngif="f.logo.errors.required">image is required </div>
+             <input type="file"  name="myFile" (change)="fileEvent($event)"/> 
+            </div> -->
+          <!-- </div>     -->
+       
         <form>
+<<<<<<< Updated upstream
           <p-toast></p-toast>
+=======
+         
+>>>>>>> Stashed changes
             <div class="row">
+         
+              <div class="form-group">
+                <input type="file" name="logo" id="logo" class="form-control" formControlName="logo"
+                (change)="fileEvent($event)" />
+              </div>
 
-
-
-          <div class="col-lg-6 col-md-6">
+          <div class="col-lg-6 col-md-6" >
             <div class="form-group">
 
               <label>Username</label>
@@ -75,7 +98,7 @@
           <div class="col-xl-6 col-lg-12 col-md-12">
             <div class="form-group">
               <label>Adresse de l'entreprise</label>
-              <input type="text" class="form-control" [(ngModel)]="user.adress" name="adresse">
+              <input type="text" class="form-control" [(ngModel)]="users.adress" name="adresse">
             </div>
           </div>
 
@@ -105,20 +128,20 @@
           <div class="col-xl-6 col-lg-12 col-md-12">
             <div class="form-group">
               <label>Adresse</label>
-              <input type="text" class="form-control" [(ngModel)]="user.adress" name="user.adress">
+              <input type="text" class="form-control" [(ngModel)]="users.adress" name="user.adress">
             </div>
           </div>
           <div class="col-xl-6 col-lg-12 col-md-12">
             <div class="form-group">
               <label>Ville</label>
-              <input type="text" class="form-control" [(ngModel)]="user.city" name="user.city">
+              <input type="text" class="form-control" [(ngModel)]="users.city" name="user.city">
             </div>
           </div>
 
           <div class="col-xl-4 col-lg-12 col-md-12">
             <div class="form-group">
               <label>Code postal</label>
-              <input type="text" class="form-control" [(ngModel)]="user.code" name="user.code">
+              <input type="text" class="form-control" [(ngModel)]="users.code" name="user.code">
             </div>
           </div>
 

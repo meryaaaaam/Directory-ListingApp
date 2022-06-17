@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
@@ -77,7 +77,10 @@ export class UserService {
 
   updateAdress(id,data)
   {
-    return this.http.put(`${adresse}/${id}`, data)
+    const headers = new HttpHeaders();
+    return this.http.post(`${adresse}/${id}`, data,{
+      headers:headers
+    });
 
    // return this.http.put(`${baseUrl}/${id}`, data);
   }
@@ -98,4 +101,8 @@ export class UserService {
 
   searchCompany() { return this.http.get(search +"company") ; }
 
+  uploadData(id ,data){
+    const headers = new HttpHeaders();
+    return this.http.post(`http://127.0.0.1:8000/api/auth/upload-image/${id}`,data,{headers:headers});
+  }
   }

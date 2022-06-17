@@ -105,7 +105,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { MessageService } from 'primeng/api';
 
-import {ToastModule} from 'primeng/toast';
+import {ToastModule} from 'primeng/toast'; 
+import { ToastrModule } from 'ngx-toastr';
 
 
 
@@ -205,7 +206,12 @@ import {ToastModule} from 'primeng/toast';
     NgxPaginationModule,
     SweetAlert2Module, NotifierModule,AutoCompleteModule,InputMaskModule,
 
+<<<<<<< Updated upstream
     ToastModule,TooltipModule,
+=======
+    ToastModule,
+    ToastrModule.forRoot(), // ToastrModule added
+>>>>>>> Stashed changes
 
     ButtonModule,DropdownModule, NgbModule
   ],
