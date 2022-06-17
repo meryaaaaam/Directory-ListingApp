@@ -33,7 +33,7 @@ export class HomeoneBannerComponent implements OnInit {
 
     mainBannerContent = [
         {
-            title: 'Bienvenu dans le bottin 3737',
+            title: 'Bienvenue dans le bottin 3737',
             paragraph: 'Trouvez une entreprise ou un(e) professionel(le)',
             popularSearchList: [ ]
         }

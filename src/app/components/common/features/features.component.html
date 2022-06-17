@@ -22,14 +22,50 @@
           </div>
 
           <div class="row" style="margin-top: 2em;">
-  <div class="col-6 ">
+ <!----> <div class="col-6 ">
 
-    <!--<input type="text" class="form-control" placeholder="Qui?">-->
+    <!--<input type="text" class="form-control" placeholder="Qui?">
    Qui? <ngx-select-dropdown    (searchChange)="search($event)" tabindex="0" [multiple]="false" [(ngModel)]="singleSelect" name="pro" [config]="config" [options]="searchResult"></ngx-select-dropdown>
+-->
 
+
+
+<p-dropdown [options]="searchResult" [(ngModel)]="singleSelect" optionLabel="name" [showClear]="true" placeholder="Qui">
+  <ng-template pTemplate="selectedItem">
+      <div class="country-item country-item-value"  *ngIf="singleSelect">
+           <div>{{singleSelect.name}}</div>
+      </div>
+  </ng-template>
+  <ng-template let-country pTemplate="item">
+      <div class="country-item">
+           <div>{{country.name}}</div>
+      </div>
+  </ng-template>
+</p-dropdown>
   </div>
+
+
+
+
+
+
      <div class="col-6 ">
-     Où? <ngx-select-dropdown   (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="StateSelect" name="state" [config]="config" [options]="searchstate"></ngx-select-dropdown>
+     <!--Où? <ngx-select-dropdown   (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="StateSelect" name="state" [config]="config" [options]="searchstate"></ngx-select-dropdown>
+     -->
+
+
+     <p-dropdown [options]="searchstate" [(ngModel)]="StateSelect" optionLabel="state" [showClear]="true" placeholder="Qui">
+      <ng-template pTemplate="selectedItem">
+          <div class="country-item country-item-value"  *ngIf="singleSelect">
+               <div>{{singleSelect.name}}</div>
+          </div>
+      </ng-template>
+      <ng-template let-country pTemplate="item">
+          <div class="country-item">
+               <div>{{country.name}}</div>
+          </div>
+      </ng-template>
+    </p-dropdown>
 
     </div>
           </div>
@@ -97,7 +133,7 @@
 
 
     </div>
-
+<br><br><br>
     <div class="divider"></div>
 </section>
 <!-- End Features Area -->

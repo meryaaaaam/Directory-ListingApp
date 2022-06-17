@@ -6,6 +6,7 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { NgxTypedJsModule } from 'ngx-typed-js';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {TooltipModule} from 'primeng/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -204,7 +205,7 @@ import {ToastModule} from 'primeng/toast';
     NgxPaginationModule,
     SweetAlert2Module, NotifierModule,AutoCompleteModule,InputMaskModule,
 
-    ToastModule,
+    ToastModule,TooltipModule,
 
     ButtonModule,DropdownModule, NgbModule
   ],

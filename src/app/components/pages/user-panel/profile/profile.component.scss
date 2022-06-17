@@ -40,7 +40,7 @@
                   transition: all .3s ease;
                   display: block;
                   position: relative;
-                  background: var(--mainColor);
+                  background: rgb(221, 52, 52);
                   box-shadow: 0 8px 16px -1px rgba(8, 141, 211, 0.2);
               }
               input + span:before, input + span:after {
