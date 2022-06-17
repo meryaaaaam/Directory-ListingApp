@@ -13,7 +13,7 @@ export class UserAdress {
   bio!: any;
   role!:any ;
   service_id!:any ;
-  Line_type!:any ;
+  line_type!:any ;
   NEQ!:any ;
   language!:any ;
   CV!:any ;
@@ -24,10 +24,10 @@ export class UserAdress {
   status!:any ;
   isEmailActive!:any ;
   IACNC : any ;
-adress! : any ;
-city! : any ;
-code! : any ;
-province_id! : any ;
+  adress! : any ;
+  city! : any ;
+  code! : any ;
+  province_id! : any ;
 
 
 }

@@ -78,7 +78,7 @@ export class ProfileComponent implements OnInit {
   {
     //const data : any = {name: this.user.name , email:this.user.email}
   let currentuser = this.user ;
-
+   console.log(currentuser) ;
     this.userapi.update(this.user.id , currentuser) .subscribe(
       response => {
         console.log(response);
@@ -103,7 +103,7 @@ export class ProfileComponent implements OnInit {
 
 
   onUpload() {
-    const formData = new FormData();
+   /* const formData = new FormData();
     formData.append('file', this.fileData);
 
     const isUploading = true;
@@ -114,8 +114,8 @@ export class ProfileComponent implements OnInit {
           console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
       } else if(events.type === HttpEventType.Response) {
           console.log(events);
-      }
-  });
+
+  });*/
 
 
 

@@ -137,6 +137,7 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
       .form-group {
           margin-bottom: 20px;
           position: relative;
+          p-dropdown { height: 48px;  display: block;  width: 100%; padding-left: 15px;   transition: var(--transition);  border-radius: 5px;}
           select {
             display: block;
             height: 48px;
@@ -159,6 +160,7 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
             }
         }
           label {
+
               display: block;
               margin-bottom: 8px;
               color: #00bd9a ;

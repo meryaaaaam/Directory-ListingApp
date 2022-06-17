@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { UserService } from 'src/app/shared/api/user.service';
 
 @Component({
     selector: 'app-listings-details',
@@ -7,11 +9,28 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
     styleUrls: ['./listings-details.component.scss']
 })
 export class ListingsDetailsComponent implements OnInit {
-
-    constructor() { }
+    id : any ;
+    result : any  ;
+    constructor(private route: ActivatedRoute, public user : UserService) { }
 
     ngOnInit(): void {
+      this.id =  this.get(this.route.snapshot.paramMap.get('id')) ;
     }
+
+
+    get(id)
+    {
+
+      let x ;
+      this.user.get(id).subscribe(
+
+        (data)=>{ x=data ;
+                  this.result= x;
+                  console.log(x) ;
+                }
+      )
+    }
+
 
     singleListingsBox = [
         {

@@ -78,7 +78,7 @@ export class UserService {
   updateAdress(id,data)
   {
     const headers = new HttpHeaders();
-    return this.http.post(`${adresse}/${id}`, data,{
+    return this.http.put(`${adresse}/${id}`, data,{
       headers:headers
     });
 

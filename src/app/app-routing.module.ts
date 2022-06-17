@@ -82,7 +82,7 @@ import { PredingUsersComponent } from './components/pages/panel/admin/preding-us
     {path: 'grid-listings-left-sidebar', component: GridListingsLeftSidebarComponent},
     {path: 'grid-listings-right-sidebar', component: GridListingsRightSidebarComponent},
     {path: 'grid-listings-full-width', component: GridListingsFullWidthComponent},
-    {path: 'single-listings', component: ListingsDetailsComponent},
+    {path: 'single-listings/:id', component: ListingsDetailsComponent},
     {path: 'events', component: EventsComponent},
     {path: 'single-events', component: EventsDetailsComponent},
     {path: 'dashboard', component: DashboardComponent},

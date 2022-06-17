@@ -20,53 +20,35 @@
       <div class="my-profile-box">
         <h3>Informations de l'entreprise</h3>
 
-        <div class="row">
-          <div class="col-lg-12 col-md-12">
-            <div class="form-group profile-box">
-              <!-- {{ this.user.logo }} -->
-
-              <img src="http://localhost:8000/storage/image/{{ image }}" alt="image">
-
-            </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div class="form-group profile-box">
+                  <img [src]="image" alt="image">
+                  <div class="file-upload">
+                      <input type="file" name="file" id="file" class="inputfile" />
+                      <label for="file"><i class='bx bx-upload'></i> Upload Photo</label>
+                  </div>
+              </div>
           </div>
-        </div>
-        <!-- #f="ngForm" -->
-        <!-- <form  #f="ngForm" (ngSubmit)="onSubmitform(f)">
-           <div class="file-upload">
-            <label for="logo"><i class='bx bx-upload'></i> Upload Logo</label>
-          </div> -->
-          <!-- <div class="form-group">
-            <input type="file" name="logo" id="logo" class="form-control" formControlName="logo"
-            (change)="fileEvent($event)" /> -->
-            <!-- [ngClass]="{'is-invalid':submitted && f.logo.errors}" -->
-            <!-- <div *ngif="submitted && f.logo.errors" class="invalid-feedback">
-              <div *ngif="f.logo.errors.required">image is required </div>
-             <input type="file"  name="myFile" (change)="fileEvent($event)"/> 
-            </div> 
-          </div>
-          <button type="submit">Upload Image</button>
-        </form>
-          -->
-          <!-- <div class="form-group">
-            <input type="file" name="logo" id="logo" class="form-control" formControlName="logo"
-            (change)="fileEvent($event)" /> -->
-            <!-- [ngClass]="{'is-invalid':submitted && f.logo.errors}" -->
-            <!-- <div *ngif="submitted && f.logo.errors" class="invalid-feedback">
-              <div *ngif="f.logo.errors.required">image is required </div>
-             <input type="file"  name="myFile" (change)="fileEvent($event)"/> 
-            </div> -->
-          <!-- </div>     -->
-       
+      </div>
+
+                <!--<form  #f="ngForm" (ngSubmit)="onSubmitform(f)">
+                <div class="file-upload">
+                  <input type="file" name="logo" id="file" class="inputfile" (change)="fileEvent($event)" />
+                  <label for="file"><i class='bx bx-upload'></i> Upload Logo</label>
+                   <button>Upload Image</button>
+                </div>
+                </form>-->
+
+
+
         <form>
           <p-toast></p-toast>
             <div class="row">
-         
-              <div class="form-group">
-                <input type="file" name="logo" id="logo" class="form-control" formControlName="logo"
-                (change)="fileEvent($event)" />
-              </div>
 
-          <div class="col-lg-6 col-md-6" >
+
+
+          <div class="col-lg-6 col-md-6">
             <div class="form-group">
 
               <label>Username</label>
@@ -94,7 +76,7 @@
           <div class="col-xl-6 col-lg-12 col-md-12">
             <div class="form-group">
               <label>Adresse de l'entreprise</label>
-              <input type="text" class="form-control" [(ngModel)]="users.adress" name="adresse">
+              <input type="text" class="form-control" [(ngModel)]="user.adress" name="adresse">
             </div>
           </div>
 
@@ -124,26 +106,38 @@
           <div class="col-xl-6 col-lg-12 col-md-12">
             <div class="form-group">
               <label>Adresse</label>
-              <input type="text" class="form-control" [(ngModel)]="users.adress" name="user.adress">
+              <input type="text" class="form-control" [(ngModel)]="user.adress" name="user.adress">
             </div>
           </div>
           <div class="col-xl-6 col-lg-12 col-md-12">
             <div class="form-group">
               <label>Ville</label>
-              <input type="text" class="form-control" [(ngModel)]="users.city" name="user.city">
+              <input type="text" class="form-control" [(ngModel)]="user.city" name="user.city">
             </div>
           </div>
 
           <div class="col-xl-4 col-lg-12 col-md-12">
             <div class="form-group">
               <label>Code postal</label>
-              <input type="text" class="form-control" [(ngModel)]="users.code" name="user.code">
+              <input type="text" class="form-control" [(ngModel)]="user.code" name="user.code">
             </div>
           </div>
 
 
+          <div class="col-xl-6 col-lg-12 col-md-12">
+            <div class="form-group">
+              <label>Selectionner province</label>
 
-          <div class="col-lg-8 col-md-8 pl-3">
+
+
+              <select [(ngModel)]="user.province_id" name="user.province_id">
+                 <option [ngValue]="null" disabled  >  Province  </option>
+                  <option *ngFor="let m of states" selected [ngValue]= m.id >{{ m.name }}</option>
+
+              </select>
+            </div>
+          </div>
+          <!--<div class="col-lg-8 col-md-8 pl-3">
             <div class="form-group  ">
               <label><i class='bx bx-duplicate'></i> Province</label>
               <p-dropdown  [options]="states" name="user.province_id"[(ngModel)]="user.province_id" optionLabel="name"  optionValue="id"   [showClear]="true" placeholder="Selectionner une province"  >
@@ -159,7 +153,7 @@
                 </ng-template>
             </p-dropdown>
             </div>
-        </div>
+        </div>-->
 
 
           <!--<div class="col-xl-8 col-lg-12 col-md-12">
@@ -183,9 +177,10 @@
                   <div class="col-10">
                     <span class="title">Disponibles pour les organismes récipiendaires de l’IACNC </span>
                   </div>
-                   <div class="col-2"> <i class='bx bx-info-circle'></i></div>
+
                   </div>
-                <div class="col-2"> <label class="switch">
+                <div class="col-2"pTooltip="Nous recrutons des professionnels hautement recommandables et collaboratifs pour intervenir dans l’Initiative Appuyer les communautés noires du Canada. Nous cherchons des « Leaders de chantier » guidés par la volonté de placer le renforcement de capacités des communautés noires au cœur de leurs préoccupations. Nous sollicitons leur expertise, expérience et indépendance.">
+                  <label class="switch">
                   <input type="checkbox" [(ngModel)]="users.IACNC" name="user.IACNC" pTooltip="Enter your username">
                   <span></span>
               </label></div>

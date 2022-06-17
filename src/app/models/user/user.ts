@@ -13,7 +13,7 @@ export class User {
   bio!: any;
   role!:any ;
   service_id!:any ;
-  Line_type!:any ;
+  line_type!:any ;
   NEQ!:any ;
   language!:any ;
   CV!:any ;

@@ -253,11 +253,11 @@ fileEvent(e){
   {
    // const data : any = {name: this.user.username , email:this.user.email}
    this.currentuser = this.user ;
-   const formData =new FormData();
-   formData.append("img",this.filedata,this.filedata.name);
-   console.log(formData);
-  
-    this.userapi.updateAdress(this.user.id , formData) .subscribe(
+   //const formData =new FormData();
+  // formData.append("img",this.filedata,this.filedata.name);
+  // console.log(formData);
+  //  this.currentuser.img=formData ;
+    this.userapi.updateAdress(this.user.id , this.currentuser) .subscribe(
       response => {
         let c :any ;
         // console.log(response);
@@ -304,12 +304,12 @@ fileEvent(e){
 //          headers.append('Content-Type', 'multipart/form-data');
 //          headers.append('Accept', 'application/json');
 //      this.http.post(`http://127.0.0.1:8000/api/auth/upload-image/${user.id}`, formData).subscribe( headers, console.log(file.name) );
-  
+
 //      reader.readAsDataURL(event.target.files[0]); // read file as data url
-    
+
 //      reader.onload = (event) => { // called once readAsDataURL is completed
 //     this.url = event.target.result;
-    
+
 //     }
 //   }
 // }
@@ -383,10 +383,10 @@ fileEvent(e){
  /* Variabe to store file data */
 
  /* File onchange event */
- 
+
  /* Upload button functioanlity */
  onSubmitform(f: NgForm) {
-    
+
    var myFormData = new FormData();
    const headers = new HttpHeaders();
    headers.append('Content-Type', 'multipart/form-data');
