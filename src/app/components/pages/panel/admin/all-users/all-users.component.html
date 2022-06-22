@@ -37,13 +37,20 @@
               <img *ngIf="Content.logo" [src]="Content.logo" alt="image">
               <img *ngIf="!Content.logo" [src]="logo" alt="image">
               <div class="info">
-                <span *ngIf="Content.role === 'Pro'">{{ Content.firstname }} {{ Content.lastname }} </span>
+                <span *ngIf="Content.role === 'Pro'">{{ Content.firstname }} {{ Content.lastname }} {{Content.status}} </span> <span  class="bookings-status"></span>
                 <span *ngIf="Content.role === 'Company'">{{ Content.companyname }} </span>
 
                 <ul>
                   <li><a href="tel:{{ Content.phone }}">{{ Content.phone }}</a></li>
                   <li><a href="mailto:{{ Content.email }}">{{ Content.email }}</a></li>
                 </ul>
+                <ul>
+                <li>
+                  <i class='bx bx-map'></i>
+                  {{ Content.adresse }}
+                  
+                </li>
+              </ul>
 
 
 
@@ -52,18 +59,12 @@
 
             <td class="details">
               <ng-container *ngIf="Content.role === 'Pro';else or">
-                <h4> {{ Content.firstname }} {{ Content.lastname }}
-                  <span  class="bookings-status  ">{{Content.status}}</span></h4>
+                <h4> 
+                  </h4>
                <!-- <ng-template #or>
                   <span class="bookings-status ">Preding</span>
                 </ng-template>-->
                 <ul>
-                  <li>
-                    <i class='bx bx-map'></i>
-                    <span>Adresse:</span>
-                    {{ Content.adresse }}
-                  </li>
-
                   <li>
                     <i class='bx bx-calendar'></i>
                     <span>Date de Creation :</span>
@@ -209,9 +210,9 @@
             <td class="action">
               <!-- (click)=Approved(Content.id) -->
               <!-- (click)=SendMail(Content.id) -->
-              <a (click)=Approved(Content.id) class="default-btn"><i class='bx bx-check-circle'></i>Approve </a>
-              <a (click)=reject(Content.id) class="default-btn danger"><i class='bx bx-x-circle'></i> Reject</a>
-              <a class="default-btn primary" (click)=open(content,Content.id)><i class='bx bxs-note'></i>Note</a>
+              <a (click)=Approved(Content.id) class="default-btn"><i class='bx bx-check-circle'></i></a>
+              <a (click)=reject(Content.id) class="default-btn danger"><i class='bx bx-x-circle'></i></a>
+              <a class="default-btn primary" (click)=open(content,Content.id)><i class='bx bxs-note' pTooltip="note pour utilisateur" tooltipPosition="top"></i></a>
             </td>
           </tr>
         </tbody>

@@ -114,7 +114,7 @@ logo:any;
     {this.user = data ; this.users = data ; this.type = this.user.Line_type ; console.log(this.user) ;
 
     if (this.user.logo)
-    {this.image = this.user.logo ;}
+    {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
     else {this.image = 'assets/img/Logo_e.jpg'}
 
     // console.log(this.image) ;
@@ -289,124 +289,32 @@ fileEvent(e){
   }
 
 
+updateprofile2()
+  {
+   // const data : any = {name: this.user.username , email:this.user.email}
+   //this.currentuser = this.user ;
+   const formData =new FormData();
+   formData.append("img",this.filedata,this.filedata.name);
+   console.log(formData);
+   //this.currentuser.logo=formData ;
+    this.userapi.updateAdress2(this.user.id , formData) .subscribe(
+      response => {
+        let c :any ;
+        // console.log(response);
+         this.data= response ;
+         console.log(this.data);
+          if(!this.data)
+         {this.showError(c.message) ;}
+         else {
+          this.showSuccess(c.message) ;          }
 
-// public imagePath;
+      },
+      error => {
+        console.log(error);
 
-// onFileChanged(event) { // called each time file input changes
-//   if (event.target.files && event.target.files[0]) {
-//     var reader = new FileReader();
-//          this.imagePath = event.target.files;
-//      for (const file of this.imagePath) {
-//      const formData = new FormData();
-//      formData.append('image', file, file.name);
-//          }
-//      const headers = new HttpHeaders();
-//          headers.append('Content-Type', 'multipart/form-data');
-//          headers.append('Accept', 'application/json');
-//      this.http.post(`http://127.0.0.1:8000/api/auth/upload-image/${user.id}`, formData).subscribe( headers, console.log(file.name) );
-
-//      reader.readAsDataURL(event.target.files[0]); // read file as data url
-
-//      reader.onload = (event) => { // called once readAsDataURL is completed
-//     this.url = event.target.result;
-
-//     }
-//   }
-// }
-
-// onFileChanged(event) {
-//   console.log(event);
-//   this.filedata = event.target.files[0];
-
-//   const reader = new FileReader();
-//   reader.onload = e => {
-//       return this.filedata = reader.result;
-//   };
-
-//   reader.readAsDataURL(this.filedata);
-// }
-
-// /* file upload */
-//      /* Variabe to store file data */
-//      filedata:any;
-//     /* File onchange event */
-//     uploadEvent(e){
-//         this.filedata = e.target.files[0];
-//         let filedata = e.target;
-//         console.log(this.filedata);
-//     }
-    /* Upload button functioanlity */
-  //   onSubmitform(f: NgForm) {
-
-  //     var myFormData = new FormData();
-  //     const headers = new HttpHeaders();
-  //     headers.append('Content-Type', 'multipart/form-data');
-  //     headers.append('Accept', 'application/json');
-  //     myFormData.append('image', this.filedata);
-  //     /* Image Post Request */
-  //     this.http.post(`http://127.0.0.1:8000/api/auth/upload-image`, myFormData, {
-  //     headers: headers
-  //     }).subscribe(data => {
-  //      //Check success message
-  //      //sweetalert message popup
-  //       Swal.fire({
-  //            title: 'Hurray!!',
-  //            text:   data['message'],
-  //            icon: 'success'
-  //        });
-  //     });
-
-  // }
-/* file upload */
-
-
-//   onUpload() {
-//     const formData = new FormData();
-//     formData.append('file', this.fileData);
-
-//     const isUploading = true;
-
-//     this.http.put("http://127.0.0.1:8000/api/auth/upload-image", formData , {  reportProgress: true,
-//     observe: 'events'  } ).subscribe(events => {
-//       if(events.type == HttpEventType.UploadProgress) {
-//           console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
-//       } else if(events.type === HttpEventType.Response) {
-//           console.log(events);
-//       }
-//   });
-
-
-
-// }
-
-
- /* Variabe to store file data */
-
- /* File onchange event */
-
- /* Upload button functioanlity */
- onSubmitform(f: NgForm) {
-
-   var myFormData = new FormData();
-   const headers = new HttpHeaders();
-   headers.append('Content-Type', 'multipart/form-data');
-   headers.append('Accept', 'application/json');
-   myFormData.append('image', this.filedata);
-   /* Image Post Request */
-   this.http.post(`http://127.0.0.1:8000/api/auth/upload-image/${this.user.id}`, myFormData, {
-   headers: headers
-   }).subscribe(data => {
-    //Check success message
-    //sweetalert message popup
-     Swal.fire({
-          title: 'Hurray!!',
-          text:   data['message'],
-          icon: 'success'
       });
-   });  console.log(myFormData);
 
-}
-/* file upload */
+  }
 
 
 filteredGroups : any[] ;

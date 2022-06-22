@@ -7,6 +7,8 @@ const baseUrl = "http://127.0.0.1:8000/api/users" ;
 const model = "http://127.0.0.1:8000/api/makes" ;
 const Active = "http://127.0.0.1:8000/api/userss/isActive" ;
 const adresse = "http://127.0.0.1:8000/api/userss/update" ;
+const CV = "http://127.0.0.1:8000/api/userss/updateCV" ;
+
 const state = "http://127.0.0.1:8000/api/provinces" ;
 const search = "http://127.0.0.1:8000/api/allusers/" ;
 
@@ -77,8 +79,25 @@ export class UserService {
 
   updateAdress(id,data)
   {
+    return this.http.put(`${adresse}/${id}`, data);
+
+   // return this.http.put(`${baseUrl}/${id}`, data);
+  }
+
+  updateAdress2(id,data)
+  {
     const headers = new HttpHeaders();
-    return this.http.put(`${adresse}/${id}`, data,{
+    return this.http.post(`${adresse}/${id}`, data,{
+      headers:headers
+    });
+
+   // return this.http.put(`${baseUrl}/${id}`, data);
+  }
+
+  updatecv(id,data)
+  {
+    const headers = new HttpHeaders();
+    return this.http.post(`${CV}/${id}`, data,{
       headers:headers
     });
 

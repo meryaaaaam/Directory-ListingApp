@@ -19,6 +19,21 @@
         <div class="col-lg-6 col-md-12">
             <div class="my-profile-box">
                 <h3>Profile Details</h3>
+                <img [src]="image" alt="image">
+        <form #f="ngForm">
+
+          <div class="form-group">
+
+            <input type="file" name="logo" id="file" class="form-control" (change)="fileEvent($event)" />
+            <!-- <label for="file"><i class='bx bx-upload'></i> Upload Logo</label> -->
+            <!-- <button>Upload Image</button> -->
+
+          </div>
+          <div>
+            <button type="submit" class="inputfile" (click)="updateprofile2()">Save Change</button>
+          </div>
+
+        </form>
 
                 <form>
                     <div class="row">

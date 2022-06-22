@@ -16,10 +16,11 @@ import Swal from 'sweetalert2';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  fileData: File = null;
-  fileProgress(fileInput: any) {
-    this.fileData = <File>fileInput.target.files[0];
-}
+  filedata: File = null;
+//   fileProgress(fileInput: any) {
+//     this.fileData = <File>fileInput.target.files[0];
+// }
+data:any;
 
  public user: User  = new User ;
 
@@ -45,7 +46,13 @@ export class ProfileComponent implements OnInit {
       new_confirm_password: [''],
     });
 
-
+    this.auth.profileUser().subscribe(data=>  {
+      
+      if (this.user.logo)
+      {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
+      else {this.image = 'assets/img/Logo_e.jpg'}
+  
+    }) ;
 
 
 
@@ -60,6 +67,40 @@ export class ProfileComponent implements OnInit {
     else
     { this.router.navigateByUrl('profile');}
   }
+
+  fileEvent(e){
+    this.filedata = e.target.files[0];
+    console.log(this.filedata);
+  }
+
+
+  updateprofile2()
+  {
+   // const data : any = {name: this.user.username , email:this.user.email}
+   //this.currentuser = this.user ;
+   const formData =new FormData();
+   formData.append("img",this.filedata,this.filedata.name);
+   console.log(formData);
+   //this.currentuser.logo=formData ;
+    this.userapi.updateAdress2(this.user.id , formData) .subscribe(
+      response => {
+        let c :any ;
+        // console.log(response);
+         this.data= response ;
+         console.log(this.data);
+        //   if(!this.data)
+        //  {this.showError(c.message) ;}
+        //  else {
+        //   this.showSuccess(c.message) ;          }
+
+      },
+      error => {
+        console.log(error);
+
+      });
+
+  }
+
 
   successAlert()
   {

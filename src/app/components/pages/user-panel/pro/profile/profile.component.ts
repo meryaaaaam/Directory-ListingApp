@@ -1,9 +1,10 @@
+import { formatDate } from '@angular/common';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import { FilterService, SelectItemGroup } from 'primeng/api';
+import { FilterService, MessageService, SelectItemGroup } from 'primeng/api';
 import { Search } from 'src/app/models/service/search';
 import { Password } from 'src/app/models/user/password';
 import { State } from 'src/app/models/user/state';
@@ -20,11 +21,13 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  providers: [MessageService]
 })
 export class ProfileComponent implements OnInit {
 
-            fileData: File = null;
+            filedata: any;
+            data :any;
             Disabled: boolean;
             categories: Object;
             sub: any;
@@ -37,14 +40,14 @@ export class ProfileComponent implements OnInit {
           public users: UserAdress  = new UserAdress ;
 
 
-          public image = 'assets/img/Logo_e.jpg';
+          public image : any;
 
           public password!: Password ;
           public currentuser : any = null;
           public passwordForm: FormGroup;
           public searchForm: FormGroup;
           public usertwoform : FormGroup;
-          private  notifier: NotifierService;
+          private notifier: NotifierService;
           selectedCountries: any[];
           selectedServices: any[];
           selectedCategories: any[];
@@ -90,14 +93,21 @@ export class ProfileComponent implements OnInit {
     public fb: FormBuilder,
     public upload : UploadService,private http: HttpClient ,
     public category : CategoryService,
-    notifierService: NotifierService,  private filterService: FilterService
+    notifierService: NotifierService,  private filterService: FilterService,
+    private messageService: MessageService
      )
   {
     this.notifier = notifierService;
 
     this.auth.Profile().subscribe((data: any)=> {this.user = data ;   console.log(this.user.role)});
 
-    this.auth.profileUser().subscribe(data=>  {this.users = data ; console.log(this.users = data ) ;  }) ;
+    this.auth.profileUser().subscribe(data=>  {this.users = data ; console.log(this.users = data ) ; 
+      
+      if (this.user.logo)
+      {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
+      else {this.image = 'assets/img/Logo_e.jpg'}
+  
+    }) ;
 
 
     this.passwordForm = this.fb.group({
@@ -152,6 +162,22 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  showSuccess(detail) {
+    this.messageService.add({severity:'success', summary: 'Success', detail: detail});
+  }
+  
+  showInfo(detail) {
+    this.messageService.add({severity:'info', summary: 'Info', detail: detail});
+  }
+  
+  showWarn(detail) {
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: detail});
+  }
+  
+  showError(detail) {
+    this.messageService.add({severity:'error', summary: 'Error', detail: detail});
+  }
+  
   breadcrumb = [ {  title: 'My Profile',subTitle: 'User Panel'}]
 
   ngOnInit():void  {
@@ -170,6 +196,38 @@ export class ProfileComponent implements OnInit {
 
 }
 
+fileEvent(e){
+  this.filedata = e.target.files[0];
+  console.log(this.filedata);
+}
+
+updateprofile2()
+  {
+   // const data : any = {name: this.user.username , email:this.user.email}
+   //this.currentuser = this.user ;
+   const formData =new FormData();
+   formData.append("img",this.filedata,this.filedata.name);
+   console.log(formData);
+   //this.currentuser.logo=formData ;
+    this.userapi.updateAdress2(this.user.id , formData) .subscribe(
+      response => {
+        let c :any ;
+        // console.log(response);
+         this.data= response ;
+         console.log(this.data);
+          if(!this.data)
+         {this.showError(c.message) ;}
+         else {
+          this.showSuccess(c.message) ;          }
+
+      },
+      error => {
+        console.log(error);
+
+      });
+
+  }
+
   successAlert()
   {
     Swal.fire({
@@ -187,16 +245,29 @@ export class ProfileComponent implements OnInit {
   {
    // const data : any = {name: this.user.username , email:this.user.email}
   let currentuser = this.users ;
-
+   const formData =new FormData();
+    formData.append("img",this.filedata,this.filedata.name);
+    
+    
+    
     this.userapi.updateAdress(this.user.id , currentuser) .subscribe(
       response => {
         this.notifier.notify('success', 'User updated successfully');
+        this.data=response;
         console.log(response);
 
       },
       error => {
         console.log(error);
       });
+      this.userapi.updatecv(this.user.id , formData) .subscribe(
+        response => {
+          this.data=response;
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   updatepassword()
@@ -212,24 +283,24 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  onUpload() {
-    const formData = new FormData();
-    formData.append('file', this.fileData);
+//   onUpload() {
+//     const formData = new FormData();
+//     formData.append('file', this.fileData);
 
-    const isUploading = true;
+//     const isUploading = true;
 
-    this.http.put("http://127.0.0.1:8000/api/auth/upload-image", formData , {  reportProgress: true,
-    observe: 'events'  } ).subscribe(events => {
-      if(events.type == HttpEventType.UploadProgress) {
-          console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
-      } else if(events.type === HttpEventType.Response) {
-          console.log(events);
-      }
-  });
+//     this.http.put("http://127.0.0.1:8000/api/auth/upload-image", formData , {  reportProgress: true,
+//     observe: 'events'  } ).subscribe(events => {
+//       if(events.type == HttpEventType.UploadProgress) {
+//           console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
+//       } else if(events.type === HttpEventType.Response) {
+//           console.log(events);
+//       }
+//   });
 
 
 
-}
+// }
 
 filteredGroups : any[] ;
 
