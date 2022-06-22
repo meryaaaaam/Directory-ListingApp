@@ -175,10 +175,12 @@
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-4 p-0">
                                     <div class="listings-image" style="background-image: url({{Content.logo}});">
-                                         <img [src]="Content.mainImg" alt="image">
+
+                                         <img [src]="Content.mainImg" alt="image"  href="/single-listings/{{Content.id}}">
                                        <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
                                         <!--  <a routerLink="/{{Content.categoryLink}}" class="category"><i class="flaticon-cooking"></i></a>-->
                                         <a routerLink="/{{Content.id}}" class="link-btn">  </a>
+
                                          <!--   <div class="author">
                                             <div class="d-flex align-items-center">
                                                 <img [src]="Content.authorImg" alt="image">
@@ -224,7 +226,8 @@
                                       <img [src]="Content.logos" alt="image" href="/single-listings/{{Content.id}}">
                                      <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
                                       <!--  <a routerLink="/{{Content.categoryLink}}" class="category"><i class="flaticon-cooking"></i></a>-->
-                                      <a routerLink="/single-listings/{{Content.id}}" class="link-btn"> plus détails </a>
+                                      <!--<a routerLink="/single-listings/{{Content.id}}" class="link-btn"> plus détails </a>-->
+
                                        <!--   <div class="author">
                                           <div class="d-flex align-items-center">
                                               <img [src]="Content.authorImg" alt="image">
@@ -235,13 +238,21 @@
                               </div>
 
                               <div class="col-lg-8 col-md-8 p-0">
-                                  <div class="listings-content justify-content-center">
+                                  <div class="row listings-content justify-content-center">
                                      <!-- <span class="status {{Content.extraClass}}"><i class="flaticon-save"></i> {{Content.openORclose}}</span> -->
-                                     <h3><a routerLink="/single-listings/{{Content.id}}">  {{Content.companyname}}</a></h3>
-                                     <div class="details" *ngIf="Content.ANCNC">
-                                          ANCNC
+                                     <div>
+
+                                      <h3><a routerLink="/single-listings/{{Content.id}}">
+                                        {{Content.companyname}}</a></h3>
+                                        <span class="details " *ngIf="Content.IACNC">
+                                          <h4>IACNC</h4>
+                                         </span>
 
                                      </div>
+
+
+
+
                                       <div class="d-flex align-items-center justify-content-between">
                                           <div class="rating">
 
