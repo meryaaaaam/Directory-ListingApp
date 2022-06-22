@@ -28,6 +28,6 @@ export class UserAdress {
   city! : any ;
   code! : any ;
   province_id! : any ;
-
+  LinkedIn!:any;
 
 }

@@ -171,6 +171,8 @@ p-calendar.ng-dirty.ng-invalid > .p-calendar > .p-inputtext {
           }
           .form-control {
               color: #808080;
+              line-height: 2.5;
+              padding: 0.1rem 0.75rem;
 
               &::placeholder {
                   transition: var(--transition);

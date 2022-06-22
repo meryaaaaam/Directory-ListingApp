@@ -212,9 +212,9 @@
                         position: relative;
                         margin-right: 15px;
                         padding: {
-                            top: 8px;
-                            bottom: 8px;
-                            left: 40px;
+                            top: 15px;
+                            bottom: 15px;
+                            left: 15px;
                             right: 20px;
                         };
                         &:hover {
@@ -223,7 +223,7 @@
                         }
                         i {
                             position: absolute;
-                            left: 20px;
+                            left: 10px;
                             top: 50%;
                             transform: translateY(-50%);
                             font-size: 15px;

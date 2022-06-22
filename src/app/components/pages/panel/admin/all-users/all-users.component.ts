@@ -47,11 +47,12 @@ export class AllUsersComponent implements OnInit {
 
             console.log(this.name);}
     );
-
+    console.log(this.users.status);
   }
 
   ngOnInit(): void {
     this.logo = "assets/img/logo/default.png";
+    
   }
 
   breadcrumb = [

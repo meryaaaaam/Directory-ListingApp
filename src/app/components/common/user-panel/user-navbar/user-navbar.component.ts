@@ -22,7 +22,7 @@ export class UserNavbarComponent implements OnInit {
     {this.user = data ;
 
       if(this.user.logo)
-      {this.logo = this.user.logo ;}
+      {this.logo = `http://localhost:8000/storage/image/${this.user.logo}`}
       else
       {this.logo="assets/img/logo/default.png" ;}
 

@@ -89,7 +89,6 @@ import { ProfileComponent as company } from './components/pages/user-panel/compa
  import {MatCheckboxDefaultOptions, MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS} from '@angular/material/checkbox';
 
  import { NotifierModule } from 'angular-notifier';
-
  import { ButtonModule } from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
 import {AutoCompleteModule} from 'primeng/autocomplete';
@@ -106,6 +105,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'primeng/api';
 
 import {ToastModule} from 'primeng/toast';
+import {FileUploadModule} from 'primeng/fileupload';
+
 //import { ToastrModule } from 'ngx-toastr';
 
 
@@ -207,7 +208,7 @@ import {ToastModule} from 'primeng/toast';
     SweetAlert2Module, NotifierModule,AutoCompleteModule,InputMaskModule,
 
     ToastModule,TooltipModule,
-
+    FileUploadModule,
     ButtonModule,DropdownModule, NgbModule
   ],
   providers: [
