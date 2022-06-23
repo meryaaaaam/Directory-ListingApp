@@ -34,7 +34,28 @@
       .form-group {
           margin-bottom: 20px;
           position: relative;
-
+          p-dropdown { height: 48px;  display: block;  width: 100%; padding-left: 15px;   transition: var(--transition);  border-radius: 5px;}
+          select {
+            display: block;
+            height: 48px;
+            line-height: 48px;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #f9f9f9;
+            transition: var(--transition);
+            border: 1px solid #e5e7f2;
+            color: #7d93b2;
+            width: 100%;
+            padding-left: 15px;
+            font: {
+                weight: 400;
+                size: var(--fontSize);
+            };
+            &:focus {
+                border-color: var(--mainColor);
+                background-color: transparent;
+            }
+        }
           label {
               display: block;
               margin-bottom: 8px;

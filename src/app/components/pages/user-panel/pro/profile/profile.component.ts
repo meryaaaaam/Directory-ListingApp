@@ -82,6 +82,12 @@ export class ProfileComponent implements OnInit {
 
  ];
 
+ public langue = [
+  {title:"Francais"},
+  {title:"Anglais"}
+
+];
+
 
 
   selecteds: any;

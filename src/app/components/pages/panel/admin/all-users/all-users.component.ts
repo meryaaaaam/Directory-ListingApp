@@ -45,9 +45,9 @@ export class AllUsersComponent implements OnInit {
             else if (this.users.role == 'Company') { this.name = this.users.companyname; }
             else { this.name = this.users.username; }
 
-            console.log(this.name);}
+            }
     );
-    console.log(this.users.status);
+    
   }
 
   ngOnInit(): void {
@@ -181,11 +181,15 @@ showError(detail) {
   open(content , id) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
         console.log(id , this.note) ;
-       this.user.bio = this.note ;
-        this.userapi.note(id , this.user.bio).subscribe(
-          data => console.log(data)
-        );
+       this.users.bio = this.note ;
+       //console.log(this.users.bio);
+        this.userapi.note(id , this.note).subscribe(
+          data =>{ 
+          console.log(this.users[id-2].bio)}
 
+        );
+        //console.log(this.user.bio);
+     
 
 
       this.closeResult = `Closed with: ${result}`;

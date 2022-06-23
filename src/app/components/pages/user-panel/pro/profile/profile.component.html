@@ -181,6 +181,7 @@
         <h3>Informations de contact</h3>
 
         <form>
+          <p-toast></p-toast>
           <div class="row">
 
 
@@ -193,10 +194,24 @@
             </div>
 
 
-            <div class="col-lg-6 col-md-6">
+            <!-- <div class="col-lg-6 col-md-6">
               <div class="form-group">
                 <label>Langue de correspondance</label>
                 <input type="text" class="form-control" [(ngModel)]="user.language" name="language">
+              </div>
+            </div> -->
+
+            <div class="col-xl-6 col-lg-12 col-md-12">
+              <div class="form-group">
+                <label>Langue de correspondance</label>
+
+
+
+                <select [(ngModel)]="user.language" name="language">
+                  <option [ngValue]="null" disabled> Type de langue </option>
+                  <option *ngFor="let m of langue" selected [ngValue]=m.title>{{ m.title }}</option>
+
+                </select>
               </div>
             </div>
 
