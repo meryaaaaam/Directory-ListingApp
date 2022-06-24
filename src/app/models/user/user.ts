@@ -22,7 +22,8 @@ export class User {
   updated_at!:any ;
   isTermsAccepted!: any;
   isActive!:any ;
-  
+  note!:any ;
+
   LinkedIn!:any;
 
   status!:any ;

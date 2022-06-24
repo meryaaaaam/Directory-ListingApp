@@ -106,6 +106,8 @@ import { MessageService } from 'primeng/api';
 
 import {ToastModule} from 'primeng/toast';
 import {FileUploadModule} from 'primeng/fileupload';
+import { PolicypageComponent } from './components/pages/policypage/policypage.component';
+import { ConditionpageComponent } from './components/pages/conditionpage/conditionpage.component';
 
 //import { ToastrModule } from 'ngx-toastr';
 
@@ -187,7 +189,7 @@ import {FileUploadModule} from 'primeng/fileupload';
     UserPanelComponent,
     UserNavbarComponent,
     ProfileComponent,
-    pro, company, ProfileTestComponent,  AdminComponent, AllUsersComponent, ActifUsersComponent, PredingUsersComponent
+    pro, company, ProfileTestComponent,  AdminComponent, AllUsersComponent, ActifUsersComponent, PredingUsersComponent, PolicypageComponent, ConditionpageComponent
 
 
 

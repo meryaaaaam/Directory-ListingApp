@@ -52,6 +52,7 @@ import { RoleService } from './services/role/role.service';
 import { AllUsersComponent } from './components/pages/panel/admin/all-users/all-users.component';
 import { ActifUsersComponent } from './components/pages/panel/admin/actif-users/actif-users.component';
 import { PredingUsersComponent } from './components/pages/panel/admin/preding-users/preding-users.component';
+import { PolicypageComponent } from './components/pages/policypage/policypage.component';
 
 
 
@@ -95,6 +96,9 @@ import { PredingUsersComponent } from './components/pages/panel/admin/preding-us
     {path: 'dashboard-add-listings', component: DashboardAddListingsComponent},
     {path: 'dashboard-bookmarks', component: DashboardBookmarksComponent},
     {path: 'dashboard-my-listings', component: DashboardMyListingsComponent},
+    {path: 'politique-d-utilisation', component: PolicypageComponent},
+
+
     {path: 'listing/:label', component: ListingComponent},
 
     {path: 'users-list', component: AllUsersComponent , canActivate: [AuthGuard ]   },

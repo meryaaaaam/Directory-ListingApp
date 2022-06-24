@@ -15,5 +15,6 @@ export class Search {
   website!: any;
   bio!: any;
   logo!: any;
+  label!: any;
 }
 

@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/shared/api/api.service';
 import { UploadService } from 'src/app/shared/api/upload.service';
 import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-profile',
@@ -47,11 +47,11 @@ data:any;
     });
 
     this.auth.profileUser().subscribe(data=>  {
-      
+
       if (this.user.logo)
       {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
       else {this.image = 'assets/img/Logo_e.jpg'}
-  
+
     }) ;
 
 
@@ -70,6 +70,7 @@ data:any;
 
   fileEvent(e){
     this.filedata = e.target.files[0];
+   // this.filedata.name = "http://localhost:8000/storage/image/"+this.filedata.name ;
     console.log(this.filedata);
   }
 
@@ -79,7 +80,7 @@ data:any;
    // const data : any = {name: this.user.username , email:this.user.email}
    //this.currentuser = this.user ;
    const formData =new FormData();
-   formData.append("img",this.filedata,this.filedata.name);
+   formData.append("img",this.filedata,this.filedata.name );
    console.log(formData);
    //this.currentuser.logo=formData ;
     this.userapi.updateAdress2(this.user.id , formData) .subscribe(
@@ -102,7 +103,7 @@ data:any;
   }
 
 
-  successAlert()
+ /* successAlert()
   {
     Swal.fire({
     position: 'top-end',
@@ -111,7 +112,7 @@ data:any;
     showConfirmButton: false,
     timer: 1500
   }) ;
-}
+}*/
 
   breadcrumb = [ {  title: 'My Profile',subTitle: 'User Panel'}]
 
@@ -134,7 +135,7 @@ data:any;
   {
       this.auth.changepassword(this.passwordForm.value).
       subscribe( response => {
-        this.successAlert() ;
+     //   this.successAlert() ;
         console.log(response);
       },
       error => {
@@ -143,22 +144,6 @@ data:any;
   }
 
 
-  onUpload() {
-   /* const formData = new FormData();
-    formData.append('file', this.fileData);
-
-    const isUploading = true;
-
-    this.http.put("http://127.0.0.1:8000/api/auth/upload-image", formData , {  reportProgress: true,
-    observe: 'events'  } ).subscribe(events => {
-      if(events.type == HttpEventType.UploadProgress) {
-          console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
-      } else if(events.type === HttpEventType.Response) {
-          console.log(events);
-
-  });*/
 
 
-
-}
 }

@@ -25,7 +25,7 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   get(id) {
-    return this.http.get(`${baseUrl}/${id}`);
+    return this.http.get(baseUrl+'/'+id);
   }
 
   note(id , data) {

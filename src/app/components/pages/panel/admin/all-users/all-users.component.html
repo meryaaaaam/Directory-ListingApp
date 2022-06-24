@@ -17,7 +17,7 @@
 
   <!-- Start -->
   <div class="bookings-listings-box">
-    <h3>Booking Requests</h3>
+    <h3>Liste des utilisateurs</h3>
     <p-toast></p-toast>
 
     <div class="table-responsive">
@@ -34,10 +34,10 @@
           <tr *ngFor="let Content of users;">
 
             <td class="name">
-              <img *ngIf="Content.logo" [src]="Content.logo" alt="image">
+              <img *ngIf="Content.logo" src={{url}}{{Content.logo}} alt="image">
               <img *ngIf="!Content.logo" [src]="logo" alt="image">
               <div class="info">
-                <span *ngIf="Content.role === 'Pro'">{{ Content.firstname }} {{ Content.lastname }} {{Content.status}} </span> <span  class="bookings-status"></span>
+                <span *ngIf="Content.role === 'Pro'">{{ Content.firstname }} {{ Content.lastname }}  </span> <span  class="bookings-status"></span>
                 <span *ngIf="Content.role === 'Company'">{{ Content.companyname }} </span>
 
                 <ul>
@@ -48,7 +48,7 @@
                 <li>
                   <i class='bx bx-map'></i>
                   {{ Content.adresse }}
-                  
+
                 </li>
               </ul>
 
@@ -59,8 +59,9 @@
 
             <td class="details">
               <ng-container *ngIf="Content.role === 'Pro';else or">
-                <h4> 
+                <h4>
                   </h4>
+
                <!-- <ng-template #or>
                   <span class="bookings-status ">Preding</span>
                 </ng-template>-->
@@ -103,7 +104,11 @@
                     <span>CV: </span>
                     {{ Content.CV }}
                   </li>
-
+                  <li>
+                    <i class='bx pi-comment'></i>
+                    <span>Note : </span>
+                    {{ Content.note }}
+                  </li>
 
                 </ul>
 
@@ -171,6 +176,13 @@
                     </li>
 
 
+                    <li>
+                      <i class='bx pi-comment'></i>
+                      <span>Note : </span>
+                      {{ Content.note }}
+                    </li>
+
+
                   </ul>
 
 
@@ -190,7 +202,7 @@
                     <div class="mb-3">
 
                       <div class="input-group">
-                        <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="note" name="note" />
+                        <input id="typeahead-basic" type="text" placeholder="hh"class="form-control" [(ngModel)]="note" name="note" value={{note}} />
                       </div>
                     </div>
                     <div class="modal-footer">
@@ -198,7 +210,7 @@
                     </div>
                   </form>
                 </div>
-                
+
               </ng-template>
 
 

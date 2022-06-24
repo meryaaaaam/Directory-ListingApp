@@ -119,25 +119,20 @@
 
 
 
-            <div class="col-lg-8 col-md-8 pl-3">
-              <div class="form-group  ">
-                <label><i class='bx bx-duplicate'></i> Province</label>
-                <p-dropdown [options]="states" name="users.province_id" [(ngModel)]="users.province_id"
-                  optionLabel="name" optionValue="id" [showClear]="true" placeholder="Selectionner une province">
-                  <ng-template pTemplate="selectedItem">
-                    <div class="country-item country-item-value" *ngIf="users.province_id">
-                      <div>{{ users.province_id.id }}</div>
-                    </div>
-                  </ng-template>
-                  <ng-template let-c pTemplate="name">
-                    <div class="country-item">
-                      <div>{{ c.name }}</div>
-                    </div>
-                  </ng-template>
-                </p-dropdown>
+
+            <div class="col-xl-8 col-lg-12 col-md-12">
+              <div class="form-group">
+                <label>Selectionner province</label>
+
+
+
+                <select [(ngModel)]="users.province_id" name="user.province_id">
+                  <option [ngValue]="null" disabled> Province </option>
+                  <option *ngFor="let m of states" selected [ngValue]=m.id>{{ m.name }}</option>
+
+                </select>
               </div>
             </div>
-
 
             <div class="col-xl-12 col-lg-12 col-md-12">
               <div class="sidebar-widgets">
@@ -223,7 +218,7 @@
               <div class="form-group">
                 <label>CV</label>
                 <div class="row">
-                    <input type="file" name="logo" id="file" class="form-control" (change)="fileEvent($event)" /> 
+                    <input type="file" name="logo" id="file" class="form-control" (change)="fileEvent($event)" />
                 </div>
               </div>
             </div>

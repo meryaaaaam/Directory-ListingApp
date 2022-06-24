@@ -15,9 +15,14 @@ import { CategoryService } from 'src/app/shared/api/category.service';
 import { UploadService } from 'src/app/shared/api/upload.service';
 import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 
 
+export class result {
+
+  subs: any[];
+
+}
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -26,12 +31,16 @@ import Swal from 'sweetalert2';
 })
 export class ProfileComponent implements OnInit {
 
+            subcategories : result = new result ;
             filedata: any;
             data :any;
             Disabled: boolean;
             categories: Object;
             sub: any;
             filteredSub: any[]; states : any;
+            searchsub : Search = new Search ;
+            result : any ;
+            selecteds: any;
 
 
 
@@ -54,6 +63,7 @@ export class ProfileComponent implements OnInit {
 
           filteredCountries: any[];
           filteredServices: any[];
+          subArray : any[] ;
 
 
             serach = new Search ;
@@ -61,8 +71,8 @@ export class ProfileComponent implements OnInit {
           //selectedCountry: Country;
           selectedCountry: string;
           selcttedService : string;
-          selcttedcategory : string;
-          selcttedsubcategory : string;
+          selcttedcategory : any;
+          selcttedsubcategory : any;
 
           countries: any[];
           services : any;
@@ -88,9 +98,8 @@ export class ProfileComponent implements OnInit {
 
 ];
 
+   searchs: FormGroup;
 
-
-  selecteds: any;
 
  public userForm: FormGroup;
   constructor(public auth: AuthService ,
@@ -103,16 +112,23 @@ export class ProfileComponent implements OnInit {
     private messageService: MessageService
      )
   {
+
+    this.searchs = this.fb.group({
+
+      subs: this.subcategories,
+
+    });
+
     this.notifier = notifierService;
 
     this.auth.Profile().subscribe((data: any)=> {this.user = data ;   console.log(this.user.role)});
 
-    this.auth.profileUser().subscribe(data=>  {this.users = data ; console.log(this.users = data ) ; 
-      
+    this.auth.profileUser().subscribe(data=>  {this.users = data ; console.log(this.users = data ) ;
+
       if (this.user.logo)
       {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
       else {this.image = 'assets/img/Logo_e.jpg'}
-  
+
     }) ;
 
 
@@ -171,19 +187,19 @@ export class ProfileComponent implements OnInit {
   showSuccess(detail) {
     this.messageService.add({severity:'success', summary: 'Success', detail: detail});
   }
-  
+
   showInfo(detail) {
     this.messageService.add({severity:'info', summary: 'Info', detail: detail});
   }
-  
+
   showWarn(detail) {
     this.messageService.add({severity:'warn', summary: 'Warn', detail: detail});
   }
-  
+
   showError(detail) {
     this.messageService.add({severity:'error', summary: 'Error', detail: detail});
   }
-  
+  qs ;
   breadcrumb = [ {  title: 'My Profile',subTitle: 'User Panel'}]
 
   ngOnInit():void  {
@@ -196,7 +212,12 @@ export class ProfileComponent implements OnInit {
 
       },) ;
 
-
+      this.category.getservBysub(["gestion"]).subscribe(
+        data => {
+            this.qs = data ;
+            console.log(this.qs);
+        }
+      )
 
 
 
@@ -204,6 +225,7 @@ export class ProfileComponent implements OnInit {
 
 fileEvent(e){
   this.filedata = e.target.files[0];
+ // this.filedata.name = "http://localhost:8000/storage/image/"+this.filedata.name ;
   console.log(this.filedata);
 }
 
@@ -234,16 +256,6 @@ updateprofile2()
 
   }
 
-  successAlert()
-  {
-    Swal.fire({
-    position: 'top-end',
-    icon: 'success',
-    title: 'Password change successfully',
-    showConfirmButton: false,
-    timer: 1500
-  }) ;
-}
 
 
 
@@ -253,9 +265,9 @@ updateprofile2()
   let currentuser = this.users ;
    const formData =new FormData();
     formData.append("img",this.filedata,this.filedata.name);
-    
-    
-    
+
+      console.log(this.selectedServices) ;
+
     this.userapi.updateAdress(this.user.id , currentuser) .subscribe(
       response => {
         this.notifier.notify('success', 'User updated successfully');
@@ -280,7 +292,7 @@ updateprofile2()
   {
       this.auth.changepassword(this.passwordForm.value).
       subscribe( response => {
-        this.successAlert() ;
+        this.notifier.notify('success', 'password updated successfully');
         console.log(response);
       },
       error => {
@@ -289,24 +301,7 @@ updateprofile2()
   }
 
 
-//   onUpload() {
-//     const formData = new FormData();
-//     formData.append('file', this.fileData);
 
-//     const isUploading = true;
-
-//     this.http.put("http://127.0.0.1:8000/api/auth/upload-image", formData , {  reportProgress: true,
-//     observe: 'events'  } ).subscribe(events => {
-//       if(events.type == HttpEventType.UploadProgress) {
-//           console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
-//       } else if(events.type === HttpEventType.Response) {
-//           console.log(events);
-//       }
-//   });
-
-
-
-// }
 
 filteredGroups : any[] ;
 
@@ -346,31 +341,30 @@ filterGroupedServices(event) {
 
 
 
-filterServices(event) {
-  //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-  let filtered : any[] = [];
-  let query = event.query;
-  for(let i = 0; i < this.services.length; i++) {
-      let serv = this.services[i];
-      console.log(serv) ;
-      if (serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-          filtered.push(serv);} }
 
 
-       this.filteredServices = filtered;
+filterSubCategories(event) {
 
+let error  ;
+ this.searchsub.label = this.selcttedcategory.label ;
+ //console.log( this.searchsub) ;
 
+ this.category.getSubByCat( this.selcttedcategory.label).subscribe(
+    response => {
+      this.result= response ;
+        // console.log( this.result) ;
+     },
+     error => {error = error.errors;}
 
-      }
+    ) ;
 
-
-      filterSubCategories(event) {
+      //  console.log(this.sub);
         //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
         let filtered : any[] = [];
         let query = event.query;
-        for(let i = 0; i < this.sub.length; i++) {
-            let sub = this.sub[i];
-            console.log(sub) ;
+        for(let i = 0; i < this.result.length; i++) {
+            let sub = this.result[i];
+           // console.log(sub) ;
             if (sub.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
                 filtered.push(sub);} }
 
@@ -380,6 +374,50 @@ filterServices(event) {
 
 
             }
+
+
+            filterServices(event) {
+              console.log( this.selcttedsubcategory) ;
+              let sub ; let result : any[] = [] ;
+              for(let i = 0; i < this.selcttedsubcategory.length; i++) {
+                  sub = this.selcttedsubcategory[i].label ;
+                  result.push(sub) ;
+              }
+                this.subArray = result;
+                this.subcategories.subs= this.subArray ;
+                console.log(this.subcategories) ;
+
+                this.data = this.searchs.value ;
+                this.data.subs = this.subcategories.subs ;
+                console.log( this.subcategories.subs) ;
+
+                let x ;
+                x= this.subcategories.subs ;
+                let f ;
+                this.category.getservBysub(result).subscribe(
+                  response => {
+                    f= response ;
+                      console.log( f) ;
+                   },
+                   error => {error = error.errors;}
+
+                  ) ;
+
+              //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+              let filtered : any[] = [];
+              let query = event.query;
+              for(let i = 0; i < this.services.length; i++) {
+                  let serv = this.services[i];
+                 // console.log(serv) ;
+                  if (serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                      filtered.push(serv);} }
+
+
+                   this.filteredServices = filtered;
+
+
+
+                  }
 
 
 }

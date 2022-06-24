@@ -7,7 +7,7 @@ import { User } from 'src/app/models/user/user';
 import { UploadService } from 'src/app/shared/api/upload.service';
 import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 import { MessageService } from 'primeng/api';
 
 
@@ -27,9 +27,9 @@ export class AllUsersComponent implements OnInit {
   user: User = new User;
   data: any;
   closeResult = '';
+  userinfo : any  ;
 
-
-
+  url : any  ;
   constructor(public auth: AuthService ,
     public userapi : UserService ,
     public router: Router ,
@@ -38,7 +38,7 @@ export class AllUsersComponent implements OnInit {
     private messageService: MessageService
      )
      {  this.userapi.getAllListUser().subscribe( data=>
-      {this.users = data
+      {this.users = data ; console.log(this.users);
 
 
             if (this.users.role == 'Pro') { this.name = this.users.firstname + ' ' + this.users.lastname; }
@@ -47,12 +47,13 @@ export class AllUsersComponent implements OnInit {
 
             }
     );
-    
+
   }
 
   ngOnInit(): void {
     this.logo = "assets/img/logo/default.png";
-    
+    this.url="http://localhost:8000/storage/image/" ;
+
   }
 
   breadcrumb = [
@@ -179,17 +180,22 @@ showError(detail) {
 
 
   open(content , id) {
+    let message ;
+
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
         console.log(id , this.note) ;
-       this.users.bio = this.note ;
-       //console.log(this.users.bio);
-        this.userapi.note(id , this.note).subscribe(
-          data =>{ 
-          console.log(this.users[id-2].bio)}
 
-        );
-        //console.log(this.user.bio);
-     
+      //  console.log(this.users); // Liste des utilisatuer
+
+         /*this.userinfo =  this.userapi.get(id).subscribe(
+          data=>{  this.userinfo = data ; console.log(this.userinfo) ;}  ) ; // Get user By id => utilisatuer selectionné (qui va lui envoyé une note )
+          this.note= this.userinfo.note ;*/
+         this.user.note = this.note ;
+         console.log(this.user) ;
+        this.userapi.note(id , this.user).subscribe(
+          data =>{ message = data; console.log(message) }  );
+        //console.log(this.user.bio);*/
+
 
 
       this.closeResult = `Closed with: ${result}`;

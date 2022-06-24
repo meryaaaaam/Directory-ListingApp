@@ -11,7 +11,7 @@ import { CategoryService } from 'src/app/shared/api/category.service';
 import { UploadService } from 'src/app/shared/api/upload.service';
 import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
-import Swal from 'sweetalert2';
+//import Swal from 'sweetalert2';
 import { FilterService, MessageService, SelectItem, SelectItemGroup } from 'primeng/api';
 import { Search } from 'src/app/models/service/search';
 import { Adress } from 'src/app/models/user/adress';
@@ -26,7 +26,7 @@ import { State } from 'src/app/models/user/state';
 })
 export class ProfileComponent implements OnInit {
   uploadedFiles: any[] = [];
-logo:any;
+  logo:any;
   fileData: File = null;
   Disabled: boolean;
   categories: any;
@@ -36,6 +36,9 @@ logo:any;
   type: any;
   datastates : any ;
   states : State[];
+  searchsub : Search;
+  searchcat : Search  ;
+  searchserv : Search ;
 
 
   fileProgress(fileInput: any) {
@@ -66,7 +69,7 @@ logo:any;
  //selectedCountry: Country;
  selectedCountry: string;
  selcttedService : string;
- selcttedcategory : string;
+ selcttedcategory : any;
  selcttedsubcategory : string;
 
  countries: any[];
@@ -200,6 +203,7 @@ logo:any;
       }) ;
 
 
+
       this.userapi.getAllStates().subscribe(
         response => {
           this.datastates = response ;
@@ -231,16 +235,7 @@ showError(detail) {
   this.messageService.add({severity:'error', summary: 'Error', detail: detail});
 }
 
-  successAlert()
-  {
-    Swal.fire({
-    position: 'top-end',
-    icon: 'success',
-    title: 'Password change successfully',
-    showConfirmButton: false,
-    timer: 1500
-  }) ;
-}
+
 
 filedata:any;
 
@@ -251,12 +246,9 @@ fileEvent(e){
 
   updateprofile()
   {
-   // const data : any = {name: this.user.username , email:this.user.email}
+
    this.currentuser = this.user ;
-   //const formData =new FormData();
-  // formData.append("img",this.filedata,this.filedata.name);
-  // console.log(formData);
-  //  this.currentuser.img=formData ;
+
     this.userapi.updateAdress(this.user.id , this.currentuser) .subscribe(
       response => {
         let c :any ;
@@ -280,13 +272,14 @@ fileEvent(e){
   {
       this.auth.changepassword(this.passwordForm.value).
       subscribe( response => {
-        this.successAlert() ;
+       // this.successAlert() ;
         console.log(response);
       },
       error => {
         console.log(error);
       });
   }
+
 
 
 updateprofile2()
@@ -302,17 +295,21 @@ updateprofile2()
         let c :any ;
         // console.log(response);
          this.data= response ;
+         c=this.data.message ;
          console.log(this.data);
           if(!this.data)
-         {this.showError(c.message) ;}
+         {this.showError(c) ;}
          else {
-          this.showSuccess(c.message) ;          }
+          this.showSuccess(c) ;          }
 
       },
       error => {
         console.log(error);
 
-      });
+      },
+      () => {  window.location.reload();}
+
+      );
 
   }
 
@@ -349,13 +346,31 @@ filterGroupedServices(event) {
   }
   console.log(query) ;
   this.filteredGroups = filteredGroups;
+  console.log(query) ;
 }
 
 
 
-
-
 filterServices(event) {
+  //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+  let filtered : any[] = [];
+  let query = event.query;
+  for(let i = 0; i < this.services.length; i++) {
+      let serv = this.services[i];
+      console.log(serv) ;
+      if (serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(serv);} }
+
+
+       this.filteredServices = filtered;
+
+
+
+      }
+
+
+
+/*filterServices(event) {
   //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
   let filtered : any[] = [];
   let query = event.query;
@@ -375,33 +390,36 @@ filterServices(event) {
 
 
 
-      }
+      }*/
 
 
-      filterSubCategories(event) {
-        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+filterSubCategories(event) {
+let x ;
+ this.selcttedcategory ;
+
+ this.category.getSubByCat( this.selcttedcategory.label).subscribe(
+  response => {
+     x = response ;
+    console.log( x) ;
+  }) ;
+  //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
         let filtered : any[] = [];
         let query = event.query;
         for(let i = 0; i < this.sub.length; i++) {
             let sub = this.sub[i];
-            console.log(sub) ;
+           // console.log(sub) ;
             if (sub.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
                 filtered.push(sub);} }
-
-
              this.filteredSub = filtered;
-
-
-
             }
 
 
-      testsearch(event)
+      /*testsearch(event)
       {
         let query = event.query;
         this.category.serachService('a').subscribe(
           data=>{ console.log(data);} )
-      }
+      }*/
 
 
 }
