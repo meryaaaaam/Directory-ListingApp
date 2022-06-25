@@ -281,7 +281,19 @@
         </form>
       </div>
 
+      <br>
+      <div class="my-profile-box ">
+        <h3>Produit et services</h3>
 
+        <form>
+          <div class="row">
+            <p-listbox [options]="userservice"  optionLabel="label"></p-listbox>
+          </div>
+        </form>
+
+
+
+    </div>
 
     </div>
 
@@ -307,7 +319,27 @@
 
 
 
-          <div class="col-lg-12 col-md-12 p-0">
+          <div class="col-lg-12 col-md-12 p-0"*ngIf="userservice">
+            <div class="form-group  ">
+              <label><i class='bx bx-duplicate'></i> categories</label>
+              <p-dropdown [options]="categories" name="selcttedcategory" [(ngModel)]="selcttedcategory" [disabled]="true"
+                optionLabel="label" [filter]="true" filterBy="label" [showClear]="true" placeholder="Select a Category">
+                <ng-template pTemplate="selectedItem">
+                  <div class="country-item country-item-value" *ngIf="selcttedcategory">
+                    <div>{{ selcttedcategory.label }}</div>
+                  </div>
+                </ng-template>
+                <ng-template let-c pTemplate="label">
+                  <div class="country-item">
+                    <div>{{ c.label }}</div>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+            </div>
+          </div>
+
+
+          <div class="col-lg-12 col-md-12 p-0"*ngIf="!userservice">
             <div class="form-group  ">
               <label><i class='bx bx-duplicate'></i> categories</label>
               <p-dropdown [options]="categories" name="selcttedcategory" [(ngModel)]="selcttedcategory"
@@ -327,7 +359,7 @@
           </div>
 
 
-{{selcttedcategory.label|json}}
+
 
           <div class="col-lg-12 col-md-12 p-0" *ngIf="selcttedcategory">
             <div class="form-group  ">
@@ -345,7 +377,7 @@
             <div class="form-group  ">
               <label><i class='bx bx-duplicate'></i> Services</label>
               <span class="p-fluid">
-                <p-autoComplete [(ngModel)]="selectedServices" [suggestions]="filteredServices"
+                <p-autoComplete [(ngModel)]="selectedServices" [suggestions]="filteredServices" name="selectedServices"
                   (completeMethod)="filterServices($event)" field="label" [multiple]="true" [dropdown]="true">
                 </p-autoComplete>
               </span>
@@ -358,11 +390,18 @@
 
 
 
-          <div class="col-lg-12 col-md-12">
+          <div class="col-lg-12 col-md-12" *ngIf="userservice">
             <div class="form-group">
-              <button type="submit" (click)="updateprofile()">Save Change</button>
+              <button type="button" disabled >Save Change</button>
             </div>
           </div>
+
+          <div class="col-lg-12 col-md-12" *ngIf="!userservice">
+            <div class="form-group">
+              <button type="submit"  (click)="AddServices()">Save Change</button>
+            </div>
+          </div>
+
 
         </form>
       </div>

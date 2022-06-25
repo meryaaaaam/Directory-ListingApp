@@ -18,6 +18,13 @@ import { Adress } from 'src/app/models/user/adress';
 import { UserAdress } from 'src/app/models/user/useradress';
 import { State } from 'src/app/models/user/state';
 
+
+export class result {
+
+  user_id: any;
+  services: any[];
+
+}
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -68,9 +75,9 @@ export class ProfileComponent implements OnInit {
 
  //selectedCountry: Country;
  selectedCountry: string;
- selcttedService : string;
+ selcttedService : any;
  selcttedcategory : any;
- selcttedsubcategory : string;
+ selcttedsubcategory : any;
 
  countries: any[];
  services : any;
@@ -85,6 +92,18 @@ export class ProfileComponent implements OnInit {
  groupedServices: SelectItemGroup[];
  groupeddServices: any[];
 
+
+ result : any ;
+ servresult : any ;
+ selecteds: any;
+ Services : any;
+ ServicesResult : result = new result ;
+
+ userservice : any;
+
+
+
+
  public line = [
           {title:"Affaires"},
           {title:"Résidence"},
@@ -95,7 +114,6 @@ export class ProfileComponent implements OnInit {
 
 
 
-  selecteds: any;
 
  public userForm: FormGroup;
   constructor(public auth: AuthService ,
@@ -196,19 +214,28 @@ export class ProfileComponent implements OnInit {
     this.category.getAllCategories().subscribe(
       response => {
         this.categories = response ;
-        console.log(this.categories) ;
+       // console.log(this.categories) ;
 
 
 
       }) ;
 
+      this.auth.Profile().subscribe(
+        (data: any)=> {
+          this.user = data ;
+          this.userapi.getservice(this.user.id).subscribe(
+            data => {this.userservice = data ; }
+          )
 
+
+        //  console.log(this.user.role)
+        });
 
       this.userapi.getAllStates().subscribe(
         response => {
           this.datastates = response ;
           this.states = this.datastates  ;
-          console.log(this.states)  ;
+      //    console.log(this.states)  ;
 
         }) ;
 
@@ -316,7 +343,7 @@ updateprofile2()
 
 filteredGroups : any[] ;
 
-filterGroupedServices(event) {
+/*filterGroupedServices(event) {
   let query :any;
   let tes = new Search ;
   tes.label="a" ;
@@ -370,27 +397,6 @@ filterServices(event) {
 
 
 
-/*filterServices(event) {
-  //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-  let filtered : any[] = [];
-  let query = event.query;
-
-  this.category.serachService(query).subscribe(
-    data=>{ this.search = data ;console.log("data search  "+ this.search.label);} )
-
-   for(let i = 0; i < this.search.length; i++) {
-      let serv = this.search[i];
-      console.log(this.search) ;
-      //if (serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(serv);
-      //} }
-    }
-
-       this.filteredServices = filtered;   console.log("feeeeeeeeeee  "+this.filteredServices) ;
-
-
-
-      }*/
 
 
 filterSubCategories(event) {
@@ -411,15 +417,102 @@ let x ;
             if (sub.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
                 filtered.push(sub);} }
              this.filteredSub = filtered;
+
             }
 
+*/
 
-      /*testsearch(event)
-      {
-        let query = event.query;
-        this.category.serachService('a').subscribe(
-          data=>{ console.log(data);} )
-      }*/
+
+filterSubCategories(event) {
+
+  let error  ;
+  // console.log( this.selcttedcategory) ;
+
+   this.category.getSubByCat( this.selcttedcategory.label).subscribe(
+      response => {
+        this.result= response ;
+       //  console.log( this.result) ;
+       },
+       error => {error = error.errors;}
+
+      ) ;
+
+        //  console.log(this.sub);
+          //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+          let filtered : any[] = [];
+          let query = event.query;
+          for(let i = 0; i < this.result.length; i++) {
+              let sub = this.result[i];
+             // console.log(sub) ;
+              if (sub.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                  filtered.push(sub);} }
+
+
+               this.filteredSub = filtered;
+
+
+
+              }
+
+
+              filterServices(event) {
+                console.log( this.selcttedsubcategory) ;
+                let sub ; let result : any[] = [] ;
+                for(let i = 0; i < this.selcttedsubcategory.length; i++) {
+                    sub = this.selcttedsubcategory[i].label ;
+                    result.push(sub) ;
+                }
+
+                  this.category.getservBysub(result).subscribe(
+                    response => {
+                      this.servresult= response ;
+                     },
+                     error => {error = error.errors;}
+
+                    ) ;
+
+                //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+                let filtered : any[] = [];
+                let query = event.query;
+                for(let i = 0; i <  this.servresult.length; i++) {
+                    let serv =  this.servresult[i];
+                   // console.log(serv) ;
+                    if (serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                        filtered.push(serv);} }
+                     this.filteredServices = filtered;
+                    }
+
+
+        AddServices()
+        {
+          let message ;
+          //console.log(this.selectedServices) ;
+          let result : any[] = [];
+
+          for(let i = 0; i <  this.selectedServices.length; i++) {
+              let serv =  this.selectedServices[i].label;
+             // console.log(serv) ;
+              result.push(serv)
+               this.Services = result;
+           }
+
+
+             this.ServicesResult.user_id =this.user.id ;
+             this.ServicesResult.services =this.Services ;
+             // console.log(this.ServicesResult) ;
+              this.userapi.addservices(this.ServicesResult).subscribe(
+                data=> {message = data ;
+                  this.showSuccess(message.message) ;
+
+                 // console.log(message)
+                },
+                error => {
+                      this.showError(message.message) ;
+                }
+
+              )
+         }
+
 
 
 }

@@ -174,7 +174,7 @@
 
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-4 p-0">
-                                    <div class="listings-image" style="background-image: url({{Content.logo}});">
+                                    <div class="listings-image" style="background-image: url({{image}}{{Content.logo}});">
 
                                          <img [src]="Content.mainImg" alt="image"  href="/single-listings/{{Content.id}}">
                                        <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
@@ -222,8 +222,8 @@
                         <div *ngIf="Content.role === 'Company'"class="single-listings-item">
                           <div class="row m-0">
                               <div class="col-lg-4 col-md-4 p-0">
-                                  <div class="listings-image" style="background-image: url({{Content.logo}});">
-                                      <img [src]="Content.logos" alt="image" href="/single-listings/{{Content.id}}">
+                                  <div class="listings-image" style="background-image: url({{image}}{{Content.logo}});">
+                                      <img src={{image}}{{Content.logo}} alt="image" href="/single-listings/{{Content.id}}">
                                      <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
                                       <!--  <a routerLink="/{{Content.categoryLink}}" class="category"><i class="flaticon-cooking"></i></a>-->
                                       <!--<a routerLink="/single-listings/{{Content.id}}" class="link-btn"> plus détails </a>-->

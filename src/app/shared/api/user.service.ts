@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 
 
 const baseUrl = "http://127.0.0.1:8000/api/users" ;
+const url = "http://127.0.0.1:8000/api/" ;
 const model = "http://127.0.0.1:8000/api/makes" ;
 const Active = "http://127.0.0.1:8000/api/userss/isActive" ;
 const adresse = "http://127.0.0.1:8000/api/userss/update" ;
@@ -124,4 +125,13 @@ export class UserService {
     const headers = new HttpHeaders();
     return this.http.post(`http://127.0.0.1:8000/api/auth/upload-image/${id}`,data,{headers:headers});
   }
+
+
+  addservices(data)
+  {
+   // http://127.0.0.1:8000/api/userservices
+    return this.http.post(url +"userservices" , data) ;
+  }
+  getservice(id)
+  {  return this.http.get(url +"userservices/"+id) ;}
   }

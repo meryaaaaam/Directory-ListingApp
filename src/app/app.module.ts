@@ -111,7 +111,7 @@ import { ConditionpageComponent } from './components/pages/conditionpage/conditi
 
 //import { ToastrModule } from 'ngx-toastr';
 
-
+import {ListboxModule} from 'primeng/listbox';
 
 
 
@@ -208,6 +208,7 @@ import { ConditionpageComponent } from './components/pages/conditionpage/conditi
     MatCheckboxModule,
     NgxPaginationModule,
     SweetAlert2Module, NotifierModule,AutoCompleteModule,InputMaskModule,
+    ListboxModule,
 
     ToastModule,TooltipModule,
     FileUploadModule,

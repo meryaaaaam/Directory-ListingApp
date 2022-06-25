@@ -17,6 +17,7 @@ export class ListingComponent implements OnInit {
 
   label : any ;
   search : any ;
+  image ;
 
   constructor( private route: ActivatedRoute, public categories: CategoryService , private s : SearchService)
   {
@@ -32,7 +33,7 @@ export class ListingComponent implements OnInit {
         },
         error=> error.errors
       )
-
+      this.image = 'http://localhost:8000/storage/image/';
   }
 
 

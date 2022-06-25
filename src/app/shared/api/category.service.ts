@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Search } from 'src/app/models/service/search';
 
@@ -24,7 +24,8 @@ export class CategoryService {
 
   getservBysub(data )
   {
-    return this.http.get("http://127.0.0.1:8000/api/search-servicesbysub", data);
+    let params = new HttpParams().set('sub',data );
+    return this.http.get("http://127.0.0.1:8000/api/search-services-bysub", {params: params });
 
   }
 
