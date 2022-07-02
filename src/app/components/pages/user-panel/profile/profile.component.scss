@@ -552,7 +552,7 @@
         }
     }
     .profile-box {
-        max-width: 300px;
+        max-width: 500px;
         position: relative;
         border-radius: 5px;
 
@@ -562,8 +562,9 @@
         .file-upload {
             display: inline-block;
             position: absolute;
-            left: 15px;
+            left: 7px;
             bottom: 15px;
+            width: 440px;
 
             .inputfile {
                 width: 0.1px;

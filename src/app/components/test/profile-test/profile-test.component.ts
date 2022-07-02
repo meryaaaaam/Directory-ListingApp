@@ -4,7 +4,7 @@ import { FilterService } from 'primeng/api';
 import { element } from 'protractor';
 import { Search } from 'src/app/models/service/search';
 import { Service } from 'src/app/models/service/service';
-import { CategoryService } from 'src/app/shared/api/category.service';
+import { CategoryService } from 'src/app/shared/api/category1.service';
 import { SearchService } from 'src/app/shared/api/search.service';
 
 

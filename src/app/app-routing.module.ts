@@ -39,12 +39,12 @@ import { TopPlaceComponent } from './components/pages/top-place/top-place.compon
 import { VerticalListingsFullWidthComponent } from './components/pages/vertical-listings-full-width/vertical-listings-full-width.component';
 import { VerticalListingsLeftSidebarComponent } from './components/pages/vertical-listings-left-sidebar/vertical-listings-left-sidebar.component';
 import { VerticalListingsRightSidebarComponent } from './components/pages/vertical-listings-right-sidebar/vertical-listings-right-sidebar.component';
-import { ListingComponent } from './components/pages/listing/listing.component';
+import { ListingComponent } from './components/pages/listing/listing1.component';
 import { ProfileComponent } from './components/pages/user-panel/profile/profile.component';
 
 
-import { ProfileComponent as pro} from './components/pages/user-panel/pro/profile/profile.component' ;
-import { ProfileComponent as company} from './components/pages/user-panel/company/profile/profile.component' ;
+import { ProfileComponent as pro} from './components/pages/user-panel/pro/profile/profile1.component' ;
+import { ProfileComponent as company} from './components/pages/user-panel/company/profile/profile1.component' ;
 
 import { AuthGuard } from './services/guard/AuthGuard.guard';
 import { ProfileTestComponent } from './components/test/profile-test/profile-test.component';

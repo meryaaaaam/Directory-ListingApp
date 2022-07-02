@@ -9,6 +9,7 @@ import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 //import Swal from 'sweetalert2';
 import { MessageService } from 'primeng/api';
+import { CategoryService } from 'src/app/shared/api/category1.service';
 
 
 @Component({
@@ -28,12 +29,16 @@ export class AllUsersComponent implements OnInit {
   data: any;
   closeResult = '';
   userinfo : any  ;
+  services : any;
+  sub: any;
+  states : any;
 
   url : any  ;
   constructor(public auth: AuthService ,
     public userapi : UserService ,
     public router: Router ,
     public fb: FormBuilder,
+    public category : CategoryService,
     public upload : UploadService,private http: HttpClient,private modalService: NgbModal ,
     private messageService: MessageService
      )
@@ -47,6 +52,20 @@ export class AllUsersComponent implements OnInit {
 
             }
     );
+
+    this.category.getAllServices() .subscribe(
+      response => {  this.services = response ;  },
+      error => { console.log(error);  });
+
+      this.category.getAllSubCategory() .subscribe(
+        response => {  this.sub = response ;  },
+        error => { console.log(error);  });
+
+        this.userapi.getAllStates().subscribe(
+          response => {
+            this.states = response ;
+
+          }) ;
 
   }
 
@@ -153,30 +172,6 @@ showError(detail) {
       data => { console.log(data); this.showSuccess('email de rejet a été envoyer avec succes') ;},
       error => console.error(error));
   }
-
-
-
-
-
-
-  // SendMail(id){ //Email Send Button Click Function
-  //   this.userapi.get(id).subscribe( response => {
-  //     this.userapi.sendMails(id,this.user).subscribe(data => {
-  //         Swal.fire({
-  //           title: 'Hurray!!',
-  //           text:   data['message'],
-  //           icon: 'success'
-  //         });
-  //     })
-  //   }
-  //     , error => console.error(error));
-  // }
-
-  // this.userapi.sendMails(id).subscribe(data => {
-  //   Swal.fire({
-  //     title: 'Hurray!!',
-  //     text:   data['message'],
-  //     icon: 'success'
 
 
   open(content , id) {
