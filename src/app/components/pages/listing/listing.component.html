@@ -6,30 +6,57 @@
         <h2>{{Content.title}}</h2>
         <form>
             <div class="row m-0 align-items-center">
-                <div class="col-lg-4 col-md-12 p-0">
+                <!-- col-lg-3 col-md-12 -->
+                <div class="col p-0">
                     <div class="form-group">
                         <label><i class="flaticon-search"></i></label>
                         <input type="text" class="form-control" placeholder="Que cherchez-vous?">
                     </div>
                 </div>
-
-                <div class="col-lg-3 col-md-6 p-0">
+                <!-- col-lg-3 col-md-6 p-0 -->
+                <div class="col p-0">
                     <div class="form-group">
                         <label><i class="flaticon-pin"></i></label>
                         <input type="text" class="form-control" placeholder="Emplacement">
                     </div>
                 </div>
+                <!-- col-lg-3 col-md-6 -->
+                <div class="col-4 p-0">
+                    <div class="form-group  ">
+                      <!-- <label><i class='bx bx-duplicate'></i> categories</label> -->
+                      <p-dropdown [options]="categorie" name="selcttedcategory" [(ngModel)]="selcttedcategory"
+                        optionLabel="label" [filter]="true" filterBy="label" [showClear]="true" placeholder="Select a Category" >
+                        <!-- <ng-template pTemplate="caption">
+                            <div style="text-align: right">        
+                                <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                                <input type="text" pInputText size="50" placeholder="Global Filter" (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                            </div>
+                        </ng-template> -->
+                        <!-- <ng-template pTemplate="selectedItem">
+                          <div class="country-item country-item-value" *ngIf="selcttedcategory">
+                            <div>{{ selcttedcategory.label }}</div>
+                          </div>
+                        </ng-template> -->
+                        <!-- <ng-template let-c pTemplate="label">
+                          <div class="country-item">
+                            <div>{{ c.label }}</div>
+                          </div>
+                        </ng-template> -->
+                      </p-dropdown>
+                    </div>
+                  </div>
 
-                <div class="col-lg-3 col-md-6 p-0">
+                <!-- <div class="col-lg-3 col-md-6 p-0">
                     <div class="form-group category-select">
                         <label><i class="flaticon-category"></i></label>
-                        <ngx-select-dropdown (searchChange)="searchChange($event)" name="options.label" tabindex="0" [multiple]="false" [(ngModel)]="options.label" [config]="config" [options]="options"></ngx-select-dropdown>
+                        <ngx-select-dropdown (searchChange)="searchChange($event)" name="options.label" tabindex="0" [multiple]="false" 
+                         [config]="config" [options]="options" placeholder="Select a Category"></ngx-select-dropdown >
                     </div>
-                </div>
-
-                <div class="col-lg-2 col-md-12 p-0">
+                </div> -->
+                <!-- col-lg-2 col-md-6 p-3 -->
+                <div class="col p-3">
                     <div class="submit-btn">
-                        <button type="submit">Chercher</button>
+                        <button type="submit" (click)="search2()">Chercher</button>
                     </div>
                 </div>
             </div>
@@ -44,99 +71,31 @@
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <aside class="listings-widget-area">
-                    <section class="widget widget_filters">
-
-
-
-                    </section>
-
-                    <section class="widget widget_categories">
-                        <h3 class="widget-title">Categories</h3>
-
-                        <ul>
-                            <li *ngFor="let x of options;">
-                                <input id="categories1" type="checkbox" [(ngModel)]="label">
-                                <label for="categories1">{{x.label}}</label>
-                            </li>
-
-                        </ul>
-                    </section>
-
+                    <!-- <section class="widget widget_filters"></section> -->
+                    <!-- <section class="widget widget_categories"><h3 class="widget-title">Categories</h3><ul> <li *ngFor="let x of options;"> <input id="categories1" type="checkbox" [(ngModel)]="label"> <label for="categories1">{{x.label}}</label></li></ul> </section> -->
                     <section class="widget widget_features">
-                        <h3 class="widget-title">Provice</h3>
+                        <h3 class="widget-title">Province</h3>
 
                         <ul>
-                            <li>
-                                <input id="features1" type="checkbox">
-                                <label for="features1">Alberta</label>
-                            </li>
-                            <li>
-                                <input id="features2" type="checkbox">
-                                <label for="features2">Colombie-Britannique</label>
-                            </li>
-                            <li>
-                                <input id="features3" type="checkbox">
-                                <label for="features3">Île-du-Prince-Édouard</label>
-                            </li>
-                            <li>
-                                <input id="features4" type="checkbox">
-                                <label for="features4">le Manitoba</label>
-                            </li>
-                            <li>
-                                <input id="features5" type="checkbox">
-                                <label for="features5">le Nouveau-Brunswick</label>
-                            </li>
-                            <li class="hide">
-                                <input id="features6" type="checkbox">
-                                <label for="features6">la Nouvelle-Écosse</label>
-                            </li>
-                            <li class="hide">
-                                <input id="features7" type="checkbox">
-                                <label for="features7">l'Ontario</label>
-                            </li>
-                            <li class="hide">
-                                <input id="features8" type="checkbox">
-                                <label for="features8">la Saskatchewan</label>
-                            </li>
-                            <li class="see-all-btn">
-                                <span>See All</span>
-                            </li>
-                        </ul>
-                    </section>
+                            <div *ngFor="let s of states;"><!-- [(ngModel)]="label" -->
+                             <!-- <span *ngif="first5Province(s.id)">  -->
+                               
+                                <span *ngIf="s.id <= 5"> 
+                                    <li>
+                                        <input id="feature{{ s.id }}" type="checkbox" >
+                                        <label for="feature{{ s.id }}">{{s.name}}</label>
+                                    </li>
 
-                    <section class="widget widget_distance">
-                        <h3 class="widget-title">Ville</h3>
+                                </span>
+                                <span *ngIf="s.id > 5"> 
+                                    <li class="hide">
+                                        <input id="feature{{ s.id }}" type="checkbox" >
+                                        <label for="feature{{ s.id }}">{{s.name}}</label>
+                                    </li>
 
-                        <ul>
-                            <li>
-                                <input id="distance1" type="checkbox">
-                                <label for="distance1">Alberta</label>
-                            </li>
-                            <li>
-                                <input id="distance2" type="checkbox">
-                                <label for="distance2">Colombie-Britannique</label>
-                            </li>
-                            <li>
-                                <input id="distance3" type="checkbox">
-                                <label for="distance3">Île-du-Prince-Édouard</label>
-                            </li>
-                            <li>
-                                <input id="distance4" type="checkbox">
-                                <label for="distance4">le Nouveau-Brunswick</label>
-                            </li>
-                            <li>
-                                <input id="distance5" type="checkbox">
-                                <label for="distance5">la Nouvelle-Écosse</label>
-                            </li>
-                            <li class="hide">
-                                <input id="distance6" type="checkbox">
-                                <label for="distance6">l'Ontario</label>
-                            </li>
-                            <li class="hide">
-                                <input id="distance7" type="checkbox">
-                                <label for="distance7">la Saskatchewan</label>
-                            </li>
-                            <li class="see-all-btn">
+                                </span>
+                        </div>
+                        <li class="see-all-btn">
                                 <span>See All</span>
                             </li>
                         </ul>
@@ -151,6 +110,9 @@
                   </div>
               </div>
             </div>
+
+
+            
 
             <div *ngIf="search" class="col-lg-8 col-md-12">
                 <div class="listings-grid-sorting row align-items-center">
@@ -174,7 +136,7 @@
 
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-4 p-0">
-                                    <div class="listings-image" style="background-image: url({{image}}{{Content.logo}});">
+                                    <div class="listings-image" style="background-image: url({{Content.logo}});">
 
                                          <img [src]="Content.mainImg" alt="image"  href="/single-listings/{{Content.id}}">
                                        <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
@@ -221,9 +183,10 @@
 
                         <div *ngIf="Content.role === 'Company'"class="single-listings-item">
                           <div class="row m-0">
-                              <div class="col-lg-4 col-md-4 p-0">
-                                  <div class="listings-image" style="background-image: url({{image}}{{Content.logo}});">
-                                      <img src={{image}}{{Content.logo}} alt="image" href="/single-listings/{{Content.id}}">
+                            <!-- col-lg-4 col-md-4 p-0 -->
+                              <div class="col-4 p-0">
+                                  <div class="listings-image" style="background-image: url({{Content.logo}});">
+                                      <img [src]="Content.logos" alt="image" href="/single-listings/{{Content.id}}">
                                      <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
                                       <!--  <a routerLink="/{{Content.categoryLink}}" class="category"><i class="flaticon-cooking"></i></a>-->
                                       <!--<a routerLink="/single-listings/{{Content.id}}" class="link-btn"> plus détails </a>-->
@@ -243,30 +206,31 @@
                                      <div>
 
                                       <h3><a routerLink="/single-listings/{{Content.id}}">
-                                        {{Content.companyname}}</a></h3>
+                                        {{Content.companyname}}</a> &nbsp;
                                         <span class="details " *ngIf="Content.IACNC">
                                           <h4>IACNC</h4>
                                          </span>
-
+                                        </h3>
                                      </div>
 
 
 
-
+<!-- 
                                       <div class="d-flex align-items-center justify-content-between">
                                           <div class="rating">
 
                                           </div>
                                           <div class="price">
-                                              <!--{{Content.price}}-->
+                                              {{Content.price}}
                                           </div>
-                                      </div>
+                                      </div> -->
                                       <ul class="listings-meta">
                                           <li><a routerLink="/{{Content.category}}">
 
                                             <i class="flaticon-furniture-and-household"></i> Entreprise </a></li>
+                                            <br>
                                           <li>
-                                            <br> <li><i class="flaticon-pin"></i> {{Content.adresse}}</li>
+                                            <br> <i class="flaticon-pin"></i> {{Content.adresse}}</li>
                                             <br>
                                             <!--<a href="#"><li  > <i class='bx bx-collection' ></i> {{Content.services[0] }}    </li></a>-->
 

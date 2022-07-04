@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Category } from 'src/app/models/category/category';
 import { Search } from 'src/app/models/Search';
-import { CategoryService } from 'src/app/shared/api/category.service';
+import { CategoryService } from 'src/app/shared/api/category1.service';
 import { SearchService } from 'src/app/shared/api/search.service';
+import { UserService } from 'src/app/shared/api/user.service';
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
@@ -12,46 +13,83 @@ import { SearchService } from 'src/app/shared/api/search.service';
 })
 export class ListingComponent implements OnInit {
 
-  x : any; options : any ;
+  x : any; categorie : any ;
   category : Category = new Category ;
 
   label : any ;
   search : any ;
-  image ;
+  states : any;
+  selcttedcategory: any = [];
 
-  constructor( private route: ActivatedRoute, public categories: CategoryService , private s : SearchService)
+  constructor( private route: ActivatedRoute, public categories: CategoryService ,public userapi : UserService , private s : SearchService  , public r : Router )
   {
+   
     }
 
   ngOnInit(): void {
         this.getResult(this.route.snapshot.paramMap.get('label')) ;
        this.getuser(this.route.snapshot.paramMap.get('id')) ;
+       
 
       this.categories.getAllCategories().subscribe(
-        data=>{this.options = data
+        data=>{this.categorie = data
           //console.log(this.options)
         },
         error=> error.errors
-      )
-      this.image = 'http://localhost:8000/storage/image/';
+      );
+      this.userapi.getAllStates().subscribe(
+        response => {
+          this.states = response ;
+
+        }) ;
+
   }
+  
+//   search() {
+//     this.dataService.searchProjectData(this.projects).subscribe(res => {
+//       this.projects = res; //right now 'res' value display as *null*
+//     })
+// }
+  search2($event)
+    {
+     // console.log($event);
+     this.s.result(this.selcttedcategory.label).subscribe(res => {
+        this.selcttedcategory.label =res;
+        console.log(this.selcttedcategory.label);
+
+     })
+      console.log(this.selcttedcategory.label) ;
+
+      var word = this.selcttedcategory.label ;
+      
+      console.log(word);
+      this.r.navigate(['/listing/', decodeURIComponent(word)]);
 
 
-  getResult(label)
+
+
+    }
+
+
+  getResult(word)
   {
-    this.s.result(label).subscribe(
+    
+    this.s.result(word).subscribe(
       response => {
         this.x = response ;
+        console.log(word);
         this.search = this.x.Result
-        console.log(this.x);
+        
         console.log(this.search);
        // console.log(this.countries);
 
 
       },
-      err => console.log(err.errorMessage)
+      err => console.log(word)
     )
   }
+
+  
 
 
   getuser(id)
@@ -376,5 +414,7 @@ export class ListingComponent implements OnInit {
   ]
 
   verticalListings: number =  1;
+
+  
 }
 

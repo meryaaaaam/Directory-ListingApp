@@ -26,7 +26,10 @@ export class SearchService {
 
 
   result(label){
-    return this.http.get(`${lastone}/${label}`);
+    const headers = new HttpHeaders();
+    return this.http.get(`http://127.0.0.1:8000/api/Search/AllItem/`+label,{
+      headers:headers
+    });
     // return this.http.put(`${baseUrl}/${id}`, data);
   }
 

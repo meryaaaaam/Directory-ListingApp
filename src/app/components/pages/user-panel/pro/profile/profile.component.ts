@@ -11,7 +11,7 @@ import { State } from 'src/app/models/user/state';
 import { User } from 'src/app/models/user/user';
 import { UserAdress } from 'src/app/models/user/useradress';
 import { ApiService } from 'src/app/shared/api/api.service';
-import { CategoryService } from 'src/app/shared/api/category.service';
+import { CategoryService } from 'src/app/shared/api/category1.service';
 import { UploadService } from 'src/app/shared/api/upload.service';
 import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
@@ -20,8 +20,7 @@ import { AuthService } from 'src/app/shared/auth/auth.service';
 
 export class result {
 
-  user_id: any;
-  services: any[];
+  subs: any[];
 
 }
 @Component({
@@ -32,7 +31,7 @@ export class result {
 })
 export class ProfileComponent implements OnInit {
 
-            ServicesResult : result = new result ;
+            subcategories : result = new result ;
             filedata: any;
             data :any;
             Disabled: boolean;
@@ -41,9 +40,7 @@ export class ProfileComponent implements OnInit {
             filteredSub: any[]; states : any;
             searchsub : Search = new Search ;
             result : any ;
-            servresult : any ;
             selecteds: any;
-            Services : any;
 
 
 
@@ -58,7 +55,7 @@ export class ProfileComponent implements OnInit {
           public currentuser : any = null;
           public passwordForm: FormGroup;
           public searchForm: FormGroup;
-
+          public usertwoform : FormGroup;
           private notifier: NotifierService;
           selectedCountries: any[];
           selectedServices: any[];
@@ -89,7 +86,6 @@ export class ProfileComponent implements OnInit {
           groupedCities: SelectItemGroup[];
           groupedServices: SelectItemGroup[];
           groupeddServices: any[];
-          userservice : any;
 
  public line : any = [
   {title:"Affaires"}, {title:"Résidence"}, {title:"Cellulaire"}, {title:"Autre"}
@@ -105,14 +101,35 @@ export class ProfileComponent implements OnInit {
    searchs: FormGroup;
 
 
-  constructor(public auth: AuthService , public userapi : UserService , public router: Router , public fb: FormBuilder,
-    public upload : UploadService,private http: HttpClient , public category : CategoryService, notifierService: NotifierService,
-      private filterService: FilterService, private messageService: MessageService
+ public userForm: FormGroup;
+  constructor(public auth: AuthService ,
+    public userapi : UserService ,
+    public router: Router ,
+    public fb: FormBuilder,
+    public upload : UploadService,private http: HttpClient ,
+    public category : CategoryService,
+    notifierService: NotifierService,  private filterService: FilterService,
+    private messageService: MessageService
      )
   {
+
+    this.searchs = this.fb.group({
+
+      subs: this.subcategories,
+
+    });
+
     this.notifier = notifierService;
 
+    this.auth.Profile().subscribe((data: any)=> {this.user = data ;   console.log(this.user.role)});
 
+    this.auth.profileUser().subscribe(data=>  {this.users = data ; console.log(this.users = data ) ;
+
+      if (this.user.logo)
+      {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
+      else {this.image = 'assets/img/Logo_e.jpg'}
+
+    }) ;
 
 
     this.passwordForm = this.fb.group({
@@ -121,6 +138,27 @@ export class ProfileComponent implements OnInit {
       new_confirm_password: [''],
     });
 
+    this.searchForm = this.fb.group({
+      label: [''],
+
+    });
+
+
+
+    this.usertwoform = new FormGroup(
+      {
+       firstname: new FormControl('' , {validators: Validators.max(12) , updateOn:'submit'}),
+       email:  new FormControl('' , {validators: Validators.email , updateOn:'submit'}),
+       lastname: new FormControl('' , {validators: Validators.max(12) , updateOn:'submit'}),
+       username: new FormControl('' , {validators: Validators.max(12) , updateOn:'submit'}),
+       phone: new FormControl('' , {validators: Validators.max(12) , updateOn:'submit'}),
+       adresse: new FormControl('' , {validators: Validators.max(12) , updateOn:'submit'}),
+       website: new FormControl('' , {validators: Validators.max(12) , updateOn:'submit'}),
+       LinkedIn:new FormControl('' , {validators: Validators.max(12) , updateOn:'submit'}),
+       langue: new FormControl('' , {validators: Validators.max(12) , updateOn:'submit'}),
+       isEmailActive: new FormControl('' ),
+      }
+    );
 
     this.category.getAllServices() .subscribe(
       response => {  this.services = response ;  },
@@ -131,7 +169,10 @@ export class ProfileComponent implements OnInit {
         error => { console.log(error);  });
 
         this.userapi.getAllStates().subscribe(
-          response => {  this.states = response ;  }) ;
+          response => {
+            this.states = response ;
+
+          }) ;
 
         this.countries = [
 
@@ -143,34 +184,6 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  ngOnInit():void  {
-     this.auth.Profile().subscribe(
-      (data: any)=> {
-        this.user = data ;
-        this.userapi.getservice(this.user.id).subscribe(
-          data => {this.userservice = data ; }
-        )
-
-
-        console.log(this.user.role)
-      });
-    this.router.navigateByUrl('professionnel/profile');
-    this.category.getAllCategories().subscribe(
-      response => {
-        this.categories = response ;
-      },) ;
-
-
-      this.auth.profileUser().subscribe(data=>  {this.users = data ; console.log(this.users = data ) ;
-        if (this.user.logo)
-        {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
-        else {this.image = 'assets/img/Logo_e.jpg'}
-
-      }) ;
-
-
-
-}
   showSuccess(detail) {
     this.messageService.add({severity:'success', summary: 'Success', detail: detail});
   }
@@ -189,7 +202,26 @@ export class ProfileComponent implements OnInit {
   qs ;
   breadcrumb = [ {  title: 'My Profile',subTitle: 'User Panel'}]
 
+  ngOnInit():void  {
+    this.router.navigateByUrl('professionnel/profile');
+    this.category.getAllCategories().subscribe(
+      response => {
+        this.categories = response ;
 
+
+
+      },) ;
+
+      this.category.getservBysub(["gestion"]).subscribe(
+        data => {
+            this.qs = data ;
+            console.log(this.qs);
+        }
+      )
+
+
+
+}
 
 fileEvent(e){
   this.filedata = e.target.files[0];
@@ -210,7 +242,34 @@ updateprofile2()
         let c :any ;
         // console.log(response);
          this.data= response ;
-       //  console.log(this.data);
+         console.log(this.data);
+          if(!this.data)
+         {this.showError(c.message) ;}
+         else {
+          this.showSuccess(c.message) ;          }
+
+      },
+      error => {
+        console.log(error);
+
+      });
+
+  }
+
+  updateprofileCV()
+  {
+   // const data : any = {name: this.user.username , email:this.user.email}
+   //this.currentuser = this.user ;
+   const formData =new FormData();
+   formData.append("img",this.filedata,this.filedata.name);
+   console.log(formData);
+   //this.currentuser.logo=formData ;
+    this.userapi.updatecv(this.user.id , formData) .subscribe(
+      response => {
+        let c :any ;
+        // console.log(response);
+         this.data= response ;
+         console.log(this.data);
           if(!this.data)
          {this.showError(c.message) ;}
          else {
@@ -230,9 +289,9 @@ updateprofile2()
   updateprofile()
   {
    // const data : any = {name: this.user.username , email:this.user.email}
-  let currentuser = this.users ;
-   const formData =new FormData();
-    formData.append("img",this.filedata,this.filedata.name);
+   let currentuser = this.users ;
+  //  const formData =new FormData();
+  //   formData.append("img",this.filedata,this.filedata.name);
 
       console.log(this.selectedServices) ;
 
@@ -246,14 +305,7 @@ updateprofile2()
       error => {
         console.log(error);
       });
-      this.userapi.updatecv(this.user.id , formData) .subscribe(
-        response => {
-          this.data=response;
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        });
+   
   }
 
   updatepassword()
@@ -341,6 +393,7 @@ let error  ;
 
 
 
+
             }
 
 
@@ -351,54 +404,63 @@ let error  ;
                   sub = this.selcttedsubcategory[i].label ;
                   result.push(sub) ;
               }
+                this.subArray = result;
+                this.subcategories.subs= this.subArray ;
+                console.log(this.subcategories) ;
 
+                this.data = this.searchs.value ;
+                this.data.subs = this.subcategories.subs ;
+                console.log( this.subcategories.subs) ;
+
+                let x ;
+                let filtered : any[] = [];
+                let query = event.query;
+                let f ;
+               
                 this.category.getservBysub(result).subscribe(
                   response => {
-                    this.servresult= response ;
+                    f= response ;
+                    
+                      // this.services=response;
+                       console.log(f);
+                       for(let i = 0; i < f.length; i++) {
+                        let serv = f[i];
+                        console.log(serv) ;
+                      
+                        for(let j = 0; i < serv.length; i++) {
+                                  filtered.push(serv[i]);
+                        } 
+                      }
+                      console.log(filtered);
+                                this.filteredServices = filtered;
+                                  console.log(this.filteredServices);
+
                    },
                    error => {error = error.errors;}
 
                   ) ;
 
               //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-              let filtered : any[] = [];
-              let query = event.query;
-              for(let i = 0; i <  this.servresult.length; i++) {
-                  let serv =  this.servresult[i];
-                 // console.log(serv) ;
-                  if (serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-                      filtered.push(serv);} }
-                   this.filteredServices = filtered;
+              // let filtered : any[] = [];
+              // let query = event.query;
+              // for(let i = 0; i < this.services.length; i++) {
+              //   let serv = this.services[i];
+              //   console.log(serv) ;
+              //   // serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0
+              //   console.log(f);
+              //   if (f) {
+              //       filtered.push(serv);} }
+              //       this.filteredServices = filtered;
+              //            console.log(this.filteredServices);
+                        
+                      
                   }
+                  // let arr:any[];
+                      // for(let i=0;i<response;i++){
+                      //   arr.push(response[i]);
+                      // }
+                      // this.filteredServices =arr ;
+                      // console.log(this.filteredServices);
 
 
-      AddServices()
-      {
-        let message ;
-        //console.log(this.selectedServices) ;
-        let result : any[] = [];
-
-        for(let i = 0; i <  this.selectedServices.length; i++) {
-            let serv =  this.selectedServices[i].label;
-           // console.log(serv) ;
-            result.push(serv)
-             this.Services = result;
-         }
-
-
-           this.ServicesResult.user_id =this.user.id ;
-           this.ServicesResult.services =this.Services ;
-           // console.log(this.ServicesResult) ;
-            this.userapi.addservices(this.ServicesResult).subscribe(
-              data=> {message = data ;
-                this.showSuccess(message.message) ;
-
-               // console.log(message)
-              },
-              error => {
-                    this.showError(message.message) ;
-              }
-
-            )
-       }
 }

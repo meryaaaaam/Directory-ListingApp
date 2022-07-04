@@ -59,7 +59,7 @@ export class HomeoneBannerComponent implements OnInit {
     }
 
 
-    search($event )
+    search()
     {
      // console.log($event);
       console.log(this.singleSelect.label) ;
@@ -71,4 +71,6 @@ export class HomeoneBannerComponent implements OnInit {
 
 
     }
+    
+
 }
