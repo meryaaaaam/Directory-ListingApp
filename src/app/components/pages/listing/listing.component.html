@@ -24,10 +24,12 @@
                 <div class="col-4 p-0">
                     <div class="form-group  ">
                       <!-- <label><i class='bx bx-duplicate'></i> categories</label> -->
-                      <p-dropdown [options]="categorie" name="selcttedcategory" [(ngModel)]="selcttedcategory"
+                      <p-dropdown [inputStyle]="{'width':'400px'}" [options]="categorie"
+                       name="selcttedcategory" [(ngModel)]="selcttedcategory"
                         optionLabel="label" [filter]="true" filterBy="label" [showClear]="true" placeholder="Select a Category" >
+
                         <!-- <ng-template pTemplate="caption">
-                            <div style="text-align: right">        
+                            <div style="text-align: right">
                                 <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
                                 <input type="text" pInputText size="50" placeholder="Global Filter" (input)="tt.filterGlobal($event.target.value, 'contains')" style="width:auto">
                             </div>
@@ -49,7 +51,7 @@
                 <!-- <div class="col-lg-3 col-md-6 p-0">
                     <div class="form-group category-select">
                         <label><i class="flaticon-category"></i></label>
-                        <ngx-select-dropdown (searchChange)="searchChange($event)" name="options.label" tabindex="0" [multiple]="false" 
+                        <ngx-select-dropdown (searchChange)="searchChange($event)" name="options.label" tabindex="0" [multiple]="false"
                          [config]="config" [options]="options" placeholder="Select a Category"></ngx-select-dropdown >
                     </div>
                 </div> -->
@@ -79,15 +81,15 @@
                         <ul>
                             <div *ngFor="let s of states;"><!-- [(ngModel)]="label" -->
                              <!-- <span *ngif="first5Province(s.id)">  -->
-                               
-                                <span *ngIf="s.id <= 5"> 
+
+                                <span *ngIf="s.id <= 5">
                                     <li>
                                         <input id="feature{{ s.id }}" type="checkbox" >
                                         <label for="feature{{ s.id }}">{{s.name}}</label>
                                     </li>
 
                                 </span>
-                                <span *ngIf="s.id > 5"> 
+                                <span *ngIf="s.id > 5">
                                     <li class="hide">
                                         <input id="feature{{ s.id }}" type="checkbox" >
                                         <label for="feature{{ s.id }}">{{s.name}}</label>
@@ -103,7 +105,7 @@
                 </aside>
             </div>
 
-            <div *ngIf="! search" class="col-lg-8 col-md-12">
+            <div *ngIf="!search" class="col-lg-8 col-md-12">
               <div class="listings-grid-sorting row align-items-center">
                   <div class="col-lg-5 col-md-6 result-count">
                       <p>Nous avons trouvé <span class="count">  0  </span> annonces disponibles  </p>
@@ -112,7 +114,7 @@
             </div>
 
 
-            
+
 
             <div *ngIf="search" class="col-lg-8 col-md-12">
                 <div class="listings-grid-sorting row align-items-center">
@@ -130,7 +132,7 @@
                     </div>
                 </div>
                   <div class="row">
-                    <div class="col-lg-12 col-md-12" *ngFor="let Content of search | paginate: { itemsPerPage: 10, currentPage: verticalListings }">
+                    <div class="col-lg-12 col-md-12" *ngFor="let Content of search | paginate: { itemsPerPage: 3, currentPage: verticalListings }">
 
                       <div *ngIf="Content.role === 'Pro'"class="single-listings-item">
 
@@ -170,9 +172,9 @@
                                               <i class="flaticon-furniture-and-household"></i> Professionnel</a></li>
                                             <li>
                                               <li><i class="flaticon-pin"></i> {{Content.adresse}}</li><br>
-                                              <a href="#"><li  > <i class="flaticon-pin"></i> {{Content.services[0] }}    </li></a>
+                                              <a href="#"><li  > <i class="flaticon-pin"></i> {{Content.service }}    </li></a>
 
-                                            <br> <a href="#">   <li><i class="flaticon-pin"></i> {{Content.category}}</li> </a>
+                                              <br> <a href="#">   <li><i class="flaticon-pin"></i> {{Content.category}}</li> </a>
 
 
                                         </ul>
@@ -215,7 +217,7 @@
 
 
 
-<!-- 
+<!--
                                       <div class="d-flex align-items-center justify-content-between">
                                           <div class="rating">
 

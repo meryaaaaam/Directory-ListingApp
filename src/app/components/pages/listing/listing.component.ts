@@ -23,13 +23,13 @@ export class ListingComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, public categories: CategoryService ,public userapi : UserService , private s : SearchService  , public r : Router )
   {
-   
+
     }
 
   ngOnInit(): void {
         this.getResult(this.route.snapshot.paramMap.get('label')) ;
        this.getuser(this.route.snapshot.paramMap.get('id')) ;
-       
+
 
       this.categories.getAllCategories().subscribe(
         data=>{this.categorie = data
@@ -44,7 +44,7 @@ export class ListingComponent implements OnInit {
         }) ;
 
   }
-  
+
 //   search() {
 //     this.dataService.searchProjectData(this.projects).subscribe(res => {
 //       this.projects = res; //right now 'res' value display as *null*
@@ -52,18 +52,28 @@ export class ListingComponent implements OnInit {
 // }
   search2($event)
     {
+      let data ;
      // console.log($event);
      this.s.result(this.selcttedcategory.label).subscribe(res => {
-        this.selcttedcategory.label =res;
+         data = res ;
+         if(data)
+       { this.search = data.Result;}
+       else {this.search = 0 ;}
+
         console.log(this.selcttedcategory.label);
+        console.log(this.search) ;
+        let word = this.selcttedcategory.label ;
+
+        this.r.navigate(['/listing/', decodeURIComponent(word)]);
+    //  window.location.reload();
 
      })
-      console.log(this.selcttedcategory.label) ;
 
-      var word = this.selcttedcategory.label ;
-      
-      console.log(word);
-      this.r.navigate(['/listing/', decodeURIComponent(word)]);
+
+
+     // console.log(word);
+
+
 
 
 
@@ -73,13 +83,18 @@ export class ListingComponent implements OnInit {
 
   getResult(word)
   {
-    
+
     this.s.result(word).subscribe(
       response => {
         this.x = response ;
         console.log(word);
-        this.search = this.x.Result
-        
+
+        if(this.x)
+        {  this.search = this.x.Result}
+        else {this.search = 0 ;}
+
+
+
         console.log(this.search);
        // console.log(this.countries);
 
@@ -89,7 +104,7 @@ export class ListingComponent implements OnInit {
     )
   }
 
-  
+
 
 
   getuser(id)
@@ -415,6 +430,6 @@ export class ListingComponent implements OnInit {
 
   verticalListings: number =  1;
 
-  
+
 }
 
