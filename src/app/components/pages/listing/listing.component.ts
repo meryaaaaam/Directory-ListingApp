@@ -7,6 +7,10 @@ import { Search } from 'src/app/models/Search';
 import { CategoryService } from 'src/app/shared/api/category1.service';
 import { SearchService } from 'src/app/shared/api/search.service';
 import { UserService } from 'src/app/shared/api/user.service';
+
+
+import {orderBy} from 'lodash';
+
 @Component({
   selector: 'app-listing',
   templateUrl: './listing.component.html',
@@ -26,7 +30,7 @@ export class ListingComponent implements OnInit {
 
   constructor( private route: ActivatedRoute, public categories: CategoryService ,public userapi : UserService , private s : SearchService  , public r : Router )
   {
-    
+
     }
 
   ngOnInit(): void {
@@ -56,7 +60,7 @@ export class ListingComponent implements OnInit {
   search2($event)
     {
       let data ;
-      
+
      // console.log($event);
      this.s.result(this.selcttedcategory.label).subscribe(res => {
          data = res ;
@@ -73,7 +77,7 @@ export class ListingComponent implements OnInit {
 
      })
 
-     
+
      // console.log(word);
 
 
@@ -81,41 +85,58 @@ export class ListingComponent implements OnInit {
 
     TriProvince(){
         let data;
-       
+
 
         // let url='%3Ftri%3D';
-        
+
         //console.log(this.codec.decodeKey(url));
         this.r.navigate(['/listing/'+this.selcttedcategory.label], { queryParams: {tri: this.singleSelect.name}});
-        console.log(this.singleSelect.name);
+     //   console.log(this.selcttedcategory.label) ;
+       // console.log(this.singleSelect.name);
 
         this.route.queryParams.subscribe(params => {
             // this.p = params['provine'];
-             this.t = params['tri'];
-             this.s.searchTriProvince(this.selcttedcategory.label,this.t).subscribe(res =>
-                { 
-                 data = res,
-                 console.log(data),
-                 console.log(this.t),
-                 console.log(this.singleSelect.name)
-             }) ;
-             console.log(this.t);
-          
-       
-        ;}) ;
+               this.t = params['tri'];
+         }) ;
+         let label = this.selcttedcategory.label ;
+         let tri = this.t ;
+        this.s.searchTriProvince(label,tri).subscribe(
+          res => {
+           data = res;
+           console.log(data);
 
-        
+           console.log(this.t),
+         //  console.log(this.singleSelect.name)
+           this.search = data.Result;
+           console.log(  this.search);
+
+
+       }) ;
+        let test ;
+       test = orderBy(this.search, ['Name'],['asc']);
+       console.log(test) ;
+
+       /* this.messageService.getMessage()
+        .subscribe(message => {
+         this.sentMessages = message.sort((a,b)=>{
+               return a.broadcastOn==b.broadcastOn?0
+                     :a.broadcastOn>b.broadcastOn?1:-1
+          }));
+         });*/
+
+
+
         //this.r.navigate(['/listing/', word,this.t]);
-        
+
         //console.log(this.t);
-        
+
             let word = this.selcttedcategory.label ;
-            
-           
+
+
         // this.s.searchTriProvince(this.selcttedcategory.label,this.t).subscribe(res =>
-            
+
         //     console.log(res)) ;
-            
+
     }
 
 
@@ -191,7 +212,7 @@ export class ListingComponent implements OnInit {
       {
           name: "Decroissant",
       },
-    
+
       //{
       //    name: "Price: low to high",
     //  },

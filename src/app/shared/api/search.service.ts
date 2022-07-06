@@ -35,8 +35,8 @@ export class SearchService {
 
   searchTriProvince(label,t)
   {
-    
-    return this.http.get(`${lastone}/${label}`,{params: {tri:t }});
+
+    return this.http.get(`${lastone}/${label}`,{params: {tri:t }})  ;
   }
 
 

@@ -132,7 +132,7 @@
                     </div>
                 </div>
                   <div class="row">
-                    <div class="col-lg-12 col-md-12" *ngFor="let Content of search | paginate: { itemsPerPage: 3, currentPage: verticalListings }">
+                    <div class="col-lg-12 col-md-12" *ngFor="let Content of search | paginate: { itemsPerPage: 10, currentPage: verticalListings }">
 
                       <div *ngIf="Content.role === 'Pro'"class="single-listings-item">
 
