@@ -27,11 +27,19 @@ export class SearchService {
 
   result(label){
     const headers = new HttpHeaders();
-    return this.http.get(`http://127.0.0.1:8000/api/Search/AllItem/`+label,{
+    return this.http.get(`${lastone}/${label}`,{
       headers:headers
     });
     // return this.http.put(`${baseUrl}/${id}`, data);
   }
+
+  searchTriProvince(label,t)
+  {
+    
+    return this.http.get(`${lastone}/${label}`,{params: {tri:t }});
+  }
+
+
 
   SearchByLabel() {
     return this.http.get(search);

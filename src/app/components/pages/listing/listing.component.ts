@@ -1,3 +1,4 @@
+import { HttpUrlEncodingCodec } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
@@ -15,15 +16,17 @@ export class ListingComponent implements OnInit {
 
   x : any; categorie : any ;
   category : Category = new Category ;
-
+  codec = new HttpUrlEncodingCodec;
   label : any ;
   search : any ;
   states : any;
   selcttedcategory: any = [];
+   p:any;
+   t:any;
 
   constructor( private route: ActivatedRoute, public categories: CategoryService ,public userapi : UserService , private s : SearchService  , public r : Router )
   {
-
+    
     }
 
   ngOnInit(): void {
@@ -53,6 +56,7 @@ export class ListingComponent implements OnInit {
   search2($event)
     {
       let data ;
+      
      // console.log($event);
      this.s.result(this.selcttedcategory.label).subscribe(res => {
          data = res ;
@@ -64,20 +68,54 @@ export class ListingComponent implements OnInit {
         console.log(this.search) ;
         let word = this.selcttedcategory.label ;
 
-        this.r.navigate(['/listing/', decodeURIComponent(word)]);
+        this.r.navigate(['/listing/', word]);
     //  window.location.reload();
 
      })
 
-
-
+     
      // console.log(word);
 
 
+    }
 
+    TriProvince(){
+        let data;
+       
 
+        // let url='%3Ftri%3D';
+        
+        //console.log(this.codec.decodeKey(url));
+        this.r.navigate(['/listing/'+this.selcttedcategory.label], { queryParams: {tri: this.singleSelect.name}});
+        console.log(this.singleSelect.name);
 
+        this.route.queryParams.subscribe(params => {
+            // this.p = params['provine'];
+             this.t = params['tri'];
+             this.s.searchTriProvince(this.selcttedcategory.label,this.t).subscribe(res =>
+                { 
+                 data = res,
+                 console.log(data),
+                 console.log(this.t),
+                 console.log(this.singleSelect.name)
+             }) ;
+             console.log(this.t);
+          
+       
+        ;}) ;
 
+        
+        //this.r.navigate(['/listing/', word,this.t]);
+        
+        //console.log(this.t);
+        
+            let word = this.selcttedcategory.label ;
+            
+           
+        // this.s.searchTriProvince(this.selcttedcategory.label,this.t).subscribe(res =>
+            
+        //     console.log(res)) ;
+            
     }
 
 
@@ -145,17 +183,15 @@ export class ListingComponent implements OnInit {
   // Ordering Select
   options2 = [
       {
-          name: "Recommandée",
+          name: "Croissant",
       },
       {
           name: "Défaut",
       },
       {
-          name: "Popularité",
+          name: "Decroissant",
       },
-      {
-          name: "Dernière",
-      },
+    
       //{
       //    name: "Price: low to high",
     //  },

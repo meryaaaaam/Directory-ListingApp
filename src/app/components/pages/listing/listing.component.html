@@ -126,7 +126,7 @@
                         <div class="d-flex justify-content-end">
                             <div class="select-box">
                                 <label>Trier par:</label>
-                                <ngx-select-dropdown (searchChange)="searchChange($event)" name="ordering-select" tabindex="0" [multiple]="false" [(ngModel)]="singleSelect" [config]="config" [options]="options2"></ngx-select-dropdown>
+                                <ngx-select-dropdown (change)="TriProvince()" name="ordering-select" tabindex="0" [multiple]="false" [(ngModel)]="singleSelect" [config]="config" [options]="options2" optionLabel="name"></ngx-select-dropdown>
                             </div>
                         </div>
                     </div>
