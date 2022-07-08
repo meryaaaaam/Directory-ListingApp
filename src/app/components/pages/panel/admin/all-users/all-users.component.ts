@@ -32,6 +32,7 @@ export class AllUsersComponent implements OnInit {
   services : any;
   sub: any;
   states : any;
+  categories: Object;
 
   url : any  ;
   constructor(public auth: AuthService ,
@@ -72,6 +73,13 @@ export class AllUsersComponent implements OnInit {
   ngOnInit(): void {
     this.logo = "assets/img/logo/default.png";
     this.url="http://localhost:8000/storage/image/" ;
+    this.category.getAllCategories().subscribe(
+      response => {
+        this.categories = response ;
+
+
+
+      },) ;
 
   }
 

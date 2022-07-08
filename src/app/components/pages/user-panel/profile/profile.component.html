@@ -7,7 +7,7 @@
     <div class="breadcrumb-area" *ngFor="let Content of breadcrumb;">
         <h1>{{Content.title}}</h1>
         <ol class="breadcrumb">
-            <li class="item"><a routerLink="/">Home</a></li>
+            <li class="item"><a routerLink="/">Acceuil</a></li>
             <li class="item"><a routerLink="dashboard">{{Content.subTitle}}</a></li>
             <li class="item">{{Content.title}}</li>
         </ol>
@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-12">
             <div class="my-profile-box">
-                <h3>Profile Details</h3>
+                <h3>Details de Profile </h3>
                 <img [src]="image" alt="image">
         <form #f="ngForm">
 
@@ -30,7 +30,7 @@
 
           </div>
           <div>
-            <button type="submit" class="inputfile" (click)="updateprofile2()">Save Change</button>
+            <button type="submit" class="inputfile" (click)="updateprofile2()">Modifier</button>
           </div>
 
         </form>
@@ -42,21 +42,21 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="form-group">
 
-                                <label>Username</label>
+                                <label>Identifiant</label>
                                 <input type="text" class="form-control"  [(ngModel)]="user.username" name="user.name">
                             </div>
                         </div>
 
                         <div class="col-xl-6 col-lg-12 col-md-12">
                           <div class="form-group">
-                              <label>Firstname</label>
+                              <label>Prénom</label>
                               <input type="email" class="form-control"  [(ngModel)]="user.firstname" name="firstname"
                              >
                           </div>
                       </div>
                       <div class="col-xl-6 col-lg-12 col-md-12">
                         <div class="form-group">
-                            <label>Lastname</label>
+                            <label>Nom</label>
                             <input type="email" class="form-control"  [(ngModel)]="user.lastname" name="lastname"
                            >
                         </div>
@@ -74,7 +74,7 @@
 
                         <div class="col-xl-6 col-lg-12 col-md-12">
                             <div class="form-group">
-                                <label>Phone</label>
+                                <label>Téléphone</label>
                                 <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone">
                             </div>
                         </div>
@@ -84,7 +84,7 @@
 
                         <div class="col-lg-12 col-md-12 pt-3">
                             <div class="form-group">
-                                <button type="submit" (click)="updateprofile()">Save Change</button>
+                                <button type="submit" (click)="updateprofile()">Modifier</button>
                             </div>
                         </div>
                     </div>
@@ -94,34 +94,34 @@
 
         <div class="col-lg-6 col-md-12">
             <div class="my-profile-box">
-                <h3>Change Password</h3>
+                <h3>Changer Mot de passe</h3>
 
                 <form [formGroup]="passwordForm" (ngSubmit)="  updatepassword() ">
                     <div class="row">
                         <div class="col-lg-12 col-md-12">
                             <div class="form-group">
-                                <label>Current Password</label>
+                                <label>Mot de passe courant</label>
                                 <input type="password" class="form-control"   formControlName="password_current">
                             </div>
                         </div>
 
                         <div class="col-lg-12 col-md-12">
                             <div class="form-group">
-                                <label>New Password</label>
+                                <label>Nouveau Mot de passe </label>
                                 <input type="password" class="form-control"   formControlName="new_password" >
                             </div>
                         </div>
 
                         <div class="col-lg-12 col-md-12">
                             <div class="form-group">
-                                <label>Confirm New Password</label>
+                                <label>Confirmer Mot de passe</label>
                                 <input type="password" class="form-control" formControlName="new_confirm_password">
                             </div>
                         </div>
                         {{ password |json }}
                         <div class="col-lg-12 col-md-12">
                             <div class="form-group">
-                                <button type="submit"  >Change Password</button>
+                                <button type="submit"  >Modifier Mot de passe</button>
                             </div>
                         </div>
                     </div>

@@ -191,7 +191,7 @@ export class ProfileComponent implements OnInit {
   }
 
 
-  breadcrumb = [ {  title: 'My Profile',subTitle: 'User Panel'}]
+  breadcrumb = [ {  title: 'Mon Profile',subTitle: 'Panneau Utilisateur'}]
 
   // createform(){
   //   this.form =this.fb.group({

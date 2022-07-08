@@ -31,7 +31,7 @@ export class ActifUsersComponent implements OnInit {
 
       {this.users = data ;
 
-
+console.log(this.users);
         if (this.users.role == 'Pro')
            {this.name = this.users.firstname + ' ' + this.users.lastname ;}
         else if (this.users.role == 'Company')

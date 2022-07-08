@@ -114,7 +114,7 @@ data:any;
   }) ;
 }*/
 
-  breadcrumb = [ {  title: 'My Profile',subTitle: 'User Panel'}]
+  breadcrumb = [ {  title: 'Mon Profile',subTitle: 'Panneau Utilisateur'}]
 
   updateprofile()
   {

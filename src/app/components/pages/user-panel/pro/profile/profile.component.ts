@@ -200,7 +200,7 @@ export class ProfileComponent implements OnInit {
     this.messageService.add({severity:'error', summary: 'Error', detail: detail});
   }
   qs ;
-  breadcrumb = [ {  title: 'My Profile',subTitle: 'User Panel'}]
+  breadcrumb = [ {  title: 'Mon Profile',subTitle: 'Panneau Utilisateur'}]
 
   ngOnInit():void  {
     this.router.navigateByUrl('professionnel/profile');
