@@ -113,6 +113,7 @@ import { ConditionpageComponent } from './components/pages/conditionpage/conditi
 
 import {ListboxModule} from 'primeng/listbox';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
  @NgModule({
@@ -214,12 +215,13 @@ import {ListboxModule} from 'primeng/listbox';
     FileUploadModule,
     ButtonModule,DropdownModule, NgbModule
   ],
-  providers: [
+   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    } ,   {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions}
+    } ,   {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions},
+          {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
 
   bootstrap: [AppComponent]

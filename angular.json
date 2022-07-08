@@ -61,6 +61,7 @@
                 "node_modules/wowjs/dist/wow.js",
                 "node_modules/sweetalert2/dist/sweetalert2.js",
                 "src/assets/js/main.js"
+
             ],
             "vendorChunk": true,
             "extractLicenses": false,

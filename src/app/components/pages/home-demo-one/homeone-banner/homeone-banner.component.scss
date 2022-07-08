@@ -1,4 +1,6 @@
 
+
+
 .search {
 
 
@@ -75,11 +77,14 @@
         bottom: 250px;
     };
     background: {
-      color:#2a2a33;
-        //image: url(../../../../../assets/img/main-banner-bg1.jpg);
+      //color:#2a2a33;
+        image: url(../../../../../assets/img/cover.jpg);
         position: center center;
         size: cover;
         repeat: no-repeat;
+        opacity: 1 ;
+        object-fit: cover;
+
     };
 }
 .main-banner-content {
@@ -106,7 +111,7 @@
     }
     p {
         line-height: initial;
-        color: #bcbcbc;
+        color: #ffffff;
         font-size: 18px;
         margin: 0;
     }
