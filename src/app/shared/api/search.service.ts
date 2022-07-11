@@ -40,6 +40,13 @@ export class SearchService {
   }
 
 
+  searchwithIACNC(label,t)
+  {
+
+    return this.http.get(`${lastone}/${label}`,{params: {IACNC:t }})  ;
+  }
+
+
 
   SearchByLabel() {
     return this.http.get(search);

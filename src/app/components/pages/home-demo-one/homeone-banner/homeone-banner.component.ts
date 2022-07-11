@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/shared/api/category1.service';
 import { SearchService } from 'src/app/shared/api/search.service';
+import { UserService } from 'src/app/shared/api/user.service';
 
 @Component({
     selector: 'app-homeone-banner',
@@ -13,9 +14,17 @@ export class HomeoneBannerComponent implements OnInit {
     cat : any ;
     label : any ;
     searchResult : any ;
-    constructor(public category : CategoryService , public s : SearchService , public r : Router ) { }
+    state: any;
+    searchstate: any;
+    StateSelect : any ;
+    constructor(public category : CategoryService , public s : SearchService , public r : Router , public u : UserService) { }
 
     ngOnInit() {
+
+      this.u.getAllStates().subscribe(
+        data => {this.state = data ; this.searchstate= this.state ;
+        console.log(this.state) ; }
+      )
 
       this.s.SearchByLabel().subscribe(
         data =>{this.searchResult = data ; console.log(this.searchResult); }
@@ -50,6 +59,11 @@ export class HomeoneBannerComponent implements OnInit {
         search: true
     };
 
+    configstate = {
+      displayKey: "name",
+      search: true
+  };
+
     searchChange($event) {
         console.log($event);
 
@@ -71,6 +85,6 @@ export class HomeoneBannerComponent implements OnInit {
 
 
     }
-    
+
 
 }

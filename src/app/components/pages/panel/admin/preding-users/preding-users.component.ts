@@ -19,6 +19,7 @@ export class PredingUsersComponent implements OnInit {
   logo: any;
   user: User =new User;
   data:any   ;
+  image = 'http://localhost:8000/storage/image/';
 
   constructor(
     public auth: AuthService ,

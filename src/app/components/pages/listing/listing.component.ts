@@ -27,6 +27,7 @@ export class ListingComponent implements OnInit {
   selcttedcategory: any = [];
    p:any;
    t:any;
+   type : any ;
 
   constructor( private route: ActivatedRoute, public categories: CategoryService ,public userapi : UserService , private s : SearchService  , public r : Router )
   {
@@ -142,8 +143,16 @@ export class ListingComponent implements OnInit {
 
   getResult(word)
   {
+    let t ;
 
-    this.s.result(word).subscribe(
+    this.route.queryParams.subscribe(params => {
+      // this.p = params['provine'];
+          t = params['IACNC'];
+   }) ;
+
+   if (t)
+   {
+    this.s.searchwithIACNC(word,t).subscribe(
       response => {
         this.x = response ;
         console.log(word);
@@ -161,6 +170,25 @@ export class ListingComponent implements OnInit {
       },
       err => console.log(word)
     )
+   }else
+    {this.s.result(word).subscribe(
+      response => {
+        this.x = response ;
+        console.log(word);
+
+        if(this.x)
+        {  this.search = this.x.Result}
+        else {this.search = 0 ;}
+
+
+
+        console.log(this.search);
+       // console.log(this.countries);
+
+
+      },
+      err => console.log(word)
+    )}
   }
 
 
@@ -488,5 +516,69 @@ export class ListingComponent implements OnInit {
   verticalListings: number =  1;
 
 
+  IACNC(event)
+  {
+    let checked = event.target.checked ;
+    console.log(checked) ;
+   let word = this.route.snapshot.paramMap.get('label') ;
+   if (checked)
+   { this.r.navigate(['/listing/', word], {queryParams: {IACNC: true}});
+
+   this.s.searchwithIACNC(word,true).subscribe(
+    response => {
+      this.x = response ;
+      console.log(word);
+
+      if(this.x)
+      {  this.search = this.x.Result}
+      else {this.search = 0 ;}
+
+
+
+      console.log(this.search);
+     // console.log(this.countries);
+
+
+    });
+
+
+  }
+   else
+   { this.r.navigate(['/listing/', word], {queryParams: {IACNC: false}});
+
+   this.s.searchwithIACNC(word,false).subscribe(
+    response => {
+      this.x = response ;
+      console.log(word);
+
+      if(this.x)
+      {  this.search = this.x.Result}
+      else {this.search = 0 ;}
+
+
+
+      console.log(this.search);
+     // console.log(this.countries);
+
+
+    });
+
+
+  }
+  }
+
+  Type(event)
+  {
+    let word = this.route.snapshot.paramMap.get('label') ;
+    let type = event.target.value ;
+    if (type=='Pro')
+    { this.r.navigate(['/listing/', word], {queryParams: {Type: 'Pro'}});}
+    else {
+      this.r.navigate(['/listing/', word], {queryParams: {Type: 'Company'}});
+    }
+  console.log(type) ;
+
+
+  }
 }
 

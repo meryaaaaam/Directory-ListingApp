@@ -14,17 +14,17 @@
                     </div>
                 </div>
                 <!-- col-lg-3 col-md-6 p-0 -->
-                <div class="col p-0">
+                <!--<div class="col p-0">
                     <div class="form-group">
                         <label><i class="flaticon-pin"></i></label>
                         <input type="text" class="form-control" placeholder="Emplacement">
                     </div>
-                </div>
+                </div>-->
                 <!-- col-lg-3 col-md-6 -->
                 <div class="col-4 p-0">
                     <div class="form-group  ">
                       <!-- <label><i class='bx bx-duplicate'></i> categories</label> -->
-                      <p-dropdown [inputStyle]="{'width':'400px'}" [options]="categorie"
+                      <p-dropdown   [style]=" {'border':'0px'}" [options]="categorie"
                        name="selcttedcategory" [(ngModel)]="selcttedcategory"
                         optionLabel="label" [filter]="true" filterBy="label" [showClear]="true" placeholder="Select a Category" >
 
@@ -73,8 +73,36 @@
         <div class="row">
             <div class="col-lg-4 col-md-12">
                 <aside class="listings-widget-area">
-                    <!-- <section class="widget widget_filters"></section> -->
-                    <!-- <section class="widget widget_categories"><h3 class="widget-title">Categories</h3><ul> <li *ngFor="let x of options;"> <input id="categories1" type="checkbox" [(ngModel)]="label"> <label for="categories1">{{x.label}}</label></li></ul> </section> -->
+                      <section class="widget widget_categories">
+                        <h3 class="widget-title">IACNC</h3>
+
+                          <ul>
+                             <li>
+                              <input id="feature" type="checkbox" (change)="IACNC($event)" >
+                              <label for="feature" value="true">IACNC</label>
+                              </li>
+                            </ul>
+
+
+                      </section>
+                      <section class="widget widget_categories">
+                        <h3 class="widget-title">Type</h3>
+                        <ul>
+                          <li>
+                           <input id="categories1" value="Pro"  type="checkbox"   (change)="Type($event)">
+                           <label for="categories1" >Professionnel</label>
+                          </li>
+
+                          <li>
+                            <input id="Company" value="Company" type="checkbox"   (change)="Type($event)">
+                            <label for="Company" >Entrepsrise</label>
+                           </li>
+                        </ul>
+
+
+
+                          </section>
+
                     <section class="widget widget_features">
                         <h3 class="widget-title">Province</h3>
 
@@ -118,23 +146,23 @@
 
             <div *ngIf="search" class="col-lg-8 col-md-12">
                 <div class="listings-grid-sorting row align-items-center">
-                    <div class="col-lg-5 col-md-6 result-count">
+                    <!--<div class="col-lg-5 col-md-6 result-count">
                         <p>Nous avons trouvé <span class="count">  {{search.length}}  </span> annonces disponibles  </p>
-                    </div>
+                    </div>-->
 
-                    <div class="col-lg-7 col-md-6 ordering">
+                  <!--  <div class="col-lg-7 col-md-6 ordering">
                         <div class="d-flex justify-content-end">
                             <div class="select-box">
                                 <label>Trier par:</label>
                                 <ngx-select-dropdown (change)="TriProvince()" name="ordering-select" tabindex="0" [multiple]="false" [(ngModel)]="singleSelect" [config]="config" [options]="options2" optionLabel="name"></ngx-select-dropdown>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
                   <div class="row">
                     <div class="col-lg-12 col-md-12" *ngFor="let Content of search | paginate: { itemsPerPage: 10, currentPage: verticalListings }">
 
-                      <div *ngIf="Content.role === 'Pro'"class="single-listings-item">
+                      <div *ngIf="Content.role === 'Pro' && Content.Active"class="single-listings-item">
 
                             <div class="row m-0">
                                 <div class="col-lg-4 col-md-4 p-0">
@@ -143,7 +171,7 @@
                                          <img [src]="Content.mainImg" alt="image"  href="/single-listings/{{Content.id}}">
                                        <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
                                         <!--  <a routerLink="/{{Content.categoryLink}}" class="category"><i class="flaticon-cooking"></i></a>-->
-                                        <a routerLink="/{{Content.id}}" class="link-btn">  </a>
+                                        <a routerLink="/single-listings/{{Content.id}}" class="link-btn">  </a>
 
                                          <!--   <div class="author">
                                             <div class="d-flex align-items-center">
@@ -158,7 +186,11 @@
                                     <div class="listings-content justify-content-center">
                                        <!-- <span class="status {{Content.extraClass}}"><i class="flaticon-save"></i> {{Content.openORclose}}</span> -->
                                        <h3><a routerLink="/{{Content.id}}">{{Content.firstname}} {{Content.lastname}}</a></h3>
+                                       <span class="details " *ngIf="Content.IACNC">
+                                        <h4>IACNC</h4>
+                                       </span>
                                         <div class="d-flex align-items-center justify-content-between">
+
                                             <div class="rating">
 
                                             </div>
@@ -167,12 +199,13 @@
                                             </div>
                                         </div>
                                         <ul class="listings-meta">
-                                            <li><a routerLink="/{{Content.category}}">
-
-                                              <i class="flaticon-furniture-and-household"></i> Professionnel</a></li>
                                             <li>
-                                              <li><i class="flaticon-pin"></i> {{Content.adresse}}</li><br>
-                                              <a href="#"><li  > <i class="flaticon-pin"></i> {{Content.service }}    </li></a>
+                                              <!--<a routerLink="/{{Content.category}}"></a>-->
+
+                                              <i class="flaticon-furniture-and-household"></i> Professionnel</li>
+
+                                              <li  *ngIf="EA"><i class="flaticon-pin"></i> {{Content.adresse}}</li><br>
+                                              <!--<a href="#"><li  > <i class="flaticon-pin"></i> {{Content.service }}    </li></a>-->
 
                                               <br> <a href="#">   <li><i class="flaticon-pin"></i> {{Content.category}}</li> </a>
 
@@ -183,7 +216,7 @@
                             </div>
                         </div>
 
-                        <div *ngIf="Content.role === 'Company'"class="single-listings-item">
+                        <div *ngIf="Content.role === 'Company' && Content.Active"class="single-listings-item">
                           <div class="row m-0">
                             <!-- col-lg-4 col-md-4 p-0 -->
                               <div class="col-4 p-0">
@@ -231,8 +264,8 @@
 
                                             <i class="flaticon-furniture-and-household"></i> Entreprise </a></li>
                                             <br>
-                                          <li>
-                                            <br> <i class="flaticon-pin"></i> {{Content.adresse}}</li>
+                                          <li *ngIf="EA">
+                                            <br>  <i class="flaticon-pin"></i> {{Content.adresse}}</li>
                                             <br>
                                             <!--<a href="#"><li  > <i class='bx bx-collection' ></i> {{Content.services[0] }}    </li></a>-->
 

@@ -113,7 +113,7 @@ export class NavbarStyleOneComponent implements OnInit {
         this.authState.setAuthState(true);
 
         this.loginForm.reset();
-       this.alertWithSuccess() ;
+       //this.alertWithSuccess() ;
        // this.router.navigate(['user/profile']);
 
       },
