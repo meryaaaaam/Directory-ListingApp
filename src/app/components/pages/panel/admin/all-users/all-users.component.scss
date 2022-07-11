@@ -17,8 +17,6 @@
     }
     table {
         margin-bottom: 0;
-        table-layout: auto;
-        width: 100%;
 
         thead {
             th {
@@ -214,9 +212,9 @@
                         position: relative;
                         margin-right: 15px;
                         padding: {
-                            top: 15px;
-                            bottom: 15px;
-                            left: 15px;
+                            top: 8px;
+                            bottom: 8px;
+                            left: 40px;
                             right: 20px;
                         };
                         &:hover {
@@ -225,24 +223,16 @@
                         }
                         i {
                             position: absolute;
-                            left: 10px;
+                            left: 20px;
                             top: 50%;
                             transform: translateY(-50%);
                             font-size: 15px;
                         }
                         &.danger {
-                            margin-right: 2;
-
-                            &:hover {
-                                background-color: red;
-                                color: var(--whiteColor);
-                            }
-                        }
-                        &.primary {
                             margin-right: 0;
 
                             &:hover {
-                                background-color: blue;
+                                background-color: red;
                                 color: var(--whiteColor);
                             }
                         }

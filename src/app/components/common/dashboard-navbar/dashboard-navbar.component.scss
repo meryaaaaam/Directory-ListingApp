@@ -8,37 +8,43 @@
     animation: unset !important;
     width: calc(100% - 250px) !important;
     background-color: var(--whiteColor) !important;
+
     box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.12) !important;
 
     .vesax-nav {
+
         padding: {
             left: 30px;
             right: 30px;
         };
         .navbar {
+          color: var(--mainColor);
             .navbar-nav {
                 margin: {
                     left: 0;
                     right: 0;
+
                 };
                 .nav-item {
                     .dropdown-menu {
+
                         li {
+
                             .dropdown-menu {
                                 left: 250px;
-                                
+                                a{  color: var(--mainColor);}
                                 li {
                                     .dropdown-menu {
                                         left: -250px;
-            
+
                                         li {
                                             .dropdown-menu {
                                                 left: 250px;
-                    
+
                                                 li {
                                                     .dropdown-menu {
                                                         left: -250px;
-                            
+
                                                         li {
                                                             .dropdown-menu {
                                                                 left: 250px;
@@ -65,11 +71,12 @@
                 margin-left: auto;
 
                 .profile-nav-item {
+
                     .dropdown-toggle {
                         padding: 0;
                         color: var(--optionalColor);
                         font-weight: 500;
-            
+
                         &::after {
                             display: none;
                         }
@@ -87,7 +94,7 @@
                         span {
                             top: 1px;
                             color: var(--optionalColor);
-            
+
                             &::before {
                                 display: none;
                             }
@@ -128,7 +135,7 @@
                             visibility: hidden;
                             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05);
                             background-color: var(--whiteColor);
-
+                            color: var(--mainColor);
                             .dropdown-header {
                                 padding: 0;
                                 border-bottom: 1px solid #f2f4f9;
@@ -140,7 +147,10 @@
                                     position: relative;
 
                                     img {
-                                        width: 80px;
+                                        width: 200px;
+                                        display: inline-block;
+                                   //     margin : 2px;
+                                        align-items: center;
                                         height: 80px;
                                     }
                                 }
@@ -171,7 +181,8 @@
                                         margin-left: 0;
 
                                         .nav-link {
-                                            color: var(--blackColor);
+                                            color: var(--mainColor);
+
                                             padding: 5px 15px 5px 38px;
                                             position: relative;
                                             font: {
@@ -179,7 +190,7 @@
                                                 weight: 500;
                                             };
                                             span {
-                                                color: var(--blackColor);
+                                                color: var(--mainColor);
                                                 display: block;
                                                 font-weight: 500;
 
@@ -279,7 +290,7 @@
         margin: 6px 0;
         transition: all .50s ease-in-out;
     }
-    &.active {                
+    &.active {
         span {
             &.top-bar {
                 transform: rotate(45deg);
@@ -307,7 +318,7 @@
                 padding: 0;
                 color: var(--optionalColor);
                 font-weight: 500;
-    
+
                 &::after {
                     display: none;
                 }
@@ -325,7 +336,7 @@
                 span {
                     top: 1px;
                     color: var(--optionalColor);
-    
+
                     &::before {
                         display: none;
                     }
@@ -362,6 +373,7 @@
                     opacity: 0;
                     visibility: hidden;
                     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .05);
+                    color: var(--mainColor);
                     background-color: var(--whiteColor);
                     margin-top: -30px;
                     border-top: 1px solid #eeeeee;
@@ -665,6 +677,6 @@
 /* Min width 1550px */
 @media only screen and (min-width: 1550px) {
 
-    
+
 
 }

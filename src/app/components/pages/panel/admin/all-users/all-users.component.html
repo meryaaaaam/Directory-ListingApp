@@ -33,169 +33,65 @@
 
           <tr *ngFor="let Content of users;">
 
-            <td class="details">
-              <img *ngIf="Content.logo" src={{url}}{{Content.logo}} alt="image">
-              <img *ngIf="!Content.logo" [src]="logo" alt="image"> 
-              <ng-container *ngIf="Content.role === 'Pro';else or">
-                <h4> {{ Content.firstname }} {{ Content.lastname }}
-                  <span *ngIf="Content.isActive ; else or" class="bookings-status  ">Approvée</span>
-                  <ng-template #or >
-                    <span class="bookings-status ">Preding</span>
-                  </ng-template>
-                  <span  class="bookings-status" *ngIf="Content.IACNC" >IACNC</span>
-                </h4>
+            <td class="name">
+                <div class="row">
+                    <div class="col-8">
+                      <img *ngIf="Content.logo" src={{url}}{{Content.logo}} alt="image">
+                      <img *ngIf="!Content.logo" [src]="logo" alt="image">
 
+                    </div>
+                    <div class="col-4 info">
+                      <span *ngIf="Content.isActive ; else or" class="bookings-status  ">Approvée</span>
+                      <ng-template #or >
+                        <span class="bookings-status ">Preding</span>
+                      </ng-template>
+                      <span  class="bookings-status" *ngIf="Content.IACNC" >IACNC</span>
+
+                    </div>
+                </div>
+
+              <ng-container *ngIf="Content.role === 'Pro';else or">
+                <div class="info">
+
+
+                          <span *ngIf="Content.role === 'Pro'">{{Content.firstname}} {{Content.lastname}} </span>
+                          <span *ngIf="Content.role === 'Company'">{{Content.companyname}}  </span>
+
+                            <ul>
+                                <li><a href="tel:{{Content.phone}}">{{Content.phone}}</a></li>
+                                <li><a href="mailto:{{Content.email}}">{{Content.email}}</a></li>
+                            </ul>
+
+
+              </div>
 
                <!-- <ng-template #or>
                   <span class="bookings-status ">Preding</span>
                 </ng-template>-->
-                <ul>
 
-                  <li>
-                    <i class='bx bx-map'></i>
-                    {{ Content.adresse }}
-  
-                  </li>
-                  <li>
-                    <i class='bx bx-phone'></i>
-                    {{ Content.phone }}
-  
-                  </li>
-                  
-                  <!-- <li>
-                    <i class='bx bx-calendar'></i>
-                    <span>Date de Creation :</span>
-                    {{ Content.created_at | date:"MM/dd/yyyy" }}
-                  </li>
-
-                  
-                  <li>
-                    <i class='bx bxl-linkedin'></i>
-                    <span>LinkdIn URL : </span>
-                    <a href="{{ Content.phone }}"> {{ Content.username }}</a>
-                  </li>
-
-                  <li>
-                    <i class='bx bx-globe'></i>
-                    <span>website : </span>
-                    <a href="{{ Content.website }}"> {{ Content.website }}</a>
-                  </li>
-
-                  <li>
-                    <i class='bx bx-user-voice'></i>
-                    <span>Langue : </span>
-                    {{ Content.language }}
-                  </li>
-
-
-
-
-                  <li>
-                    <i class='bx bx-outline'></i>
-                    <span>Type ligne : </span>
-                    {{ Content.Line_type }}
-                  </li>
-
-                  <li>
-                    <i class='bx bxs-file-pdf'></i>
-                    <span>CV: </span>
-                    {{ Content.CV }}
-                  </li>
-                  <li>
-                    <i class='bx pi-comment'></i>
-                    <span>Note : </span>
-                    {{ Content.note }}
-                  </li> -->
-
-                </ul>
 
               </ng-container>
 
 
               <!-- <ng-template #or> -->
                 <ng-container *ngIf="Content.role === 'Company';else or">
-                  <h4> {{ Content.companyname }}
-                    <span *ngIf="Content.isActive ; else or" class="bookings-status  ">Approvée</span>
-                    <ng-template #or >
-                      <span class="bookings-status ">Preding</span>
-                    </ng-template>
-                    <span  class="bookings-status" *ngIf="Content.IACNC" >IACNC</span>
-                  </h4>
+                  <div class="info">
+
+
+
+                    <span *ngIf="Content.role === 'Company'">{{Content.companyname}}  </span>
+
+                      <ul>
+                          <li><a href="tel:{{Content.phone}}">{{Content.phone}}</a></li>
+                          <li><a href="mailto:{{Content.email}}">{{Content.email}}</a></li>
+                      </ul>
+
+
+        </div>
+
                   <!--<ng-template #or>
                     <span class="bookings-status ">Preding</span>
                   </ng-template>-->
-                  <ul>
-                    <li>
-                      <i class='bx bx-map'></i>
-                      {{ Content.adresse }}
-    
-                    </li>
-                    <li>
-                      <i class='bx bx-phone'></i>
-                      {{ Content.phone }}
-    
-                    </li>
-                    <!-- <li>
-                      <i class='bx bx-map'></i>
-                      <span>Prénom de contact:</span>
-                      {{ Content.firstname }}
-                    </li>
-                    <li>
-                      <i class='bx bx-map'></i>
-                      <span>Nom de contact:</span>
-                      {{ Content.lastname }}
-                    </li>
-
-                    <li>
-                      <i class='bx bx-map'></i>
-                      <span>Adresse:</span>
-                      {{ Content.adresse }}
-                    </li>
-
-                    <li>
-                      <i class='bx bx-calendar'></i>
-                      <span>Date de Creation :</span>
-                      {{ Content.created_at | date:"MM/dd/yyyy" }}
-                    </li>
-
-
-
-                    <li>
-                      <i class='bx bx-globe'></i>
-                      <span>website : </span>
-                      <a href="{{ Content.website }}"> {{ Content.website }}</a>
-                    </li>
-
-                    <li>
-                      <i class='bx bx-user-voice'></i>
-                      <span>Langue : </span>
-                      {{ Content.language }}
-                    </li>
-
-
-
-
-                    <li>
-                      <i class='bx bx-outline'></i>
-                      <span>Type ligne : </span>
-                      {{ Content.Line_type }}
-                    </li>
-
-                    <li>
-                      <i class='bx bx-globe'></i>
-                      <span>NEQ : </span>
-                      {{ Content.NEQ }}
-                    </li>
-
-
-                    <li>
-                      <i class='bx pi-comment'></i>
-                      <span>Note : </span>
-                      {{ Content.note }}
-                    </li> -->
-
-
-                  </ul>
 
 
 
@@ -232,7 +128,7 @@
                     <span>Langue : </span>
                     {{ Content.language }}
                   </li>
-
+                  &nbsp;
                   <li>
                     <i class='bx bx-globe'></i>
                     <span>Categorie : </span>
@@ -240,12 +136,13 @@
                     &nbsp;
                     <i class='bx bx-user-voice'></i>
                     <span>Sous-Category : </span>
-                    
+
                     &nbsp;
                     <i class='bx bx-user-voice'></i>
                     <span>Service : </span>
-                    
+
                   </li>
+
 
                   <li>
                     <i class='bx bx-user-voice'></i>
@@ -255,7 +152,7 @@
 
 
 
-<!-- 
+
                   <li>
                     <i class='bx bx-outline'></i>
                     <span>Type ligne : </span>
@@ -271,7 +168,7 @@
                     <i class='bx pi-comment'></i>
                     <span>Note : </span>
                     {{ Content.note }}
-                  </li> -->
+                  </li>
 
                 </ul>
 
@@ -280,34 +177,8 @@
 
               <!-- <ng-template #ox> -->
                 <ng-container *ngIf="Content.role === 'Company';else ox">
-                  <!-- <h4> {{ Content.companyname }}
-                    <span  class="bookings-status  ">{{Content.status}}</span></h4> -->
-                  <!--<ng-template #or>
-                    <span class="bookings-status ">Preding</span>
-                  </ng-template>-->
+
                   <ul>
-                    <!-- <li>
-                      <i class='bx bx-map'></i>
-                      <span>Prénom de contact:</span>
-                      {{ Content.firstname }}
-                    </li> 
-                    <li>
-                      <i class='bx bx-map'></i>
-                      <span>Nom de contact:</span>
-                      {{ Content.lastname }}
-                    </li>
-
-                    <li>
-                      <i class='bx bx-map'></i>
-                      <span>Adresse:</span>
-                      {{ Content.adresse }}
-                    </li>
-
-                    <li>
-                      <i class='bx bx-calendar'></i>
-                      <span>Date de Creation :</span>
-                      {{ Content.created_at | date:"MM/dd/yyyy" }}
-                    </li> -->
 
 
 
@@ -326,7 +197,7 @@
 
 
 
-                    <!-- <li>
+                     <li>
                       <i class='bx bx-outline'></i>
                       <span>Type ligne : </span>
                       {{ Content.Line_type }}
@@ -343,7 +214,7 @@
                       <i class='bx pi-comment'></i>
                       <span>Note : </span>
                       {{ Content.note }}
-                    </li> -->
+                    </li>
 
 
                   </ul>
@@ -365,7 +236,7 @@
                     <div class="mb-3">
 
                       <div class="input-group">
-                        <input id="typeahead-basic" type="text" placeholder="hh"class="form-control" [(ngModel)]="note" name="note" value={{note}} />
+                        <input id="typeahead-basic" type="text" placeholder="ecrire une note"class="form-control" [(ngModel)]="note" name="note" value={{note}} />
                       </div>
                     </div>
                     <div class="modal-footer">

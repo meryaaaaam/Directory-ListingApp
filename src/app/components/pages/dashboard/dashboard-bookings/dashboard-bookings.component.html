@@ -17,7 +17,7 @@
 
   <!-- Start -->
   <div class="bookings-listings-box">
-    <h3>Booking Requests</h3>
+    <h3>Liste des utilisateurs actifs</h3>
 
     <div class="table-responsive">
         <table class="table">
@@ -32,8 +32,8 @@
 
                 <tr *ngFor="let Content of users;" >
 
-                    <td class="name">
-                       <img *ngIf="Content.logo" [src]="Content.logo" alt="image">
+                    <td  class="name">
+                       <img *ngIf="Content.logo" src="{{image}}{{Content.logo}}" alt="image">
                         <img *ngIf="!Content.logo" [src]="logo" alt="image">
                         <div class="info">
                           <span *ngIf="Content.role === 'Pro'">{{Content.firstname}} {{Content.lastname}} </span>

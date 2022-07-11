@@ -112,7 +112,7 @@ import { PolicypageComponent } from './components/pages/policypage/policypage.co
     {path: 'entreprise/profile', component: company , canActivate: [   AuthGuard ] },
 
 
-    {path: 'test/profile/:label', component: ProfileTestComponent },
+    {path: 'test/profiles', component: ProfileTestComponent },
 
     // Here add new pages component
 

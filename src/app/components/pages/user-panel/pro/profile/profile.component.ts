@@ -11,7 +11,7 @@ import { State } from 'src/app/models/user/state';
 import { User } from 'src/app/models/user/user';
 import { UserAdress } from 'src/app/models/user/useradress';
 import { ApiService } from 'src/app/shared/api/api.service';
-import { CategoryService } from 'src/app/shared/api/category1.service';
+import { CategoryService } from 'src/app/shared/api/category.service';
 import { UploadService } from 'src/app/shared/api/upload.service';
 import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
@@ -20,8 +20,9 @@ import { AuthService } from 'src/app/shared/auth/auth.service';
 
 export class result {
 
-  subs: any[];
-
+ // subs: any[];
+ user_id: any;
+ services: any[];
 }
 @Component({
   selector: 'app-profile',
@@ -31,6 +32,10 @@ export class result {
 })
 export class ProfileComponent implements OnInit {
 
+           ServicesResult : result = new result ;
+           servresult : any ;
+           selecteds: any;
+           Services : any;
             subcategories : result = new result ;
             filedata: any;
             data :any;
@@ -40,7 +45,7 @@ export class ProfileComponent implements OnInit {
             filteredSub: any[]; states : any;
             searchsub : Search = new Search ;
             result : any ;
-            selecteds: any;
+
 
 
 
@@ -86,6 +91,8 @@ export class ProfileComponent implements OnInit {
           groupedCities: SelectItemGroup[];
           groupedServices: SelectItemGroup[];
           groupeddServices: any[];
+
+          userservice : any;
 
  public line : any = [
   {title:"Affaires"}, {title:"Résidence"}, {title:"Cellulaire"}, {title:"Autre"}
@@ -202,26 +209,36 @@ export class ProfileComponent implements OnInit {
   qs ;
   breadcrumb = [ {  title: 'Mon Profile',subTitle: 'Panneau Utilisateur'}]
 
+
   ngOnInit():void  {
-    this.router.navigateByUrl('professionnel/profile');
-    this.category.getAllCategories().subscribe(
-      response => {
-        this.categories = response ;
+    this.auth.Profile().subscribe(
+     (data: any)=> {
+       this.user = data ;
+       this.userapi.getservice(this.user.id).subscribe(
+         data => {this.userservice = data ; }
+       )
 
 
 
-      },) ;
+     });
+   //this.router.navigateByUrl('professionnel/profile');
+   this.category.getAllCategories().subscribe(
+     response => {
+       this.categories = response ;
+     },) ;
 
-      this.category.getservBysub(["gestion"]).subscribe(
-        data => {
-            this.qs = data ;
-            console.log(this.qs);
-        }
-      )
+
+     this.auth.profileUser().subscribe(data=>  {this.users = data ; //console.log(this.users = data ) ;
+       if (this.user.logo)
+       {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
+       else {this.image = 'assets/img/Logo_e.jpg'}
+
+     }) ;
 
 
 
 }
+
 
 fileEvent(e){
   this.filedata = e.target.files[0];
@@ -305,7 +322,7 @@ updateprofile2()
       error => {
         console.log(error);
       });
-   
+
   }
 
   updatepassword()
@@ -397,70 +414,68 @@ let error  ;
             }
 
 
-            filterServices(event) {
-              console.log( this.selcttedsubcategory) ;
-              let sub ; let result : any[] = [] ;
-              for(let i = 0; i < this.selcttedsubcategory.length; i++) {
-                  sub = this.selcttedsubcategory[i].label ;
-                  result.push(sub) ;
-              }
-                this.subArray = result;
-                this.subcategories.subs= this.subArray ;
-                console.log(this.subcategories) ;
+filterServices(event) {
+//  console.log( this.selcttedsubcategory) ;
+  let sub ; let result : any[] = [] ;
 
-                this.data = this.searchs.value ;
-                this.data.subs = this.subcategories.subs ;
-                console.log( this.subcategories.subs) ;
+  for(let i = 0; i < this.selcttedsubcategory.length; i++) {
+      sub = this.selcttedsubcategory[i].label ;
+      result.push(sub) ;
+  }
+  let data ;
+ // console.log(result);  //mes choix
+      data ="['"+result+"']";
+    this.category.getservBysub(data).subscribe(
+      response => {
+        this.servresult= response ;  //console.log(this.servresult);  //service de mes choix
+       },
+       error => {error = error.errors;}
 
-                let x ;
-                let filtered : any[] = [];
-                let query = event.query;
-                let f ;
-               
-                this.category.getservBysub(result).subscribe(
-                  response => {
-                    f= response ;
-                    
-                      // this.services=response;
-                       console.log(f);
-                       for(let i = 0; i < f.length; i++) {
-                        let serv = f[i];
-                        console.log(serv) ;
-                      
-                        for(let j = 0; i < serv.length; i++) {
-                                  filtered.push(serv[i]);
-                        } 
-                      }
-                      console.log(filtered);
-                                this.filteredServices = filtered;
-                                  console.log(this.filteredServices);
+      ) ;
 
-                   },
-                   error => {error = error.errors;}
+  //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+  let filtered : any[] = [];
+  let query = event.query;
+  for(let i = 0; i <  this.servresult.length; i++) {
+      let serv =  this.servresult[i];
+    // console.log(serv) ;
+      if (serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+          filtered.push(serv);} }
+       this.filteredServices = filtered;
 
-                  ) ;
 
-              //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-              // let filtered : any[] = [];
-              // let query = event.query;
-              // for(let i = 0; i < this.services.length; i++) {
-              //   let serv = this.services[i];
-              //   console.log(serv) ;
-              //   // serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0
-              //   console.log(f);
-              //   if (f) {
-              //       filtered.push(serv);} }
-              //       this.filteredServices = filtered;
-              //            console.log(this.filteredServices);
-                        
-                      
+
                   }
-                  // let arr:any[];
-                      // for(let i=0;i<response;i++){
-                      //   arr.push(response[i]);
-                      // }
-                      // this.filteredServices =arr ;
-                      // console.log(this.filteredServices);
 
 
+
+ AddServices()
+                      {
+                        let message ;
+                     //   console.log(this.selectedServices) ;
+                        let result : any[] = [];
+
+                         for(let i = 0; i <  this.selectedServices.length; i++) {
+                            let serv =  this.selectedServices[i].label;
+                           // console.log(serv) ;
+                            result.push(serv)
+                             this.Services = result;
+                         }
+
+
+                           this.ServicesResult.user_id =this.user.id ;
+                           this.ServicesResult.services =this.Services ;
+                           // console.log(this.ServicesResult) ;
+                            this.userapi.addservices(this.ServicesResult).subscribe(
+                              data=> {message = data ;
+                                this.showSuccess(message.message) ;
+
+                               // console.log(message)
+                              },
+                              error => {
+                                    this.showError(message.message) ;
+                              }
+
+                            )
+    }
 }

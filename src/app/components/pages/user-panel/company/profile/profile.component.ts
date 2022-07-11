@@ -7,7 +7,7 @@ import { NotifierService } from 'angular-notifier';
 import { Password } from 'src/app/models/user/password';
 import { User } from 'src/app/models/user/user';
 import { ApiService } from 'src/app/shared/api/api.service';
-import { CategoryService } from 'src/app/shared/api/category1.service';
+import { CategoryService } from 'src/app/shared/api/category.service';
 import { UploadService } from 'src/app/shared/api/upload.service';
 import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
@@ -69,11 +69,14 @@ export class ProfileComponent implements OnInit {
  data :any;
 
   serach : any ;
-
+   servresult : any ;
+  selecteds: any;
+  Services : any;
+  ServicesResult : result = new result ;
+  selcttedService : any;
+  userservice : any;
  //selectedCountry: Country;
- selectedCountry: string;
- selcttedService : string;
- selcttedcategory : any;
+   selcttedcategory : any;
  selcttedsubcategory : any;
 
  countries: any[];
@@ -99,7 +102,6 @@ export class ProfileComponent implements OnInit {
 
 
 
-  selecteds: any;
 
  public userForm: FormGroup;
   constructor(public auth: AuthService ,
@@ -130,6 +132,10 @@ export class ProfileComponent implements OnInit {
     else {this.image = 'assets/img/Logo_e.jpg'}
 
     // console.log(this.image) ;
+    this.userapi.getservice(this.user.id).subscribe(
+      data => {this.userservice = data ; }
+    );
+
 
     });
 
@@ -388,90 +394,71 @@ filterSubCategories(event) {
 
               }
 
-filterServices(event) {
-  
-  //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-  console.log( this.selcttedsubcategory) ;
-  let sub ; let result : any[] = [] ;
-  for(let i = 0; i < this.selcttedsubcategory.length; i++) {
-      sub = this.selcttedsubcategory[i].label ;
-      result.push(sub) ;
-  }
-    this.subArray = result;
-    this.subcategories.subs= this.subArray ;
-    console.log(this.subcategories) ;
 
-    this.data = this.searchs.value ;
-    this.data.subs = this.subcategories.subs ;
-    console.log( this.subcategories.subs) ;
 
-    let x ;
-    let filtered : any[] = [];
-    let query = event.query;
-    let f ;
-   
-    this.category.getservBysub(result).subscribe(
-      response => {
-        f= response ;
-        
-          // this.services=response;
-           console.log(f);
-           for(let i = 0; i < f.length; i++) {
-            let serv = f[i];
-            console.log(serv) ;
-          
-            for(let j = 0; i < serv.length; i++) {
-                      filtered.push(serv[i]);
-            } 
-          }
-          console.log(filtered);
-                    this.filteredServices = filtered;
-                      console.log(this.filteredServices);
+              filterServices(event) {
+                //  console.log( this.selcttedsubcategory) ;
+                  let sub ; let result : any[] = [] ;
 
-       },
-       error => {error = error.errors;}
+                  for(let i = 0; i < this.selcttedsubcategory.length; i++) {
+                      sub = this.selcttedsubcategory[i].label ;
+                      result.push(sub) ;
+                  }
+                  let data ;
+                 // console.log(result);  //mes choix
+                      data ="['"+result+"']";
+                    this.category.getservBysub(data).subscribe(
+                      response => {
+                        this.servresult= response ;  //console.log(this.servresult);  //service de mes choix
+                       },
+                       error => {error = error.errors;}
 
-      ) ;
+                      ) ;
+
+                  //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+                  let filtered : any[] = [];
+                  let query = event.query;
+                  for(let i = 0; i <  this.servresult.length; i++) {
+                      let serv =  this.servresult[i];
+                    // console.log(serv) ;
+                      if (serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                          filtered.push(serv);} }
+                       this.filteredServices = filtered;
 
 
 
-
-      }
-
-
-
-/*filterServices(event) {
-  //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-  let filtered : any[] = [];
-  let query = event.query;
-
-  this.category.serachService(query).subscribe(
-    data=>{ this.search = data ;console.log("data search  "+ this.search.label);} )
-
-   for(let i = 0; i < this.search.length; i++) {
-      let serv = this.search[i];
-      console.log(this.search) ;
-      //if (serv.label.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(serv);
-      //} }
-    }
-
-       this.filteredServices = filtered;   console.log("feeeeeeeeeee  "+this.filteredServices) ;
+                                  }
 
 
 
-      }*/
+                 AddServices()
+                                      {
+                                        let message ;
+                                     //   console.log(this.selectedServices) ;
+                                        let result : any[] = [];
+
+                                         for(let i = 0; i <  this.selectedServices.length; i++) {
+                                            let serv =  this.selectedServices[i].label;
+                                           // console.log(serv) ;
+                                            result.push(serv)
+                                             this.Services = result;
+                                         }
 
 
+                                           this.ServicesResult.user_id =this.user.id ;
+                                           this.ServicesResult.services =this.Services ;
+                                           // console.log(this.ServicesResult) ;
+                                            this.userapi.addservices(this.ServicesResult).subscribe(
+                                              data=> {message = data ;
+                                                this.showSuccess(message.message) ;
 
+                                               // console.log(message)
+                                              },
+                                              error => {
+                                                    this.showError(message.message) ;
+                                              }
 
-
-      /*testsearch(event)
-      {
-        let query = event.query;
-        this.category.serachService('a').subscribe(
-          data=>{ console.log(data);} )
-      }*/
-
+                                            )
+                    }
 
 }

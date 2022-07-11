@@ -22,7 +22,7 @@
 
         <div class="row">
           <form #f="ngForm" >
-          
+
               <!-- <button type="submit" class="inputfile" (click)="">Save Change</button> -->
             </form>
           </div>
@@ -285,8 +285,18 @@
 
 
     </div>
+    <div class="flex-grow-1"></div>
 
+    <br>
+    <div class="my-profile-box ">
+      <h3>Produit et services</h3>
 
+      <form>
+        <div class="row">
+          <p-listbox [options]="userservice"  optionLabel="label"></p-listbox>
+        </div>
+      </form>
+    </div>
 
 
   </div>
@@ -346,7 +356,7 @@
             <div class="form-group  ">
               <label><i class='bx bx-duplicate'></i> Services</label>
               <span class="p-fluid">
-                <p-autoComplete [(ngModel)]="selectedServices" [suggestions]="filteredServices"
+                <p-autoComplete [(ngModel)]="selectedServices" name="selectedServices"[suggestions]="filteredServices"
                   (completeMethod)="filterServices($event)" field="label" [multiple]="true" [dropdown]="true">
                 </p-autoComplete>
               </span>
@@ -361,7 +371,7 @@
 
           <div class="col-lg-12 col-md-12">
             <div class="form-group">
-              <button type="submit" (click)="updateprofile()">Modifier</button>
+              <button type="submit" (click)="AddServices()">Ajouter Services</button>
             </div>
           </div>
 

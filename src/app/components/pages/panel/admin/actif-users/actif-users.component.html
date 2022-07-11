@@ -32,7 +32,7 @@
 
                 <tr *ngFor="let Content of users;" >
 
-                    <td class="name">
+                    <td  class="name">
                        <img *ngIf="Content.logo" src="{{image}}{{Content.logo}}" alt="image">
                         <img *ngIf="!Content.logo" [src]="logo" alt="image">
                         <div class="info">

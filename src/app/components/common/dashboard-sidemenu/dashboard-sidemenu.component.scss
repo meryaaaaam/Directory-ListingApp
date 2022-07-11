@@ -20,6 +20,9 @@
 
         .navbar-brand {
             padding: 0;
+            img {
+              height: auto;
+              width: 100%;}
         }
         .responsive-burger-menu {
             cursor: pointer;
@@ -154,7 +157,7 @@
                     &:hover {
                         background-color: #fafafa;
                         color: var(--mainColor);
-    
+
                         &::before {
                             width: 3px;
                         }
@@ -168,7 +171,7 @@
                     .nav-link {
                         background-color: #fafafa;
                         color: var(--mainColor);
-    
+
                         &::before {
                             width: 3px;
                         }
@@ -234,7 +237,7 @@
                             list-style-type: none;
                             padding-left: 15px;
                             margin-bottom: 0;
-        
+
                             .nav-item {
                                 .nav-link {
                                     color: #7e7e7e;
@@ -257,7 +260,7 @@
                                     }
                                     &:hover {
                                         color: var(--mainColor);
-        
+
                                         .icon {
                                             color: var(--mainColor);
                                         }
@@ -266,7 +269,7 @@
                                 &.mm-active {
                                     .nav-link {
                                         color: var(--mainColor);
-        
+
                                         .icon {
                                             color: var(--mainColor);
                                         }
@@ -350,7 +353,7 @@
         left: -100%;
         opacity: 0;
         visibility: hidden;
-    
+
         &.active-sidemenu-area {
             left: 0;
             opacity: 1;
@@ -358,7 +361,7 @@
         }
         .sidemenu-header {
             height: 75px;
-    
+
             .responsive-burger-menu {
                 display: block !important;
             }
@@ -429,6 +432,6 @@
 /* Min width 1550px */
 @media only screen and (min-width: 1550px) {
 
-    
+
 
 }

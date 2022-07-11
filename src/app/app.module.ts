@@ -112,7 +112,7 @@ import { ConditionpageComponent } from './components/pages/conditionpage/conditi
 //import { ToastrModule } from 'ngx-toastr';
 
 import {ListboxModule} from 'primeng/listbox';
-
+import {TableModule} from 'primeng/table';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
@@ -190,7 +190,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     UserPanelComponent,
     UserNavbarComponent,
     ProfileComponent,
-    pro, company, ProfileTestComponent,  AdminComponent, AllUsersComponent, ActifUsersComponent, PredingUsersComponent, PolicypageComponent, ConditionpageComponent
+    pro, company, ProfileTestComponent,  AdminComponent, AllUsersComponent, ActifUsersComponent, PredingUsersComponent, PolicypageComponent,
+
+    ConditionpageComponent
 
 
 
@@ -210,7 +212,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     NgxPaginationModule,
     SweetAlert2Module, NotifierModule,AutoCompleteModule,InputMaskModule,
     ListboxModule,
-
+    TableModule,
     ToastModule,TooltipModule,
     FileUploadModule,
     ButtonModule,DropdownModule, NgbModule

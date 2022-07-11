@@ -440,6 +440,7 @@
   }
   .file-upload-box {
       margin-bottom: 30px;
+      margin-top: 30px;
   }
   .opening-day {
       margin-bottom: 25px;
@@ -557,6 +558,10 @@
         border-radius: 5px;
 
         img {
+
+            height: auto;
+            width: 75%;
+
             border-radius: 5px;
         }
         .file-upload {
