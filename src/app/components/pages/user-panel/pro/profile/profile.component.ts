@@ -230,7 +230,7 @@ export class ProfileComponent implements OnInit {
 
      this.auth.profileUser().subscribe(data=>  {this.users = data ; //console.log(this.users = data ) ;
        if (this.user.logo)
-       {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
+       {this.image = `localhost:8000/storage/image/${this.user.logo}`}
        else {this.image = 'assets/img/Logo_e.jpg'}
 
      }) ;

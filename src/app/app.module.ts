@@ -114,6 +114,7 @@ import { ConditionpageComponent } from './components/pages/conditionpage/conditi
 import {ListboxModule} from 'primeng/listbox';
 import {TableModule} from 'primeng/table';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AllListingComponent } from './components/pages/listings/all-listing/all-listing.component';
 
 
  @NgModule({
@@ -192,7 +193,9 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ProfileComponent,
     pro, company, ProfileTestComponent,  AdminComponent, AllUsersComponent, ActifUsersComponent, PredingUsersComponent, PolicypageComponent,
 
-    ConditionpageComponent
+    ConditionpageComponent,
+      AllListingComponent,
+
 
 
 

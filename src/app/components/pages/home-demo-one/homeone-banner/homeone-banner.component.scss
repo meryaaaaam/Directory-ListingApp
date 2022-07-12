@@ -1,6 +1,10 @@
 
+::ng-deep {
+  .p-tooltip {
+      max-width: fit-content;
 
-
+   }
+}
 .search {
 
 
@@ -142,7 +146,7 @@
             }
             &.category-select {
                 border-right: none;
-                padding-right: 20px;
+                padding-right: 2px;
             }
             .form-control {
                 border: none !important;

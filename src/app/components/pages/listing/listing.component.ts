@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Category } from 'src/app/models/category/category';
 import { Search } from 'src/app/models/Search';
-import { CategoryService } from 'src/app/shared/api/category1.service';
+import { CategoryService } from 'src/app/shared/api/category.service';
 import { SearchService } from 'src/app/shared/api/search.service';
 import { UserService } from 'src/app/shared/api/user.service';
 

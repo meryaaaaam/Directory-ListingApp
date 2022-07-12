@@ -53,6 +53,7 @@ import { AllUsersComponent } from './components/pages/panel/admin/all-users/all-
 import { ActifUsersComponent } from './components/pages/panel/admin/actif-users/actif-users.component';
 import { PredingUsersComponent } from './components/pages/panel/admin/preding-users/preding-users.component';
 import { PolicypageComponent } from './components/pages/policypage/policypage.component';
+import { AllListingComponent } from './components/pages/listings/all-listing/all-listing.component';
 
 
 
@@ -100,6 +101,7 @@ import { PolicypageComponent } from './components/pages/policypage/policypage.co
 
 
     {path: 'listing/:label', component: ListingComponent},
+    {path: 'listings/all', component: AllListingComponent},
 
     {path: 'users-list', component: AllUsersComponent , canActivate: [AuthGuard ]   },
     {path: 'users-actifs', component: ActifUsersComponent , canActivate: [AuthGuard ]   },

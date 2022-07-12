@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 
-const baseApiUrl = "http://127.0.0.1:8000/api/auth/upload-image" ;
+//const baseApiUrl = "https://bottin.groupe3737.com/api/auth/upload-image" ;
+const baseApiUrl = "https:/backbottin.groupe3737.com/api/auth/upload-image" ;
 
 
 
@@ -21,7 +22,8 @@ export class UploadService {
 
     formData.append("file", file, file.name);
 
-    return this.http.put("http://127.0.0.1:8000/api/auth/upload-image", formData)
+   // return this.http.put("http://127.0.0.1:8000/api/auth/upload-image", formData)
+    return this.http.put("https:/backbottin.groupe3737.com/api/auth/upload-image", formData)
 
 }
 

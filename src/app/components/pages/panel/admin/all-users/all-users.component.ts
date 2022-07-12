@@ -72,7 +72,7 @@ export class AllUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.logo = "assets/img/logo/default.png";
-    this.url="http://localhost:8000/storage/image/" ;
+    this.url="https:/backbottin.groupe3737.com/storage/image/" ;
     this.category.getAllCategories().subscribe(
       response => {
         this.categories = response ;
@@ -176,7 +176,7 @@ showError(detail) {
   }
   SendMail(id) { //Email Send Button Click Function
 
-    this.http.get(`http://localhost:8000/users/send-mail/${id}`).subscribe(
+    this.http.get(`https:/backbottin.groupe3737.com/users/send-mail/${id}`).subscribe(
       data => { console.log(data); this.showSuccess('email de rejet a été envoyer avec succes') ;},
       error => console.error(error));
   }

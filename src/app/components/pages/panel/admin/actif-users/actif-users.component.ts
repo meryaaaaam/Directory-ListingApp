@@ -18,7 +18,7 @@ export class ActifUsersComponent implements OnInit {
   logo: any;
   user: User =new User;
   data:any   ;
-image = 'http://localhost:8000/storage/image/';
+image = 'https://backbottin.groupe3737.com/storage/image/';
   constructor(
     public auth: AuthService ,
     public userapi : UserService ,

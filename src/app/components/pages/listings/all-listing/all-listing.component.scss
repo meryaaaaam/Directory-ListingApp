@@ -1,0 +1,79 @@
+@import "../../vertical-listings-left-sidebar/vertical-listings-left-sidebar.component.scss";
+
+
+.details {
+  h4 {
+    display: inline!important;
+      margin-bottom: 15px;
+      font-size: 17px;
+      background-color: var(--mainColor);
+      color: var(--whiteColor);
+      border-radius: 20px;
+      padding: 3px 10px 3.5px;
+      position: relative;
+      width:30% ;
+
+      .bookings-status {
+          border-radius: 30px;
+          color: var(--whiteColor);
+          padding: 3px 10px 3.5px;
+          position: relative;
+          background-color: var(--mainColor);
+          top: -2px;
+          margin-left: 2px;
+          font: {
+              weight: 500;
+              size: 12px;
+          };
+          &.approved {
+              background-color: #64bc36;
+          }
+          &.canceled {
+              background-color: red;
+          }
+      }
+  }
+  ul {
+      padding-left: 0;
+      list-style-type: none;
+      margin-bottom: 0;
+
+      li {
+          margin-top: 12px;
+          color: var(--optionalColor);
+          font-size: 14px;
+
+          span {
+              color: var(--blackColor);
+              font-weight: 500;
+          }
+          i {
+              color: var(--mainColor);
+              position: relative;
+              top: .8px;
+              margin-right: 5px;
+          }
+          a {
+              color: var(--optionalColor);
+
+              &:hover {
+                  color: var(--mainColor);
+              }
+          }
+          strong {
+              font-weight: 600;
+              color: var(--blackColor);
+              margin-left: 3px;
+          }
+          .paid {
+              color: #64bc36;
+          }
+          .unpaid {
+              color: red;
+          }
+          &:last-child {
+              margin-bottom: 0;
+          }
+      }
+  }
+}

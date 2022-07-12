@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoryService } from 'src/app/shared/api/category1.service';
+import { CategoryService } from 'src/app/shared/api/category.service';
 import { SearchService } from 'src/app/shared/api/search.service';
 import { UserService } from 'src/app/shared/api/user.service';
 

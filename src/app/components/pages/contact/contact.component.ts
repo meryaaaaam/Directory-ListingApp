@@ -15,35 +15,32 @@ export class ContactComponent implements OnInit {
     contactInfoBox = [
         {
             icon: 'bx bx-map',
-            title: 'Our Address',
+            title: 'Adresse',
             info: [
                 {
-                    text: '175 5th Ave, New York, NY 10010, United States'
+                    text: '3737 Crémazie Est, Montréal, Québec, H1Z 2K4'
+                }
+            ]
+        },
+        {
+
+            icon: 'bx bx-envelope',
+            title: 'Contactez-nous',
+            info: [
+
+                {
+                    text: 'bottin@groupe3737.com'
                 }
             ]
         },
         {
             icon: 'bx bx-phone-call',
-            title: 'Email Us',
+            title: 'Téléphone',
             info: [
-                {
-                    text: '(+44) - 45789 - 5789'
-                },
-                {
-                    text: 'hello@vesax.com'
-                }
-            ]
-        },
-        {
-            icon: 'bx bx-time-five',
-            title: 'Hours of Operation',
-            info: [
-                {
-                    text: 'Monday - Friday: 09:00 - 20:00'
-                },
-                {
-                    text: 'Sunday & Saturday: 10:30 - 22:00'
-                }
+              {
+                text: '1 (877) 476-3737'
+            },
+
             ]
         }
     ]
@@ -64,13 +61,13 @@ export class ContactComponent implements OnInit {
     submit(form){
         var name = form.name;
         console.log(name);
-        
+
         var email = form.email;
         console.log(email);
 
         var number = form.number;
         console.log(number);
-        
+
         var message = form.message;
         console.log(message);
     }
