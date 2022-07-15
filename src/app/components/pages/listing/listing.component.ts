@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Category } from 'src/app/models/category/category';
 import { Search } from 'src/app/models/Search';
-import { CategoryService } from 'src/app/shared/api/category.service';
+import { CategoryService } from 'src/app/shared/api/category1.service';
 import { SearchService } from 'src/app/shared/api/search.service';
 import { UserService } from 'src/app/shared/api/user.service';
 
@@ -28,6 +28,8 @@ export class ListingComponent implements OnInit {
    p:any;
    t:any;
    type : any ;
+   globalData:any = [];
+   checkedTypes:any = {pro:false,company:false};
 
   constructor( private route: ActivatedRoute, public categories: CategoryService ,public userapi : UserService , private s : SearchService  , public r : Router )
   {
@@ -177,7 +179,9 @@ export class ListingComponent implements OnInit {
         console.log(word);
 
         if(this.x)
-        {  this.search = this.x.Result}
+        {  this.search = this.x.Result;
+            this.globalData=this.search;
+        }
         else {this.search = 0 ;}
 
 
@@ -569,14 +573,44 @@ export class ListingComponent implements OnInit {
 
   Type(event)
   {
-    let word = this.route.snapshot.paramMap.get('label') ;
+    
     let type = event.target.value ;
-    if (type=='Pro')
-    { this.r.navigate(['/listing/', word], {queryParams: {Type: 'Pro'}});}
-    else {
-      this.r.navigate(['/listing/', word], {queryParams: {Type: 'Company'}});
+    if(type == 'Pro'){
+        this.checkedTypes.pro = !this.checkedTypes.pro;  
+        console.log(this.checkedTypes.pro);
     }
-  console.log(type) ;
+    if(type == 'Company'){
+        this.checkedTypes.company = !this.checkedTypes.company;  
+        console.log(this.checkedTypes.company);
+    }
+    
+    if (this.checkedTypes.pro == true && this.checkedTypes.company ==true || this.checkedTypes.pro ==false && this.checkedTypes.company == false){
+        this.search=this.globalData;
+    }else if(this.checkedTypes.pro == true && this.checkedTypes.company == false){
+        this.search = this.globalData.filter(element=>element.role == type);
+    }else if(this.checkedTypes.pro == false && this.checkedTypes.company == true){
+        this.search = this.globalData.filter(element=>element.role == type);
+    }
+
+    // if(!type){
+    //     this.search=this.globalData;
+    //     console.log(type);
+    // }
+    // else{
+    //     this.search = this.globalData.filter(element=>element.role == type);
+    // console.log(this.search) ;
+    //console.log(type);
+    //}
+    
+    
+//     let word = this.route.snapshot.paramMap.get('label') ;
+    
+//     if (type=='Pro')
+//     { this.r.navigate(['/listing/', word], {queryParams: {Type: 'Pro'}});}
+//     else {
+//       this.r.navigate(['/listing/', word], {queryParams: {Type: 'Company'}});
+//     }
+//   console.log(type) ;
 
 
   }
