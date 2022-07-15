@@ -1300,6 +1300,7 @@ textarea.form-control {
             margin-bottom: 0;
             list-style-type: none;
 
+            
             li {
                 position: relative;
                 margin-bottom: 12px;
@@ -1864,6 +1865,7 @@ textarea.form-control {
             padding-left: 0;
             margin-bottom: 0;
             list-style-type: none;
+            width: 220px;
 
             li {
                 position: relative;
@@ -2205,6 +2207,11 @@ textarea.form-control {
         }
     }
 }
+.tooltip{ 
+    .ui-tooltip-text {
+        width: 100em; 
+      }
+    }
 .listings-grid-sorting {
     .ordering {
         .ngx-dropdown-container {
