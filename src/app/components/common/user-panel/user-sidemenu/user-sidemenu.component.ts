@@ -36,7 +36,7 @@ signOut() {
   this.auths.setAuthState(false);
   this.token.removeToken();
   this.router.navigate(['/']);
-  console.log('signOut');
+ // console.log('signOut');
 }
 
 }

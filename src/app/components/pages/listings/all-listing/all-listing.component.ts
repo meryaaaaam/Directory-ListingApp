@@ -28,6 +28,8 @@ export class AllListingComponent implements OnInit {
    t:any;
    type : any ;
 
+   img ="" ;
+
   constructor( private route: ActivatedRoute, public categories: CategoryService ,public userapi : UserService , private s : SearchService  , public r : Router )
   {
 

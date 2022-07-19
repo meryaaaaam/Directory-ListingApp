@@ -213,7 +213,8 @@ import { AllListingComponent } from './components/pages/listings/all-listing/all
     ReactiveFormsModule ,
     MatCheckboxModule,
     NgxPaginationModule,
-    SweetAlert2Module, NotifierModule,AutoCompleteModule,InputMaskModule,
+   SweetAlert2Module,
+    NotifierModule,AutoCompleteModule,InputMaskModule,
     ListboxModule,
     TableModule,
     ToastModule,TooltipModule,
@@ -226,7 +227,7 @@ import { AllListingComponent } from './components/pages/listings/all-listing/all
       useClass: AuthInterceptor,
       multi: true
     } ,   {provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: { clickAction: 'noop' } as MatCheckboxDefaultOptions},
-          {provide: LocationStrategy, useClass: HashLocationStrategy}
+          //{provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
 
   bootstrap: [AppComponent]

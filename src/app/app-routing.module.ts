@@ -75,7 +75,7 @@ import { AllListingComponent } from './components/pages/listings/all-listing/all
     {path: 'cart', component: CartComponent},
     {path: 'checkout', component: CheckoutComponent},
     {path: 'single-products', component: ProductsDetailsComponent},
-    {path: 'user-profile', component: AuthorProfileComponent},
+    {path: 'user-profile/:id', component: AuthorProfileComponent},
     {path: 'categories', component: CategoriesComponent},
     {path: 'destinations', component: TopPlaceComponent},
     {path: 'vertical-listings-left-sidebar', component: VerticalListingsLeftSidebarComponent},
@@ -97,7 +97,7 @@ import { AllListingComponent } from './components/pages/listings/all-listing/all
     {path: 'dashboard-add-listings', component: DashboardAddListingsComponent},
     {path: 'dashboard-bookmarks', component: DashboardBookmarksComponent},
     {path: 'dashboard-my-listings', component: DashboardMyListingsComponent},
-    {path: 'politique-d-utilisation', component: PolicypageComponent},
+    {path: 'user-policy', component: PolicypageComponent},
 
 
     {path: 'listing/:label', component: ListingComponent},
@@ -122,7 +122,10 @@ import { AllListingComponent } from './components/pages/listings/all-listing/all
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+    imports: [RouterModule.forRoot(routes,
+      //{ relativeLinkResolution: 'legacy' }
+      { enableTracing: true }
+      )],
     exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -56,11 +56,15 @@ export class HomeoneBannerComponent implements OnInit {
     resetOption: any;
     config = {
         displayKey: "label",
-        search: true
+        placeholder: "Que cherchez-vous",
+        search: true,
+        searchPlaceholder: 'Cherchez...',
     };
 
     configstate = {
       displayKey: "name",
+      placeholder: "Addresse",
+      searchPlaceholder: 'Cherchez...',
       search: true
   };
 

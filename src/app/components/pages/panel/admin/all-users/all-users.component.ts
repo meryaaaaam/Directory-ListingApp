@@ -9,7 +9,7 @@ import { UserService } from 'src/app/shared/api/user.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 //import Swal from 'sweetalert2';
 import { MessageService } from 'primeng/api';
-import { CategoryService } from 'src/app/shared/api/category1.service';
+import { CategoryService } from 'src/app/shared/api/category.service';
 
 
 @Component({
@@ -72,7 +72,7 @@ export class AllUsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.logo = "assets/img/logo/default.png";
-    this.url="https:/backbottin.groupe3737.com/storage/image/" ;
+    this.url="https://backbottin.groupe3737.com/storage/image/" ;
     this.category.getAllCategories().subscribe(
       response => {
         this.categories = response ;

@@ -168,10 +168,10 @@
                                 <div class="col-lg-4 col-md-4 p-0">
                                     <div class="listings-image" style="background-image: url({{Content.logo}});">
 
-                                         <img [src]="Content.mainImg" alt="image"  href="/single-listings/{{Content.id}}">
+                                         <img [src]="Content.mainImg" alt="image"  href="/user-profile/{{Content.id}}">
                                        <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
                                         <!--  <a routerLink="/{{Content.categoryLink}}" class="category"><i class="flaticon-cooking"></i></a>-->
-                                        <a routerLink="/single-listings/{{Content.id}}" class="link-btn">  </a>
+                                        <a routerLink="/user-profile/{{Content.id}}" class="link-btn">  </a>
 
                                          <!--   <div class="author">
                                             <div class="d-flex align-items-center">
@@ -185,7 +185,7 @@
                                 <div class="col-lg-8 col-md-8 p-0">
                                     <div class="listings-content justify-content-center">
                                        <!-- <span class="status {{Content.extraClass}}"><i class="flaticon-save"></i> {{Content.openORclose}}</span> -->
-                                       <h3><a routerLink="/{{Content.id}}">{{Content.firstname}} {{Content.lastname}}</a></h3>
+                                       <h3><a routerLink="/user-profile/{{Content.id}}">{{Content.firstname}} {{Content.lastname}}</a></h3>
                                        <span class="details " *ngIf="Content.IACNC">
                                         <h4>IACNC</h4>
                                        </span>
@@ -221,7 +221,9 @@
                             <!-- col-lg-4 col-md-4 p-0 -->
                               <div class="col-4 p-0">
                                   <div class="listings-image" style="background-image: url({{Content.logo}});">
-                                      <img [src]="Content.logos" alt="image" href="/single-listings/{{Content.id}}">
+                                      <img [src]="Content.logo" alt="image" href="/user-profile/{{Content.id}}">
+                                      <a routerLink="/user-profile/{{Content.id}}" class="link-btn">  </a>
+
                                      <!-- <a routerLink="/{{Content.bookmarkLink}}" class="bookmark-save"><i class="flaticon-heart"></i></a>-->
                                       <!--  <a routerLink="/{{Content.categoryLink}}" class="category"><i class="flaticon-cooking"></i></a>-->
                                       <!--<a routerLink="/single-listings/{{Content.id}}" class="link-btn"> plus détails </a>-->
@@ -240,7 +242,7 @@
                                      <!-- <span class="status {{Content.extraClass}}"><i class="flaticon-save"></i> {{Content.openORclose}}</span> -->
                                      <div>
 
-                                      <h3><a routerLink="/single-listings/{{Content.id}}">
+                                      <h3><a routerLink="/user-profile/{{Content.id}}">
                                         {{Content.companyname}}</a> &nbsp;
                                         <span class="details " *ngIf="Content.IACNC">
                                           <h4>IACNC</h4>

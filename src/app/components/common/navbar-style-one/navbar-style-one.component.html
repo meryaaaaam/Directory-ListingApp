@@ -4,7 +4,9 @@
         <div class="container">
             <div class="vesax-responsive-menu">
                 <div class="logo">
-                    <a routerLink="/"><img src="assets/img/3737.png" alt="logo"></a>
+                    <a routerLink="/">
+                      <img src="assets/img/3737.png" alt="logo" width="50px">
+                    </a>
                 </div>
             </div>
         </div>
@@ -13,8 +15,8 @@
     <div class="vesax-nav">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md navbar-light">
-                <a class="navbar-brand" routerLink="/"><img src="assets/img/logo.png" alt="logo"></a>
-
+                <a class="navbar-brand" routerLink="/"><img src="assets/img/3737.png" width="250px" alt="logo"></a>
+                <p-toast></p-toast>
                 <div class="collapse navbar-collapse mean-menu">
 
                     <ul class="navbar-nav">
@@ -89,9 +91,7 @@
                             <span data-bs-toggle="modal" data-bs-target="#loginRegisterModal"><i class="flaticon-user"></i> Connexion / Inscription</span>
                         </div>
 
-                        <div class="option-item">
-                            <a routerLink="/dashboard-add-listings" class="default-btn"><i class="flaticon-more"></i> Add Listing</a>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -191,7 +191,10 @@
                                   <li>
                                       <label class="checkbox p-3">
                                           <input type="checkbox" name="isTermsAccepted" value="true" formControlName="isTermsAccepted"  >
-                                          <span>J’accepte et valide les <a href="/politique-d-utilisation" target="_blank">politique de confidentialité et les conditions  d'utilisations</a></span>
+                                          <span>J’accepte et valide les
+                                            <a routerLink="user-policy" target="_blank">
+                                              politiques de confidentialité et les conditions d'utilisations</a>
+                                            </span>
 
                                         </label>
 

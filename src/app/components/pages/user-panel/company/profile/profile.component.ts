@@ -128,7 +128,7 @@ export class ProfileComponent implements OnInit {
     {this.user = data ; this.users = data ; this.type = this.user.Line_type ; console.log(this.user) ;
 
     if (this.user.logo)
-    {this.image = `http://localhost:8000/storage/image/${this.user.logo}`}
+    {this.image = this.user.logo}
     else {this.image = 'assets/img/Logo_e.jpg'}
 
     // console.log(this.image) ;

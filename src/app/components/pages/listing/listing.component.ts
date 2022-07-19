@@ -573,17 +573,17 @@ export class ListingComponent implements OnInit {
 
   Type(event)
   {
-    
+
     let type = event.target.value ;
     if(type == 'Pro'){
-        this.checkedTypes.pro = !this.checkedTypes.pro;  
+        this.checkedTypes.pro = !this.checkedTypes.pro;
         console.log(this.checkedTypes.pro);
     }
     if(type == 'Company'){
-        this.checkedTypes.company = !this.checkedTypes.company;  
+        this.checkedTypes.company = !this.checkedTypes.company;
         console.log(this.checkedTypes.company);
     }
-    
+
     if (this.checkedTypes.pro == true && this.checkedTypes.company ==true || this.checkedTypes.pro ==false && this.checkedTypes.company == false){
         this.search=this.globalData;
     }else if(this.checkedTypes.pro == true && this.checkedTypes.company == false){
@@ -601,18 +601,22 @@ export class ListingComponent implements OnInit {
     // console.log(this.search) ;
     //console.log(type);
     //}
-    
-    
+
+
 //     let word = this.route.snapshot.paramMap.get('label') ;
-    
+
 //     if (type=='Pro')
 //     { this.r.navigate(['/listing/', word], {queryParams: {Type: 'Pro'}});}
-//     else {
+//     else {()
 //       this.r.navigate(['/listing/', word], {queryParams: {Type: 'Company'}});
 //     }
 //   console.log(type) ;
 
 
   }
+
+
+  province()
+  {}
 }
 

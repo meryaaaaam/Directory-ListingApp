@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { User } from 'src/app/models/user/user';
 import { AuthStateService } from 'src/app/shared/auth/auth-state.service';
 import { AuthService } from 'src/app/shared/auth/auth.service';
 import { TokenService } from 'src/app/shared/auth/token.service';
-import Swal from 'sweetalert2'
 
 
 @Component({
   selector: 'app-navbar-style-one',
   templateUrl: './navbar-style-one.component.html',
-  styleUrls: ['./navbar-style-one.component.scss']
+  styleUrls: ['./navbar-style-one.component.scss'],
+  providers: [MessageService]
+
 })
 export class NavbarStyleOneComponent implements OnInit {
   loginForm: FormGroup;
@@ -27,7 +29,8 @@ export class NavbarStyleOneComponent implements OnInit {
     public fb: FormBuilder,
     public authService: AuthService,
     private token: TokenService,
-    private authState: AuthStateService
+    private authState: AuthStateService,
+    private messageService: MessageService
   ) {
     this.auth.profileUser().subscribe((data: any)=>
 
@@ -76,51 +79,53 @@ export class NavbarStyleOneComponent implements OnInit {
 
 
 
-
   }
 
   getroles()
   {this.authService.roles().subscribe(
     (result) => {
-      console.log(result) ;
+     // console.log(result) ;
        this.role = result ;
     },
     (error) => {
 
-      console.log(error.errors);
+     // console.log(error.errors);
     }
   );}
- alertWithSuccess(){
-    Swal.fire('Yre authentificated succesfully!', '', 'success')
+
+  showSuccess(detail) {
+    this.messageService.add({severity:'success', summary: 'Success', detail: detail});
   }
 
-  alertWithError()
-  {Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text: 'Something went wrong! please verify your information',
-   // footer: '<a href="">Why do I have this issue?</a>'
-  })}
+  showInfo(detail) {
+    this.messageService.add({severity:'info', summary: 'Info', detail: detail});
+  }
+
+  showWarn(detail) {
+    this.messageService.add({severity:'warn', summary: 'Warn', detail: detail});
+  }
+
+  showError(detail) {
+    this.messageService.add({severity:'error', summary: 'Error', detail: detail});
+  }
+
+
 
   loginAfterRegister(form:any) {
-  //  this.getroles() ;
-    this.authService.signin(form).subscribe(
+     this.authService.signin(form).subscribe(
       (result) => {
         this.responseHandler(result);
-      //  console.log(result.role)
-        console.log() ;
+         console.log() ;
 
         this.authState.setAuthState(true);
 
         this.loginForm.reset();
-       //this.alertWithSuccess() ;
-       // this.router.navigate(['user/profile']);
 
       },
       (error) => {
-        this.alertWithError();
+      //  this.alertWithError();
         this.errors = error.error;
-        console.log(this.errors);
+       // console.log(this.errors);
       }
     );
   }
@@ -133,7 +138,7 @@ export class NavbarStyleOneComponent implements OnInit {
         const data1 : any = {email: data.email , password:data.password, isActive:0}
 
         this.registerForm.reset();
-        this.alertWithSuccess() ;
+      //  this.alertWithSuccess() ;
 
         /*this.loginAfterRegister(data1);
         console.log(result);*/
@@ -141,8 +146,9 @@ export class NavbarStyleOneComponent implements OnInit {
       },
       (error) => {
         this.errors = error.error;
+        this.showError('Veuillez vérifier votre adresse email ou votre mot de passe')
         console.log(this.errors) ;
-        this.alertWithError();
+       // this.alertWithError();
       },
 
 
@@ -151,30 +157,30 @@ export class NavbarStyleOneComponent implements OnInit {
   }
 
   login() {
+    let data ;
     this.authService.signin(this.loginForm.value).subscribe(
       (result) => {
         this.responseHandler(result);
-        console.log(result);
-        console.log('c est un '+result.user.role);
-     let data = result.user.role ;
-
-        this.authState.setAuthState(true);
-        this.loginForm.reset();
-       this.alertWithSuccess() ;
-       // this.router.navigate(['user/profile']);
-       if(data == "Pro")
-       this.router.navigateByUrl('professionnel/profile');
-       else if(data == "Company")
-       this.router.navigateByUrl('entreprise/profile');
-       else
-       { this.router.navigateByUrl('profile');}
-
-       console.log(this.role) ;
+        data = result.user.role ;
+      //  this.authState.setAuthState(true);
       },
       (error) => {
-        this.alertWithError();
+         this.showError('Veuillez vérifier votre adresse email ou votre mot de passe')
         this.errors = error.error;
-      }
+      },
+      () => {
+        // this.authState.setAuthState(true);
+         this.loginForm.reset();
+        // this.router.navigate(['user/profile']);
+        if(data == "Pro")
+        this.router.navigateByUrl('professionnel/profile');
+        else if(data == "Company")
+        this.router.navigateByUrl('entreprise/profile');
+        else
+        { this.router.navigateByUrl('profile');}
+
+       }
+     // () => { window.location.reload();}
     );
   }
 
@@ -184,7 +190,9 @@ export class NavbarStyleOneComponent implements OnInit {
   // Handle response
   responseHandler(data:any) {
     this.token.handleData(data.access_token);
-  }
+    this.token.saveUser(data.user) ;
+    this.token.saveToken(data.access_token);
+   }
 
   ischecked = false ;
   pro=false ; company = false;

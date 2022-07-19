@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { UserService } from 'src/app/shared/api/user.service';
 
 @Component({
     selector: 'app-author-profile',
@@ -10,17 +12,29 @@ export class AuthorProfileComponent implements OnInit {
 
     blogGrid: number = 1;
 
-    constructor() { }
+    id : any ;
+    result : any  ;
+    constructor(private route: ActivatedRoute, public user : UserService) { }
 
     ngOnInit(): void {
+      this.id =  this.get(this.route.snapshot.paramMap.get('id')) ;
     }
 
-    pageTitleContent = [
-        {
-            title: 'Author',
-            backgroundImage: 'assets/img/page-title/page-title1.jpg'
-        }
-    ]
+
+    get(id)
+    {
+
+      let x ;
+      this.user.get(id).subscribe(
+
+        (data)=>{ x=data ;
+                  this.result= x;
+                  console.log(x) ;
+                }
+      )
+    }
+
+
     singleListingsBox = [
         {
             mainImg: [
@@ -96,153 +110,50 @@ export class AuthorProfileComponent implements OnInit {
                 }
             ],
             ratingCount: '10'
+        }
+    ]
+
+    galleryOptions: OwlOptions = {
+		loop: true,
+		nav: true,
+		dots: false,
+		autoplayHoverPause: true,
+		autoplay: true,
+		margin: 30,
+        navText: [
+            "<i class='flaticon-left-chevron'></i>",
+            "<i class='flaticon-right-chevron'></i>"
+        ],
+		responsive: {
+			0: {
+				items: 1,
+			},
+			576: {
+				items: 2,
+			},
+			768: {
+				items: 2,
+			},
+			992: {
+				items: 2,
+			}
+		}
+    }
+    singleImageBox = [
+        {
+            img: 'assets/img/gallery/gallery1.jpg'
         },
         {
-            mainImg: [
-                {
-                    img: 'assets/img/listings/listings8.jpg'
-                }
-            ],
-            categoryLink: 'single-listings',
-            category: 'Shopping',
-            bookmarkLink: 'single-listings',
-            location: 'Seattle, USA',
-            title: 'Blue Water Shopping City',
-            price: 'Start From: $500',
-            detailsLink: 'single-listings',
-            authorImg: 'assets/img/user5.jpg',
-            openORclose: 'Open Now',
-            extraClass: 'status-open',
-            authorName: 'Lina',
-            rating: [
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                }
-            ],
-            ratingCount: '55'
+            img: 'assets/img/gallery/gallery2.jpg'
         },
         {
-            mainImg: [
-                {
-                    img: 'assets/img/listings/listings1.jpg'
-                }
-            ],
-            categoryLink: 'single-listings',
-            category: 'Restaurant',
-            bookmarkLink: 'single-listings',
-            location: 'New York, USA',
-            title: 'Chipotle Mexican Grill',
-            price: 'Start From: $150',
-            detailsLink: 'single-listings',
-            authorImg: 'assets/img/user1.jpg',
-            openORclose: 'Open Now',
-            extraClass: 'status-open',
-            authorName: 'Taylor',
-            rating: [
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bx-star'
-                },
-                {
-                    icon: 'bx bx-star'
-                }
-            ],
-            ratingCount: '45'
+            img: 'assets/img/gallery/gallery3.jpg'
         },
         {
-            mainImg: [
-                {
-                    img: 'assets/img/listings/listings3.jpg'
-                }
-            ],
-            categoryLink: 'single-listings',
-            category: 'Shopping',
-            bookmarkLink: 'single-listings',
-            location: 'Bangkok, Thailand',
-            title: 'Central Shopping Center',
-            price: 'Start From: $110',
-            detailsLink: 'single-listings',
-            authorImg: 'assets/img/user3.jpg',
-            openORclose: 'Close Now',
-            extraClass: 'status-close',
-            authorName: 'James',
-            rating: [
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star-half'
-                }
-            ],
-            ratingCount: '35'
+            img: 'assets/img/gallery/gallery4.jpg'
         },
         {
-            mainImg: [
-                {
-                    img: 'assets/img/listings/listings5.jpg'
-                },
-                {
-                    img: 'assets/img/listings/listings6.jpg'
-                }
-            ],
-            categoryLink: 'single-listings',
-            category: 'Beauty',
-            bookmarkLink: 'single-listings',
-            location: 'Suwanee, USA',
-            title: 'Vesax Beauty Center',
-            price: 'Start From: $100',
-            detailsLink: 'single-listings',
-            authorImg: 'assets/img/user4.jpg',
-            openORclose: 'Open Now',
-            extraClass: 'status-open',
-            authorName: 'Andy',
-            rating: [
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bxs-star'
-                },
-                {
-                    icon: 'bx bx-star'
-                },
-                {
-                    icon: 'bx bx-star'
-                }
-            ],
-            ratingCount: '15'
+            img: 'assets/img/gallery/gallery5.jpg'
         }
     ]
 
@@ -261,5 +172,14 @@ export class AuthorProfileComponent implements OnInit {
             "<i class='flaticon-right-chevron'></i>"
         ]
     }
+
+
+    pageTitleContent = [
+        {
+            title: 'Author',
+            backgroundImage: 'assets/img/page-title/page-title1.jpg'
+        }
+    ]
+
 
 }

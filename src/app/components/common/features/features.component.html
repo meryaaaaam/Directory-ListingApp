@@ -1,5 +1,5 @@
 <!-- Start Features Area -->
-<section class="features-area ptb-50">
+<section class="features-area ptb-150">
     <div class="container">
 
 
@@ -24,7 +24,11 @@
           <div class="row" style="margin-top: 2em;">
  <div class="col-6 ">
 
-<p-dropdown [options]="searchResult"
+
+  <ngx-select-dropdown     (searchChange)="search($event)" tabindex="0" [multiple]="false" [(ngModel)]="singleSelect" name="singleSelect" [config]="config" [options]="searchResult"></ngx-select-dropdown>
+
+
+<!--<p-dropdown [options]="searchResult"
 [style]="{'minWidth':'100%'}"
 [(ngModel)]="singleSelect" optionLabel="name" [showClear]="true" placeholder="Qui">
   <ng-template pTemplate="selectedItem">
@@ -37,7 +41,7 @@
            <div>{{country.name}}</div>
       </div>
   </ng-template>
-</p-dropdown>
+</p-dropdown>-->
   </div>
 
 
@@ -47,11 +51,11 @@
 
 
      <div class="col-6 ">
-     <!--Où? <ngx-select-dropdown   (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="StateSelect" name="state" [config]="config" [options]="searchstate"></ngx-select-dropdown>
-     -->
+      <ngx-select-dropdown   (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="StateSelect" name="state" [config]="configstate" [options]="searchstate"></ngx-select-dropdown>
 
 
-     <p-dropdown [options]="searchstate" [(ngModel)]="StateSelect"
+
+     <!--<p-dropdown [options]="searchstate" [(ngModel)]="StateSelect"
      [style]="{'minWidth':'100%'}"
      optionLabel="state" [showClear]="true" placeholder="Où">
       <ng-template pTemplate="selectedItem">
@@ -64,7 +68,7 @@
                <div>{{country.name}}</div>
           </div>
       </ng-template>
-    </p-dropdown>
+    </p-dropdown>-->
 
     </div>
           </div>
@@ -72,7 +76,7 @@
          <div class="row" style="margin-top: 3em;">
            <div class="col-4"></div>  <div class="col-4"></div>
            <div class="col-4" *ngIf="singleSelect">
-            <a routerLink="/single-listings/{{singleSelect.id}}" class="default-btn">Chercher</a>
+            <a routerLink="/user-profile/{{singleSelect.id}}" class="default-btn">Chercher</a>
          </div>
 
 
@@ -104,7 +108,7 @@
 <div class="col-6">
 
 
-  <p-dropdown [options]="searchCompany"
+  <!--<p-dropdown [options]="searchCompany"
   [style]="{'minWidth':'100%'}"
   [(ngModel)]="CompanysingleSelect" optionLabel="name" [showClear]="true" placeholder="Qui" name="company">
     <ng-template pTemplate="selectedItem">
@@ -117,24 +121,22 @@
              <div>{{country.name}}</div>
         </div>
     </ng-template>
-  </p-dropdown>
-    </div>
+  </p-dropdown>-->
 
 
- <!--Qui? <ngx-select-dropdown   placeholder="Qui?" (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="CompanysingleSelect" name="company" [config]="config" [options]="searchCompany"></ngx-select-dropdown>
+   <ngx-select-dropdown     (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="CompanysingleSelect" name="company" [config]="config" [options]="searchCompany"></ngx-select-dropdown>
 
 </div>
 
   <div class="col-6">
-    <!--<input type="text" class="form-control" placeholder="Où? ">
-   Où? <ngx-select-dropdown  placeholder="Où?" (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="StateSelect" name="state2" [config]="config" [options]="searchstate"></ngx-select-dropdown>
+   <ngx-select-dropdown    (searchChange)="searchComp($event)" tabindex="0" [multiple]="false" [(ngModel)]="StateSelect" name="state2" [config]="configstate" [options]="searchstate"></ngx-select-dropdown>
 
 
   </div>
-        </div>-->
 
 
-        <div class="col-6">
+
+       <!-- <div class="col-6">
      <p-dropdown [options]="searchstate" [(ngModel)]="StateSelect"
      [style]="{'minWidth':'100%'}"
      optionLabel="state" [showClear]="true" placeholder="Où">
@@ -150,7 +152,7 @@
       </ng-template>
     </p-dropdown>
 
-    </div>
+    </div>-->
           </div>
 
        <div class="row" style="margin-top: 3em;">
@@ -158,7 +160,7 @@
 
 
        <div class="col-4" *ngIf="CompanysingleSelect">
-        <a routerLink="/single-listings/{{CompanysingleSelect.id}}" class="default-btn">Chercher</a>
+        <a routerLink="/user-profile/{{CompanysingleSelect.id}}" class="default-btn">Chercher</a>
      </div>
 
 

@@ -17,10 +17,25 @@ export class FeaturesComponent implements OnInit {
   searchstate : any ;
   searchCompany : any ;
   state : any;
+
   config = {
     displayKey: "name",
-    search: true
+    height:'200px',
+    search: true,
+    placeholder: "Que cherchez-vous",
+     searchPlaceholder: 'Cherchez...',
 };
+
+
+
+configstate = {
+displayKey: "name",
+placeholder: "Addresse",
+searchPlaceholder: 'Cherchez...',
+height:'200px',
+search: true
+};
+
 
     constructor( public r : Router , public u : UserService ) { }
 
@@ -56,6 +71,8 @@ export class FeaturesComponent implements OnInit {
 
 
     }
+
+
 
 
     searchComp($event )

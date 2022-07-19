@@ -19,7 +19,7 @@ export class AuthService {
     return this.http.post('https://backbottin.groupe3737.com/api/auth/register', user);
   }
   // Login
-  signin(user: User): Observable<any> {
+  signin(user): Observable<any> {
     return this.http.post<any>('https://backbottin.groupe3737.com/api/auth/login', user);
   }
   // Access user profile

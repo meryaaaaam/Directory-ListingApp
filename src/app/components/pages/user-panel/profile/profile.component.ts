@@ -49,7 +49,7 @@ data:any;
     this.auth.profileUser().subscribe(data=>  {
 
       if (this.user.logo)
-      {this.image = `localhost:8000/storage/image/${this.user.logo}`}
+      {this.image = this.user.logo}
       else {this.image = 'assets/img/Logo_e.jpg'}
 
     }) ;

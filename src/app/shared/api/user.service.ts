@@ -39,7 +39,7 @@ export class UserService {
 
   note(id , data) {
    // return this.http.put("http://127.0.0.1:8000/api/note/"+id , data);
-    return this.http.put("https:/backbottin.groupe3737.com/api/note/"+id , data);
+    return this.http.put("https://backbottin.groupe3737.com/api/note/"+id , data);
   }
 
   create(data)  {
@@ -68,19 +68,19 @@ export class UserService {
 
   getAllListUser()
   //{return this.http.get("http://127.0.0.1:8000/api/list/users") ; }
-  {return this.http.get("https:/backbottin.groupe3737.com/api/list/users") ; }
+  {return this.http.get("https://backbottin.groupe3737.com/api/list/users") ; }
 
 
 
   getAllActifUsers()
   //{return this.http.get(" http://127.0.0.1:8000/api/list/users/actifs") ; }
-  {return this.http.get(" https:/backbottin.groupe3737.com/api/list/users/actifs") ; }
+  {return this.http.get("https://backbottin.groupe3737.com/api/list/users/actifs") ; }
 
 
 
   getAllPredingUsers()
  // {return this.http.get(" http://127.0.0.1:8000/api/list/users/preding") ; }
-  {return this.http.get(" https:/backbottin.groupe3737.com/api/list/users/preding") ; }
+  {return this.http.get("https:/backbottin.groupe3737.com/api/list/users/preding") ; }
 
   isActive(id,data)
   {
@@ -136,7 +136,7 @@ export class UserService {
   uploadData(id ,data){
     const headers = new HttpHeaders();
    // return this.http.post(`http://127.0.0.1:8000/api/auth/upload-image/${id}`,data,{headers:headers});
-    return this.http.post(`https:/backbottin.groupe3737.com/api/auth/upload-image/${id}`,data,{headers:headers});
+    return this.http.post(`https://backbottin.groupe3737.com/api/auth/upload-image/${id}`,data,{headers:headers});
   }
 
 
