@@ -2,9 +2,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const baseUrl = "http://127.0.0.1:8000/api/";
-/*const baseUrl = "https://backbottin.groupe3737.com/api/all/search" ;
-const url =     "https://backbottin.groupe3737.com/api/users" ;
+//const baseUrl = "http://127.0.0.1:8000/api/";
+const baseUrl = "https://backbottin.groupe3737.com/api/" ;
+/*const url =     "https://backbottin.groupe3737.com/api/users" ;
 const searchAll = "https://backbottin.groupe3737.com/api/searchAll" ;
 const search = "https://backbottin.groupe3737.com/api/searchByLabel" ;
 const lastone = "https://backbottin.groupe3737.com/api/Search/AllItem" ;

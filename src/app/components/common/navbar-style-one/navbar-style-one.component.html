@@ -5,7 +5,7 @@
             <div class="vesax-responsive-menu">
                 <div class="logo">
                     <a routerLink="/">
-                      <img src="assets/img/3737.png" alt="logo" width="50px">
+                      <img src="assets/img/3737.png" alt="logo" width="100px">
                     </a>
                 </div>
             </div>
@@ -13,6 +13,7 @@
     </div>
 
     <div class="vesax-nav">
+      <p-toast></p-toast>
         <div class="container-fluid">
             <nav class="navbar navbar-expand-md navbar-light">
                 <a class="navbar-brand" routerLink="/"><img src="assets/img/3737.png" width="250px" alt="logo"></a>
@@ -80,14 +81,19 @@
             <div class="container">
                 <div class="option-inner">
                     <div class="others-option">
-                        <div class="option-item">
-                            <form class="navbar-search-box">
+                        <!-- <div class="option-item">
+                           <form class="navbar-search-box">
                                 <label><i class="flaticon-search"></i></label>
                                 <input type="text" class="input-search" placeholder="What are you looking for?">
                             </form>
-                        </div>
+                        </div>-->
 
-                        <div class="option-item">
+
+
+                        <div *ngIf="user.id" class="option-item">
+                          <span routerLink={{link}}  ><i class="flaticon-user"></i> Profile</span>
+                      </div>
+                        <div *ngIf="!user.id" class="option-item">
                             <span data-bs-toggle="modal" data-bs-target="#loginRegisterModal"><i class="flaticon-user"></i> Connexion / Inscription</span>
                         </div>
 
@@ -131,7 +137,7 @@
                             <div class="form-group">
                                 <input type="password" placeholder="Password" class="form-control" formControlName="password">
                             </div>
-                            <button type="submit" data-bs-dismiss="modal">Connexion</button>
+                            <button type="submit" data-bs-dismiss="modal" >Connexion</button>
                         </form>
                         <span class="dont-account">Vous n'avez pas de compte ? <a href="#">S'inscrire </a></span>
 
@@ -139,13 +145,7 @@
                 </div>
                 <div class="tab-pane fade" id="register" role="tabpanel">
                     <div class="vesax-register">
-                       <!-- <div class="register-with-account">
-                            <span>Register with</span>
-                            <ul>
-                                <li><a href="#" class="facebook"><i class='bx bxl-facebook'></i> Facebook</a></li>
-                                <li><a href="#" class="twitter"><i class='bx bxl-twitter'></i> Twitter</a></li>
-                            </ul>
-                        </div>-->
+
                         <span class="sub-title"><span>Creer compte</span></span>
                         <form [formGroup]="registerForm" (ngSubmit)="signup()">
                             <div class="form-group">
@@ -210,9 +210,9 @@
 
                           </div></div>
 
-                            <button type="submit">S'inscrire</button>
+                            <button type="submit" data-bs-dismiss="modal">S'inscrire</button>
                         </form>
-                        <span class="already-account">Vous avez déjà un compte?
+                        <span class="already-account"data-bs-toggle="modal" data-bs-target="#loginRegisterModal">Vous avez déjà un compte?
                            <a href="#" >Login Now</a></span>
 
 

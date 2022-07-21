@@ -136,7 +136,7 @@ export class UserService {
   uploadData(id ,data){
     const headers = new HttpHeaders();
    // return this.http.post(`http://127.0.0.1:8000/api/auth/upload-image/${id}`,data,{headers:headers});
-    return this.http.post(`https://backbottin.groupe3737.com/api/auth/upload-image/${id}`,data,{headers:headers});
+   return this.http.post(`https://backbottin.groupe3737.com/api/auth/upload-image/${id}`,data,{headers:headers});
   }
 
 

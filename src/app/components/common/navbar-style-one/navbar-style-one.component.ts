@@ -39,16 +39,16 @@ export class NavbarStyleOneComponent implements OnInit {
 
       if (this.user.role=='Admin')
       {
-        this.link ='profile' ;
+        this.link ='/profile' ;
       }
       else if (this.user.role =='Company')
       {
-        this.link ='entreprise/profile' ;
+        this.link ='/entreprise/profile' ;
       }
       else {
-        this.link ='professionnel/profile' ;
+        this.link ='/professionnel/profile' ;
       }
-      console.log(this.link) ;
+    //  console.log(this.link) ;
 
     }
 
@@ -109,75 +109,44 @@ export class NavbarStyleOneComponent implements OnInit {
     this.messageService.add({severity:'error', summary: 'Error', detail: detail});
   }
 
+    // Handle response
+    responseHandler(data:any) {
+      this.token.handleData(data.access_token);
+      this.token.saveUser(data.user) ;
+      this.token.saveToken(data.access_token);
+     }
 
-
-  loginAfterRegister(form:any) {
-     this.authService.signin(form).subscribe(
-      (result) => {
-        this.responseHandler(result);
-         console.log() ;
-
-        this.authState.setAuthState(true);
-
-        this.loginForm.reset();
-
-      },
-      (error) => {
-      //  this.alertWithError();
-        this.errors = error.error;
-       // console.log(this.errors);
-      }
-    );
-  }
-
-  signup() {
-    this.authService.register(this.registerForm.value).subscribe(
-      (result) => {
-        const data = result;
-
-        const data1 : any = {email: data.email , password:data.password, isActive:0}
-
-        this.registerForm.reset();
-      //  this.alertWithSuccess() ;
-
-        /*this.loginAfterRegister(data1);
-        console.log(result);*/
-
-      },
-      (error) => {
-        this.errors = error.error;
-        this.showError('Veuillez vérifier votre adresse email ou votre mot de passe')
-        console.log(this.errors) ;
-       // this.alertWithError();
-      },
+    ischecked = false ;
+    pro=false ; company = false;
+    checked = false;
+    indeterminate = false;
+    labelPosition: 'before' | 'after' = 'after';
+    disabled = false;
 
 
 
-    );
-  }
+  loginAfterRegister(data) {
 
-  login() {
-    let data ;
-    this.authService.signin(this.loginForm.value).subscribe(
+
+    this.authService.signin(data).subscribe(
       (result) => {
         this.responseHandler(result);
         data = result.user.role ;
-      //  this.authState.setAuthState(true);
-      },
-      (error) => {
-         this.showError('Veuillez vérifier votre adresse email ou votre mot de passe')
-        this.errors = error.error;
-      },
-      () => {
-        // this.authState.setAuthState(true);
-         this.loginForm.reset();
-        // this.router.navigate(['user/profile']);
+        this.loginForm.reset();
         if(data == "Pro")
         this.router.navigateByUrl('professionnel/profile');
         else if(data == "Company")
         this.router.navigateByUrl('entreprise/profile');
         else
         { this.router.navigateByUrl('profile');}
+      },
+      (error) => {
+         this.showError('Veuillez vérifier votre adresse email ou votre mot de passe')
+        this.errors = error.error;
+      },
+      () => {
+
+
 
        }
      // () => { window.location.reload();}
@@ -186,19 +155,55 @@ export class NavbarStyleOneComponent implements OnInit {
 
 
 
+  login() {
+    let data ;
+    this.authService.signin(this.loginForm.value).subscribe(
+      (result) => {
+        this.responseHandler(result);
+        data = result.user.role ;
+        this.loginForm.reset();
+        if(data == "Pro")
+        this.router.navigateByUrl('professionnel/profile');
+        else if(data == "Company")
+        this.router.navigateByUrl('entreprise/profile');
+        else
+        { this.router.navigateByUrl('profile');}
+      //  this.authState.setAuthState(true);
+      },
+      (error) => {
+         this.showError('Veuillez vérifier votre adresse email ou votre mot de passe')
+        this.errors = error.error;
+      },
 
-  // Handle response
-  responseHandler(data:any) {
-    this.token.handleData(data.access_token);
-    this.token.saveUser(data.user) ;
-    this.token.saveToken(data.access_token);
-   }
 
-  ischecked = false ;
-  pro=false ; company = false;
-  checked = false;
-  indeterminate = false;
-  labelPosition: 'before' | 'after' = 'after';
-  disabled = false;
+    );
+  }
+
+
+  signup() {
+    //console.log(this.registerForm.value.email , this.registerForm.value.password);
+    this.loginForm.value['email'] = this.registerForm.value.email  ;
+    this.loginForm.value['password'] = this.registerForm.value.password  ;
+    console.log(this.loginForm.value );
+
+     this.authService.register(this.registerForm.value).subscribe(
+      (result) => {
+        const data = result;
+        this.showSuccess('Votre compte a été créer avec success ')
+        this.registerForm.reset();
+        console.log(result);
+              this.loginAfterRegister(this.loginForm.value);
+      },
+      (error) => {
+        this.errors = error.error;
+        this.showError('Veuillez vérifier votre adresse email ou votre mot de passe')
+        console.log(this.errors) ;
+       },
+
+
+
+  );
+  }
+
 
 }

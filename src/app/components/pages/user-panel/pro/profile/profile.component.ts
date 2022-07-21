@@ -230,7 +230,7 @@ export class ProfileComponent implements OnInit {
 
      this.auth.profileUser().subscribe(data=>  {this.users = data ; //console.log(this.users = data ) ;
        if (this.user.logo)
-       {this.image = `https://backbottin.groupe3737.com/storage/image/${this.user.logo}`}
+       {this.image = this.user.logo}
        else {this.image = 'assets/img/Logo_e.jpg'}
 
      }) ;
@@ -263,8 +263,8 @@ updateprofile2()
           if(!this.data)
          {this.showError(c.message) ;}
          else {
-          this.showSuccess(c.message) ;          }
-
+          this.showSuccess(c.message) ;        }
+          window.location.reload();
       },
       error => {
         console.log(error);
@@ -291,7 +291,7 @@ updateprofile2()
          {this.showError(c.message) ;}
          else {
           this.showSuccess(c.message) ;          }
-
+          window.location.reload();
       },
       error => {
         console.log(error);
@@ -317,7 +317,7 @@ updateprofile2()
         this.notifier.notify('success', 'User updated successfully');
         this.data=response;
         console.log(response);
-
+        window.location.reload();
       },
       error => {
         console.log(error);
@@ -330,7 +330,7 @@ updateprofile2()
       this.auth.changepassword(this.passwordForm.value).
       subscribe( response => {
         this.notifier.notify('success', 'password updated successfully');
-        console.log(response);
+        console.log(response); window.location.reload();
       },
       error => {
         console.log(error);

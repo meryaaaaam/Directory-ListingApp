@@ -3,9 +3,10 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Password } from 'src/app/models/user/password';
 
-const baseUrl = "http://127.0.0.1:8000/api/auth/";
-//const baseUrl ="'https://backbottin.groupe3737.com/api/auth/";
-const user = "http://127.0.0.1:8000/api/users/";
+//const baseUrl = "http://127.0.0.1:8000/api/auth/";
+ const baseUrl ="https://backbottin.groupe3737.com/api/auth/";
+//const user = "http://127.0.0.1:8000/api/users/";
+const user = "https://backbottin.groupe3737.com/api/users/";
 
 
 // User interface
