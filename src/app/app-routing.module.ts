@@ -100,7 +100,7 @@ import { AllListingComponent } from './components/pages/listings/all-listing/all
     {path: 'user-policy', component: PolicypageComponent},
 
 
-    {path: 'listing/:label', component: ListingComponent},
+    {path: 'listing', component: ListingComponent},
     {path: 'listings/all', component: AllListingComponent},
 
     {path: 'users-list', component: AllUsersComponent , canActivate: [AuthGuard ]   },

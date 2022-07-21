@@ -78,8 +78,8 @@
 
                           <ul>
                              <li>
-                              <input id="feature" type="checkbox" (change)="IACNC($event)" >
-                              <label for="feature" value="true">IACNC</label>
+                              <input id="feature" type="checkbox" value="false" (change)="IACNC($event)" >
+                              <label for="feature" >IACNC</label>
                               </li>
                             </ul>
 
@@ -111,14 +111,14 @@
 
                                 <span *ngIf="s.id <= 5">
                                     <li>
-                                        <input id="feature{{ s.id }}" type="checkbox" >
+                                        <input id="feature{{ s.id }}" value={{s.name}} type="checkbox"  (change)="province($event)">
                                         <label for="feature{{ s.id }}">{{s.name}}</label>
                                     </li>
 
                                 </span>
                                 <span *ngIf="s.id > 5">
                                     <li class="hide">
-                                        <input id="feature{{ s.id }}" type="checkbox" >
+                                        <input id="feature{{ s.id }}" type="checkbox" value={{s.name}} (change)="province($event)" >
                                         <label for="feature{{ s.id }}">{{s.name}}</label>
                                     </li>
 
@@ -132,7 +132,7 @@
                 </aside>
             </div>
 
-            <div *ngIf="!search" class="col-lg-8 col-md-12">
+            <div *ngIf="!result" class="col-lg-8 col-md-12">
               <div class="listings-grid-sorting row align-items-center">
                   <div class="col-lg-5 col-md-6 result-count">
                       <p>Nous avons trouvé <span class="count">  0  </span> annonces disponibles  </p>
@@ -143,10 +143,10 @@
 
 
 
-            <div *ngIf="search" class="col-lg-8 col-md-12">
+            <div *ngIf="result" class="col-lg-8 col-md-12">
                 <div class="listings-grid-sorting row align-items-center">
                     <div class="col-lg-5 col-md-6 result-count">
-                        <p>Nous avons trouvé <span class="count">  {{search.length}}  </span> annonces disponibles  </p>
+                        <p>Nous avons trouvé <span class="count">  {{result.length}}  </span> annonces disponibles  </p>
                     </div>
 
                   <!-- <div class="col-lg-7 col-md-6 ordering">
@@ -156,10 +156,13 @@
                                 <ngx-select-dropdown (change)="TriProvince()" name="ordering-select" tabindex="0" [multiple]="false" [(ngModel)]="singleSelect" [config]="config" [options]="options2" optionLabel="name"></ngx-select-dropdown>
                             </div>
                         </div>
+                        {{result|json}}
                     </div> -->
                 </div>
+
+
                   <div class="row">
-                    <div class="col-lg-12 col-md-12" *ngFor="let Content of search | paginate: { itemsPerPage: 10, currentPage: verticalListings }">
+                    <div class="col-lg-12 col-md-12" *ngFor="let Content of result | paginate: { itemsPerPage: 10, currentPage: verticalListings }">
 
                       <div *ngIf="Content.role === 'Pro' && Content.Active"class="single-listings-item">
 
@@ -202,11 +205,12 @@
                                               <!--<a routerLink="/{{Content.category}}"></a>-->
 
                                               <i class="flaticon-furniture-and-household"></i> Professionnel</li>
-
-                                              <li  *ngIf="EA"><i class="flaticon-pin"></i> {{Content.adresse}}</li><br>
+                                                <br>
+                                               <li *ngIf="Content.EA == true">
+                                                <i class="flaticon-pin"></i> {{Content.adresse}} {{Content.province}}</li><br>
                                               <!--<a href="#"><li  > <i class="flaticon-pin"></i> {{Content.service }}    </li></a>-->
 
-                                              <br> <a href="#">   <li><i class="flaticon-pin"></i> {{Content.category}}</li> </a>
+                                                <a href="#">   <li><i class="bx bx-collection"></i> {{Content.category}}</li> </a>
 
 
                                         </ul>
@@ -264,9 +268,10 @@
 
                                             <i class="flaticon-furniture-and-household"></i> Entreprise </a></li>
                                             <br>
-                                          <li *ngIf="EA">
-                                            <br>  <i class="flaticon-pin"></i> {{Content.adresse}}</li>
-                                            <br>
+                                          <li *ngIf="Content.EA == true">
+                                             <i class="flaticon-pin"></i> {{Content.adresse}} {{Content.province}}
+                                          </li>
+
                                             <!--<a href="#"><li  > <i class='bx bx-collection' ></i> {{Content.services[0] }}    </li></a>-->
 
                                             <br> <a href="#">   <li><i class='bx bx-collection' ></i>{{Content.category}}</li> </a>

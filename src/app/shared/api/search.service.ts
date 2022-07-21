@@ -28,6 +28,10 @@ export class SearchService {
     return this.http.get(baseUrl+"all/search" , data);
   }
 
+  searchusers(label , state , IACNC)
+  { return this.http.get(baseUrl+"Search" ,{params: {label:label, state : state, IACNC : IACNC }});}
+
+
 
   result(label){
     const headers = new HttpHeaders();

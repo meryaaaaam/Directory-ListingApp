@@ -78,15 +78,10 @@ export class HomeoneBannerComponent implements OnInit {
 
 
     search()
-    {
-     // console.log($event);
+    {// console.log($event);
       console.log(this.singleSelect.label) ;
-
       let word = this.singleSelect.label ;
-      this.r.navigate(['/listing/', word]);
-
-
-
+      this.r.navigate(['/listing'],{ queryParams: {label: this.singleSelect.label}});
 
     }
 

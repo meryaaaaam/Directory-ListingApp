@@ -18,7 +18,7 @@ import {orderBy} from 'lodash';
 })
 export class ListingComponent implements OnInit {
 
-  x : any; categorie : any ;
+  x : any; categorie : any ; checkIACNC :boolean = false;
   category : Category = new Category ;
   codec = new HttpUrlEncodingCodec;
   label : any ;
@@ -27,9 +27,12 @@ export class ListingComponent implements OnInit {
   selcttedcategory: any = [];
    p:any;
    t:any;
-   type : any ;
+   type : any ;  provinces : any[] = [] ;
    globalData:any = [];
    checkedTypes:any = {pro:false,company:false};
+   I="" ; state="" ; l ;
+  result ;
+
 
   constructor( private route: ActivatedRoute, public categories: CategoryService ,public userapi : UserService , private s : SearchService  , public r : Router )
   {
@@ -37,9 +40,29 @@ export class ListingComponent implements OnInit {
     }
 
   ngOnInit(): void {
-        this.getResult(this.route.snapshot.paramMap.get('label')) ;
+      this.checkIACNC=false;
+      let word ; let prov : string = null ; let i="" ;
+      // this.getResult(this.route.snapshot.paramMap.get('label')) ;
        this.getuser(this.route.snapshot.paramMap.get('id')) ;
 
+       this.route.queryParams.subscribe(params => {
+        word = params['label'];
+          prov = params['state'];
+          i = params['IACNC'];
+ }) ;
+
+      if (prov && i)
+      { this.getRes(i,prov);}
+      else if(prov)
+      {this.getRes('',prov);}
+      else if(i)
+      {this.getRes(i,'');}
+       else
+       {
+        this.getRes('','');
+       }
+        console.log(word , prov , i) ;
+        //this.getRes('','');
 
       this.categories.getAllCategories().subscribe(
         data=>{this.categorie = data
@@ -55,11 +78,6 @@ export class ListingComponent implements OnInit {
 
   }
 
-//   search() {
-//     this.dataService.searchProjectData(this.projects).subscribe(res => {
-//       this.projects = res; //right now 'res' value display as *null*
-//     })
-// }
   search2($event)
     {
       let data ;
@@ -88,15 +106,11 @@ export class ListingComponent implements OnInit {
 
     TriProvince(){
         let data;
-
-
         // let url='%3Ftri%3D';
-
         //console.log(this.codec.decodeKey(url));
         this.r.navigate(['/listing/'+this.selcttedcategory.label], { queryParams: {tri: this.singleSelect.name}});
-     //   console.log(this.selcttedcategory.label) ;
+        //   console.log(this.selcttedcategory.label) ;
        // console.log(this.singleSelect.name);
-
         this.route.queryParams.subscribe(params => {
             // this.p = params['provine'];
                this.t = params['tri'];
@@ -112,8 +126,6 @@ export class ListingComponent implements OnInit {
          //  console.log(this.singleSelect.name)
            this.search = data.Result;
            console.log(  this.search);
-
-
        }) ;
         let test ;
        test = orderBy(this.search, ['Name'],['asc']);
@@ -245,331 +257,53 @@ export class ListingComponent implements OnInit {
           name: "Decroissant",
       },
 
-      //{
-      //    name: "Price: low to high",
-    //  },
-     // {
-          //name: "Price: high to low",
-     // }
+
   ];
-
-  // All Listings
-  singleListingsItem = [
-      {
-          mainImg: 'assets/img/bottin.jpg',
-          categoryLink: 'single-listings',
-          bookmarkLink: 'single-listings',
-          category: 'Entreprise',
-          location: 'Montréal, Québec',
-          title: 'Groupe 3737',
-         // price: 'Start From: $121',
-          detailsLink: 'single-listings',
-          authorImg: 'assets/img/user3.jpg',
-          authorName: 'James',
-           //openORclose: 'Open Now',
-          extraClass: 'status-open',
-          rating: [
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              }
-          ],
-          ratingCount: '18'
-      },
-
-      {
-        mainImg: 'assets/img/bottin.jpg',
-        categoryLink: 'single-listings',
-        bookmarkLink: 'single-listings',
-        category: 'Entreprise',
-        location: 'Montréal, Québec',
-        title: 'Groupe 3737',
-       // price: 'Start From: $121',
-        detailsLink: 'single-listings',
-        authorImg: 'assets/img/user3.jpg',
-        authorName: 'James',
-         //openORclose: 'Open Now',
-        extraClass: 'status-open',
-        rating: [
-            {
-                icon: 'bx bxs-star'
-            },
-            {
-                icon: 'bx bxs-star'
-            },
-            {
-                icon: 'bx bxs-star'
-            },
-            {
-                icon: 'bx bxs-star'
-            },
-            {
-                icon: 'bx bxs-star'
-            }
-        ],
-        ratingCount: '18'
-    },
-
-    {
-      mainImg: 'assets/img/bottin.jpg',
-      categoryLink: 'single-listings',
-      bookmarkLink: 'single-listings',
-      category: 'Entreprise',
-      location: 'Montréal, Québec',
-      title: 'Groupe 3737',
-     // price: 'Start From: $121',
-      detailsLink: 'single-listings',
-      authorImg: 'assets/img/user3.jpg',
-      authorName: 'James',
-       //openORclose: 'Open Now',
-      extraClass: 'status-open',
-      rating: [
-          {
-              icon: 'bx bxs-star'
-          },
-          {
-              icon: 'bx bxs-star'
-          },
-          {
-              icon: 'bx bxs-star'
-          },
-          {
-              icon: 'bx bxs-star'
-          },
-          {
-              icon: 'bx bxs-star'
-          }
-      ],
-      ratingCount: '18'
-  },
-
-
-   /*   {
-          mainImg: 'assets/img/listings/listings10.jpg',
-          categoryLink: 'single-listings',
-          bookmarkLink: 'single-listings',
-          category: 'Hotel',
-          location: 'Los Angeles, USA',
-          title: 'The Beverly Hills Hotel',
-          price: 'Start From: $200',
-          detailsLink: 'single-listings',
-          authorImg: 'assets/img/user2.jpg',
-          authorName: 'Sarah',
-          openORclose: 'Open Now',
-          extraClass: 'status-open',
-          rating: [
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              }
-          ],
-          ratingCount: '10'
-      },
-      {
-          mainImg: 'assets/img/listings/listings11.jpg',
-          categoryLink: 'single-listings',
-          bookmarkLink: 'single-listings',
-          category: 'Shopping',
-          location: 'Seattle, USA',
-          title: 'Blue Water Shopping City',
-          price: 'Start From: $500',
-          detailsLink: 'single-listings',
-          authorImg: 'assets/img/user5.jpg',
-          authorName: 'Lina',
-          openORclose: 'Open Now',
-          extraClass: 'status-open',
-          rating: [
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              }
-          ],
-          ratingCount: '55'
-      },
-      {
-          mainImg: 'assets/img/listings/listings12.jpg',
-          categoryLink: 'single-listings',
-          bookmarkLink: 'single-listings',
-          category: 'Restaurant',
-          location: 'New York, USA',
-          title: 'Chipotle Mexican Grill',
-          price: 'Start From: $150',
-          detailsLink: 'single-listings',
-          authorImg: 'assets/img/user1.jpg',
-          authorName: 'Taylor',
-          openORclose: 'Close Now',
-          extraClass: 'status-close',
-          rating: [
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              }
-          ],
-          ratingCount: '45'
-      },
-      {
-          mainImg: 'assets/img/listings/listings17.jpg',
-          categoryLink: 'single-listings',
-          bookmarkLink: 'single-listings',
-          category: 'Restaurant',
-          location: 'New York, USA',
-          title: 'Thai Me Up Restaurant',
-          price: 'Start From: $150',
-          detailsLink: 'single-listings',
-          authorImg: 'assets/img/user2.jpg',
-          authorName: 'Sarah',
-          openORclose: 'Close Now',
-          extraClass: 'status-close',
-          rating: [
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              }
-          ],
-          ratingCount: '45'
-      },
-      {
-          mainImg: 'assets/img/listings/listings16.jpg',
-          categoryLink: 'single-listings',
-          bookmarkLink: 'single-listings',
-          category: 'Shopping',
-          location: 'Seattle, USA',
-          title: 'Skyview Shopping Complex',
-          price: 'Start From: $500',
-          detailsLink: 'single-listings',
-          authorImg: 'assets/img/user5.jpg',
-          authorName: 'Lina',
-          openORclose: 'Open Now',
-          extraClass: 'status-open',
-          rating: [
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              },
-              {
-                  icon: 'bx bxs-star'
-              }
-          ],
-          ratingCount: '55'
-      }*/
-  ]
 
   verticalListings: number =  1;
 
 
   IACNC(event)
-  {
+  { let word ; let prov='';
+    this.route.queryParams.subscribe(params => {
+          word = params['label'];
+          prov = params['state'];
+   }) ;
     let checked = event.target.checked ;
     console.log(checked) ;
-   let word = this.route.snapshot.paramMap.get('label') ;
-   if (checked)
-   { this.r.navigate(['/listing/', word], {queryParams: {IACNC: true}});
-
-   this.s.searchwithIACNC(word,true).subscribe(
-    response => {
-      this.x = response ;
-      console.log(word);
-
-      if(this.x)
-      {  this.search = this.x.Result}
-      else {this.search = 0 ;}
-
-
-
-      console.log(this.search);
-     // console.log(this.countries);
-
-
-    });
-
+    if (checked)
+   {
+    if(prov)
+    {this.r.navigate(['/listing'],{ queryParams: {label: word , state: prov ,IACNC: true }});
+    console.log(prov)
+    this.getRes(true,prov);
+  }
+    else {this.r.navigate(['/listing'],{ queryParams: {label: word , IACNC: true }});
+    this.getRes(true,'');}
+   console.log(this.l)
+   this.checkIACNC = true  ;
 
   }
    else
-   { this.r.navigate(['/listing/', word], {queryParams: {IACNC: false}});
+   {
+    let res ;
+    //this.r.navigate(['/listing/', word], {queryParams: {IACNC: false}});
 
-   this.s.searchwithIACNC(word,false).subscribe(
-    response => {
-      this.x = response ;
-      console.log(word);
+  if(prov)
+    {this.r.navigate(['/listing'],{ queryParams: {label: word , state : prov,IACNC: false }});
+    this.getRes(false,prov);
 
-      if(this.x)
-      {  this.search = this.x.Result}
-      else {this.search = 0 ;}
-
-
-
-      console.log(this.search);
-     // console.log(this.countries);
-
-
-    });
+  }
+    else {this.r.navigate(['/listing'],{ queryParams: {label: word , IACNC: false }});
+    this.getRes(false,'');}
+   this.checkIACNC = false   ;
 
 
   }
   }
+
+
+
 
   Type(event)
   {
@@ -577,46 +311,127 @@ export class ListingComponent implements OnInit {
     let type = event.target.value ;
     if(type == 'Pro'){
         this.checkedTypes.pro = !this.checkedTypes.pro;
-        console.log(this.checkedTypes.pro);
-    }
+     }
     if(type == 'Company'){
         this.checkedTypes.company = !this.checkedTypes.company;
-        console.log(this.checkedTypes.company);
-    }
+     }
 
     if (this.checkedTypes.pro == true && this.checkedTypes.company ==true || this.checkedTypes.pro ==false && this.checkedTypes.company == false){
-        this.search=this.globalData;
+        this.result=this.globalData;
     }else if(this.checkedTypes.pro == true && this.checkedTypes.company == false){
-        this.search = this.globalData.filter(element=>element.role == type);
+        this.result = this.globalData.filter(element=>element.role == type);
     }else if(this.checkedTypes.pro == false && this.checkedTypes.company == true){
-        this.search = this.globalData.filter(element=>element.role == type);
+        this.result = this.globalData.filter(element=>element.role == type);
     }
-
-    // if(!type){
-    //     this.search=this.globalData;
-    //     console.log(type);
-    // }
-    // else{
-    //     this.search = this.globalData.filter(element=>element.role == type);
-    // console.log(this.search) ;
-    //console.log(type);
-    //}
-
-
-//     let word = this.route.snapshot.paramMap.get('label') ;
-
-//     if (type=='Pro')
-//     { this.r.navigate(['/listing/', word], {queryParams: {Type: 'Pro'}});}
-//     else {()
-//       this.r.navigate(['/listing/', word], {queryParams: {Type: 'Company'}});
-//     }
-//   console.log(type) ;
-
 
   }
 
 
-  province()
-  {}
+  province(event)
+  {
+    let word ; let i ;let res ;
+   this.route.queryParams.subscribe(params => {
+    word = params['label'];
+    i = params['IACNC'];
+    });
+    let j = 0 ; let e = event.target.value ;
+    let state :any[] = [] ;
+    //console.log(e) ;
+    let unique ;
+
+    if(event.target.checked)
+    {  this.provinces.push(e);}
+    else if(event.target.checked==false){
+      const index: number = this.provinces.indexOf(e);
+      if (index !== -1) {
+            this.provinces.splice(index, 1); }
+    }
+
+    unique = this.provinces.filter((item, i, ar) => ar.indexOf(item) === i);
+    //console.log(unique) ;
+    this.provinces = unique;
+    unique = this.provinces.map(x=>x).join(",");
+    console.log(unique) ;
+
+
+
+this.r.navigate(['/listing'],{ queryParams: {label: word, state:unique,IACNC: i }});
+
+          if(i==true)
+          {
+
+            this.s.searchusers(word,unique,true).subscribe(
+              response => {
+                res = response ;
+                this.result = res.Result ;
+                console.log(this.result);
+                this.globalData=this.result;
+
+              }) ;
+          }
+          else if(i==false)
+          {
+
+
+            this.s.searchusers(word,unique,false).subscribe(
+              response => {
+                res = response ;
+                this.result = res.Result ;
+                console.log(this.result);
+                this.globalData=this.result;
+
+              }) ;
+          }
+            else
+            {
+              this.s.searchusers(word,unique,'').subscribe(
+                response => {
+                  res = response ;
+                  this.result = res.Result ;
+                  console.log(this.result);
+                  this.globalData=this.result;
+
+                }) ;
+            }
+
+
+
+
+}
+getRes(i,p)
+{
+  let l =""; let provv ;
+  this.route.queryParams.subscribe(params => {
+    // this.p = params['provine'];
+
+        l = params['label'];
+         provv = params['state'];
+ }) ;
+ console.log(provv) ;
+let res ;
+if(p)
+{
+  this.s.searchusers(l,p,i).subscribe(
+    response => {
+      res = response ;
+      this.result = res.Result ;
+      console.log(this.result);
+      this.globalData=this.result;
+
+    }) ;
+}
+else {
+  this.s.searchusers(l,'',i).subscribe(
+    response => {
+      res = response ;
+      this.result = res.Result ;
+      console.log(this.result);
+      this.globalData=this.result;
+
+    }) ;
+}
+
+
+}
 }
 
